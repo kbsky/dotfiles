@@ -49,7 +49,7 @@ augroup END
 source $VIMRUNTIME/ftplugin/man.vim
 
 " TagHighlight
-map <Leader>r :UpdateTypesFile<CR>
+map <Leader>tr :UpdateTypesFile<CR>
 
 " vim-latex
 filetype plugin on
