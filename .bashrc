@@ -43,11 +43,8 @@ PS1="$GREEN[$BOLD$RED\u$RETURN$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RETURN$GREE
 # ls colors
 eval `dircolors ~/.dir_colors`
 
-# Alias
-alias yuup='sudo yum update'
-
-# Adresses alias
-export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
+# Use vi binding in shell
+set -o vi
 
 # Use vimpager as pager and less
 export PAGER=~/bin/vimpager
@@ -57,6 +54,11 @@ alias zless=$PAGER
 # Git autocompletion
 . ~/.git-completion.bash
 
-# SVN editor
+# Editor
 export SVN_EDITOR=vim
 export EDITOR=vim
+
+# Alias
+
+# Adresses alias
+export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
