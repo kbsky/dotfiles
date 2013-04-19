@@ -1,5 +1,5 @@
 " Pathogen
-execute pathogen#infect()
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " Thème coloration
 syntax on
