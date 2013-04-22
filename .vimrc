@@ -43,6 +43,10 @@ augroup helpfiles
   au BufRead,BufEnter */doc/* wincmd L
 augroup END
 
+" Map divers
+map <Leader>cl :lcd %:p:h<CR>
+map <Leader>cg :cd %:p:h<CR>
+
 
 " Plugins
 
