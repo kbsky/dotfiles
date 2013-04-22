@@ -2,3 +2,5 @@
 *.swp
 # ctags
 tags
+# TagHighlight
+*.taghl

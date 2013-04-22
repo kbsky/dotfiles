@@ -51,6 +51,10 @@ source $VIMRUNTIME/ftplugin/man.vim
 
 " TagHighlight
 map <Leader>tr :UpdateTypesFile<CR>
+if ! exists('g:TagHighlightSettings')
+	let g:TagHighlightSettings = {}
+endif
+let g:TagHighlightSettings['IncludeLocals']=1
 
 " vim-latex
 filetype plugin on
