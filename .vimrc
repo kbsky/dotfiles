@@ -13,8 +13,8 @@ call togglebg#map("<F3>")
 
 " Options gvim
 set guifont=Source\ Code\ Pro\ Medium\ 10
-" Pas de toolbar
-set guioptions-=T
+" Pas de toolbar, heading texte (bug rafraîchissement avec heading graphiques)
+set guioptions-=Te
 
 " Leader
 let mapleader = ","
