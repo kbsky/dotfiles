@@ -7,3 +7,9 @@
 [submodule ".vim/bundle/camelcasemotion"]
 	path = .vim/bundle/camelcasemotion
 	url = git://github.com/vim-scripts/camelcasemotion.git
+[submodule ".vim/bundle/clang-complete"]
+	path = .vim/bundle/clang-complete
+	url = git://github.com/Rip-Rip/clang_complete.git
+[submodule ".vim/bundle/vim-clang"]
+	path = .vim/bundle/vim-clang
+	url = git://github.com/LucHermitte/vim-clang.git

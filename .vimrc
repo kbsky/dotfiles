@@ -46,6 +46,9 @@ augroup END
 " Map divers
 map <Leader>cl :lcd %:p:h<CR>
 map <Leader>cg :cd %:p:h<CR>
+map <Leader>v :source ~/.vimrc<CR>
+
+imap <C-Tab> <C-x><C-u>
 
 
 " Plugins
@@ -59,6 +62,23 @@ if ! exists('g:TagHighlightSettings')
 	let g:TagHighlightSettings = {}
 endif
 let g:TagHighlightSettings['IncludeLocals']=1
+
+" clang_complete
+let g:clang_auto_select=1
+let g:clang_complete_auto=0
+let g:clang_complete_copen=1
+let g:clang_snippets=1
+let g:clang_conceal_snippets=1
+let g:clang_trailing_placeholder=1
+let g:clang_use_library=1
+let g:clang_complete_macros=1
+nnoremap <Leader>cq :call g:ClangUpdateQuickFix()<CR>
+" clang_indexer
+nnoremap <Leader>cr :call ClangGetReferences()<CR>
+nnoremap <Leader>cd :call ClangGetDeclarations()<CR>
+nnoremap <Leader>cs :call ClangGetSubclasses()<CR>
+" Suppression preview sur complétion (inutile avec clang_complete)
+set completeopt=menu,menuone
 
 " vim-latex
 filetype plugin on
