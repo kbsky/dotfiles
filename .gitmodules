@@ -13,3 +13,6 @@
 [submodule ".vim/bundle/vim-clang"]
 	path = .vim/bundle/vim-clang
 	url = git://github.com/LucHermitte/vim-clang.git
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git

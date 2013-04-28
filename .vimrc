@@ -23,6 +23,9 @@ set guioptions-=e
 " Leader
 let mapleader = ","
 
+" Pour être sûr
+filetype plugin on
+
 " Indentation
 set tabstop=4
 set shiftwidth=4
