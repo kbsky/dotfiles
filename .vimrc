@@ -2,7 +2,10 @@
 runtime bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
-" Thème coloration
+" Encodage par défaut
+set encoding=utf8
+
+" Colorscheme
 syntax on
 set background=dark
 colorscheme solarized 
@@ -14,7 +17,8 @@ call togglebg#map("<F3>")
 " Options gvim
 set guifont=Source\ Code\ Pro\ Medium\ 10
 " Pas de toolbar, heading texte (bug rafraîchissement avec heading graphiques)
-set guioptions-=Te
+set guioptions-=T
+set guioptions-=e
 
 " Leader
 let mapleader = ","
@@ -26,7 +30,7 @@ set autoindent
 " Indentation C-style
 autocmd FileType c,cpp,java :set cindent
 " Options programmation
-autocmd FileType c,cpp,java,py :set colorcolumn=80 number
+autocmd FileType c,cpp,java,py,sh :set colorcolumn=80 number
 " Pas d'indentation private/protected/public:, namespace, type retour
 set cinoptions=g0,N0,t0
 
@@ -44,9 +48,10 @@ augroup helpfiles
 augroup END
 
 " Map divers
-map <Leader>cl :lcd %:p:h<CR>
-map <Leader>cg :cd %:p:h<CR>
-map <Leader>v :source ~/.vimrc<CR>
+nnoremap <Leader>cl :lcd %:p:h<CR>
+nnoremap <Leader>cg :cd %:p:h<CR>
+nnoremap <Leader>v :source ~/.vimrc<CR>
+nnoremap <Leader>ws :w !sudo tee %<CR>
 
 imap <C-Tab> <C-x><C-u>
 

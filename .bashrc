@@ -46,6 +46,9 @@ eval `dircolors ~/.dir_colors`
 # Use vi binding in shell
 set -o vi
 
+# Back to default language
+export LANG=C
+
 # Use vimpager as pager and less
 export PAGER=~/bin/vimpager
 alias less=$PAGER
@@ -60,5 +63,5 @@ export EDITOR=vim
 
 # Alias
 
-# Adresses alias
+# Alias adresses
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
