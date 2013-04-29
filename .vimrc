@@ -37,6 +37,9 @@ autocmd FileType c,cpp,java,py,sh :set colorcolumn=80 number
 " Pas d'indentation private/protected/public:, namespace, type retour
 set cinoptions=g0,N0,t0
 
+" Complétion en mode Ex
+set wildmode=longest,list,full
+
 " Options recherche
 set incsearch
 " Options pour le copier/coller
@@ -51,8 +54,8 @@ augroup helpfiles
 augroup END
 
 " Map divers
-nnoremap <Leader>cl :lcd %:p:h<CR>
-nnoremap <Leader>cg :cd %:p:h<CR>
+nnoremap <Leader>dl :lcd %:p:h<CR>
+nnoremap <Leader>dg :cd %:p:h<CR>
 nnoremap <Leader>v :source ~/.vimrc<CR>
 nnoremap <Leader>ws :w !sudo tee %<CR>
 
@@ -80,11 +83,11 @@ let g:clang_conceal_snippets=1
 let g:clang_trailing_placeholder=1
 let g:clang_use_library=1
 let g:clang_complete_macros=1
-nnoremap <Leader>cq :call g:ClangUpdateQuickFix()<CR>
+nnoremap <Leader>aq :call g:ClangUpdateQuickFix()<CR>
 " clang_indexer
-nnoremap <Leader>cr :call ClangGetReferences()<CR>
-nnoremap <Leader>cd :call ClangGetDeclarations()<CR>
-nnoremap <Leader>cs :call ClangGetSubclasses()<CR>
+nnoremap <Leader>ar :call ClangGetReferences()<CR>
+nnoremap <Leader>ad :call ClangGetDeclarations()<CR>
+nnoremap <Leader>as :call ClangGetSubclasses()<CR>
 " Suppression preview sur complétion (inutile avec clang_complete)
 set completeopt=menu,menuone
 
