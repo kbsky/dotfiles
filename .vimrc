@@ -59,7 +59,7 @@ nnoremap <Leader>dg :cd %:p:h<CR>
 nnoremap <Leader>v :source ~/.vimrc<CR>
 nnoremap <Leader>ws :w !sudo tee %<CR>
 
-imap <C-Tab> <C-x><C-u>
+inoremap <C-Space> <Esc>
 
 
 " Plugins
@@ -70,7 +70,7 @@ source $VIMRUNTIME/ftplugin/man.vim
 " TagHighlight
 map <Leader>tr :UpdateTypesFile<CR>
 if ! exists('g:TagHighlightSettings')
-	let g:TagHighlightSettings = {}
+	let g:TagHighlightSettings={}
 endif
 let g:TagHighlightSettings['IncludeLocals']=1
 
@@ -89,7 +89,16 @@ nnoremap <Leader>ar :call ClangGetReferences()<CR>
 nnoremap <Leader>ad :call ClangGetDeclarations()<CR>
 nnoremap <Leader>as :call ClangGetSubclasses()<CR>
 " Suppression preview sur complétion (inutile avec clang_complete)
-set completeopt=menu,menuone
+set completeopt=menu,menuone,longest
+
+" Supertab
+let g:SuperTabDefaultCompletionType='context'
+let g:SuperTabCompletionContexts=['s:ContextDiscover', 's:ContextText']
+let g:SuperTabContextDiscoverDiscovery= 
+			\ ["&completefunc:<c-x><c-u>" ,"&omnifunc:<c-x><c-o>"]
+let g:SuperTabRetainCompletionDuration='completion'
+let g:SuperTabLongestEnhanced=1
+let g:SuperTabLongestHighlight=1
 
 " vim-latex
 filetype plugin on
