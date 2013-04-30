@@ -58,6 +58,7 @@ nnoremap <Leader>dl :lcd %:p:h<CR>
 nnoremap <Leader>dg :cd %:p:h<CR>
 nnoremap <Leader>v :source ~/.vimrc<CR>
 nnoremap <Leader>ws :w !sudo tee %<CR>
+nnoremap <Leader>n :noh<CR>
 
 inoremap <C-Space> <Esc>
 
@@ -99,6 +100,11 @@ let g:SuperTabContextDiscoverDiscovery=
 let g:SuperTabRetainCompletionDuration='completion'
 let g:SuperTabLongestEnhanced=1
 let g:SuperTabLongestHighlight=1
+
+" Tagbar
+autocmd FileType * nested :call tagbar#autoopen(0)
+let g:tagbar_compact=1
+nnoremap <Leader>tt :TagbarToggle<CR>
 
 " vim-latex
 filetype plugin on
