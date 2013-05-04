@@ -42,6 +42,8 @@ set wildmode=longest,list,full
 
 " Options recherche
 set incsearch
+" -nH $* pour vim-latex
+set grepprg=grep\ --exclude=*.swp\ --exclude=tags\ --exclude=*.taghl\ -nH\ $*
 " Options pour le copier/coller
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
@@ -54,11 +56,12 @@ augroup helpfiles
 augroup END
 
 " Map divers
-nnoremap <Leader>dl :lcd %:p:h<CR>
-nnoremap <Leader>dg :cd %:p:h<CR>
-nnoremap <Leader>v :source ~/.vimrc<CR>
-nnoremap <Leader>ws :w !sudo tee %<CR>
-nnoremap <Leader>n :noh<CR>
+nnoremap <Leader>dl	:lcd %:p:h<CR>
+nnoremap <Leader>dg	:cd %:p:h<CR>
+nnoremap <Leader>sv	:source ~/.vimrc<CR>
+nnoremap <Leader>ws	:w !sudo tee %<CR>
+nnoremap <Leader>n	:nohl<CR>
+nnoremap <Leader>gw	:grep -R '<cword>' .<CR>
 
 inoremap <C-Space> <Esc>
 
@@ -78,13 +81,13 @@ let g:TagHighlightSettings['IncludeLocals']=1
 " clang_complete
 let g:clang_auto_select=1
 let g:clang_complete_auto=0
-let g:clang_complete_copen=1
+let g:clang_complete_copen=0
 let g:clang_snippets=1
 let g:clang_conceal_snippets=1
 let g:clang_trailing_placeholder=1
 let g:clang_use_library=1
 let g:clang_complete_macros=1
-nnoremap <Leader>aq :call g:ClangUpdateQuickFix()<CR>
+nnoremap <Leader>aq :call g:ClangUpdateQuickFix() <bar> cc <bar> clist<CR>
 " clang_indexer
 nnoremap <Leader>ar :call ClangGetReferences()<CR>
 nnoremap <Leader>ad :call ClangGetDeclarations()<CR>
@@ -109,5 +112,4 @@ nnoremap <Leader>tt :TagbarToggle<CR>
 " vim-latex
 filetype plugin on
 filetype indent on
-set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
