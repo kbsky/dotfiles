@@ -63,8 +63,6 @@ nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
 nnoremap <Leader>gw	:grep -R '<cword>' .<CR>
 
-inoremap <C-Space> <Esc>
-
 
 " Plugins
 
