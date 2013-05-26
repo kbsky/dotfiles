@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/ansi-esc"]
 	path = .vim/bundle/ansi-esc
 	url = git://github.com/vim-scripts/AnsiEsc.vim.git
+[submodule ".vim/bundle/tag-highlight"]
+	path = .vim/bundle/tag-highlight
+	url = ./.vim/bundle/tag-highlight/
