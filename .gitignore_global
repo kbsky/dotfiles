@@ -4,3 +4,5 @@
 tags
 # TagHighlight
 *.taghl
+# Precompiled Py
+*.pyc
