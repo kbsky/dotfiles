@@ -5,10 +5,11 @@ execute pathogen#infect()
 " Encodage par défaut
 set encoding=utf8
 
-" Colorscheme
+" Colorscheme & options générales d'affichage
 syntax on
 set background=dark
 colorscheme solarized 
+set cursorline
 " Options solarized
 let g:solarized_contrast="high"    "default value is normal
 " Touche changement arrière-plan
