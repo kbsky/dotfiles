@@ -32,7 +32,9 @@ set tabstop=4
 set shiftwidth=4
 set autoindent
 " Indentation C-style
-autocmd FileType c,cpp,java :set cindent
+autocmd FileType c,cpp,java :set cindent |
+	\ :inoremap {<CR> {<CR>}<Esc><Up>o
+ 
 " Options programmation
 autocmd FileType c,cpp,java,py,sh :set colorcolumn=80 number
 " Pas d'indentation private/protected/public:, namespace, type retour
@@ -102,11 +104,16 @@ let g:SuperTabContextDiscoverDiscovery=
 let g:SuperTabRetainCompletionDuration='completion'
 let g:SuperTabLongestEnhanced=1
 let g:SuperTabLongestHighlight=1
+let g:SuperTabCrMapping=0 " Problème de compatibilité avec delimitMate
 
 " Tagbar
 autocmd FileType * nested :call tagbar#autoopen(0)
 let g:tagbar_compact=1
 nnoremap <Leader>tt :TagbarToggle<CR>
+
+" delimitMate
+inoremap <A-a> <Plug>delimitMateS-Tab
+let delimitMate_expand_space=1
 
 " vim-latex
 filetype plugin on

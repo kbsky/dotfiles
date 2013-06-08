@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/ansi-esc"]
 	path = .vim/bundle/ansi-esc
 	url = git://github.com/vim-scripts/AnsiEsc.vim.git
+[submodule ".vim/bundle/delimit-mate"]
+	path = .vim/bundle/delimit-mate
+	url = git://github.com/Raimondi/delimitMate.git
