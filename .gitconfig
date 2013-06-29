@@ -11,4 +11,4 @@
 [merge]
 	defaultToUpstream = true
 [core]
-	excludesfile = /home/corax/.gitignore_global
+	excludesfile = ~/.gitignore_global
