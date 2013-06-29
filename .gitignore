@@ -1,2 +1,7 @@
 /.*
+
 !.vim
+/.vim/bundle/tag-highlight/
+/.vim/.netrwhist
+
+/tmp/
