@@ -247,7 +247,7 @@ less_vim() {
 			${vim_cmd} \
 				-u "${vimrc}" \
 				--cmd 'set nocp' \
-				-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu" \
+				-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu | set nomodifiable | noremap q :q!<CR>" \
 				"${@:--}"
 			;;
 		*) # gvim or mvim GUI

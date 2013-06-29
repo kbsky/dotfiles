@@ -20,6 +20,8 @@ set guifont=Source\ Code\ Pro\ Medium\ 10
 " Pas de toolbar, heading texte (bug rafraîchissement avec heading graphiques)
 set guioptions-=T
 set guioptions-=e
+" Désactivation clignotement curseur
+set guicursor+=a:blinkon0
 
 " Leader
 let mapleader = ","
@@ -34,7 +36,8 @@ set autoindent
 " Indentation C-style
 autocmd FileType c,cpp,java :set cindent |
 	\ :inoremap {<CR> {<CR>}<Esc><Up>o
- 
+" } (fix highlight)
+
 " Options programmation
 autocmd FileType c,cpp,java,py,sh :set colorcolumn=80 number
 " Pas d'indentation private/protected/public:, namespace, type retour
@@ -119,3 +122,9 @@ let delimitMate_expand_space=1
 filetype plugin on
 filetype indent on
 let g:tex_flavor='latex'
+
+
+" Source specific
+if filereadable($HOME . "/.vimrc_specific")
+	source $HOME/.vimrc_specific
+endif
