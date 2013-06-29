@@ -40,10 +40,15 @@ fi
 
 PS1="$GREEN[$BOLD$RED\u$RETURN$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RETURN$GREEN]$MK$RETURN "
 
+# Path
+if [ `eval echo $PATH | grep "$(eval echo ~/bin)"` ]; then
+	export PATH=$PATH:~/bin
+fi
+
 # ls colors
 eval `dircolors ~/.dir_colors`
 
-# Use vi binding in shell
+# Use vi bindings in shell
 set -o vi
 
 # Use vimpager as pager and less
@@ -52,7 +57,8 @@ alias less=$PAGER
 alias zless=$PAGER
 
 # Git autocompletion
-. ~/.git-completion.bash
+# &> to silence in case Git is not installed
+. ~/.git-completion.bash &> /dev/null
 
 # Editor
 export SVN_EDITOR=vim
@@ -60,8 +66,16 @@ export EDITOR=vim
 
 # Alias
 
-# Back to default language for man
-alias man='LANG=C man'
-
 # Alias adresses
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
+
+
+# Source specific
+if [ -f $HOME/.bashrc_specific ]; then
+	. $HOME/.bashrc_specific
+fi
+
+
+# Waiting for resolution
+# Back to default language for man
+#alias man='LANG=C man'
