@@ -110,7 +110,7 @@ let g:SuperTabLongestHighlight=1
 let g:SuperTabCrMapping=0 " Problème de compatibilité avec delimitMate
 
 " Tagbar
-autocmd FileType * nested :call tagbar#autoopen(0)
+"autocmd FileType * nested :call tagbar#autoopen(0)
 let g:tagbar_compact=1
 nnoremap <Leader>tt :TagbarToggle<CR>
 
