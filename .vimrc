@@ -26,8 +26,8 @@ set guicursor+=a:blinkon0
 " Leader
 let mapleader = ","
 
-" Pour être sûr
-filetype plugin on
+" Chargement auto plugin/indent language-specific
+filetype plugin indent on
 
 " Indentation
 set tabstop=4
@@ -62,6 +62,10 @@ augroup helpfiles
 augroup END
 
 " Map divers
+nnoremap gb 		:bnext<CR>
+nnoremap gB 		:bprevious<CR>
+
+" Maps leader
 nnoremap <Leader>dl	:lcd %:p:h<CR>
 nnoremap <Leader>dg	:cd %:p:h<CR>
 nnoremap <Leader>sv	:source ~/.vimrc<CR>
