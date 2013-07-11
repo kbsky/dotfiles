@@ -2,6 +2,10 @@
 runtime bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
+" Plugins built-in
+runtime ftplugin/man.vim
+runtime macros/matchit.vim
+
 " Encodage par défaut
 set encoding=utf8
 
@@ -74,10 +78,7 @@ nnoremap <Leader>n	:nohl<CR>
 nnoremap <Leader>gw	:grep -R '<cword>' .<CR>
 
 
-" Plugins
-
-" Plugin man
-source $VIMRUNTIME/ftplugin/man.vim
+" Config plugins
 
 " TagHighlight
 map <Leader>tr :UpdateTypesFile<CR>
