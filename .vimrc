@@ -27,6 +27,9 @@ set guioptions-=e
 " Désactivation clignotement curseur
 set guicursor+=a:blinkon0
 
+" Souris
+set mouse=a
+
 " Leader
 let mapleader = ","
 
@@ -69,13 +72,35 @@ augroup END
 nnoremap gb 		:bnext<CR>
 nnoremap gB 		:bprevious<CR>
 
+" Search for selected text, forwards or backwards.
+" http://vim.wikia.com/wiki/Search_for_visually_selected_text
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
 " Maps leader
 nnoremap <Leader>dl	:lcd %:p:h<CR>
 nnoremap <Leader>dg	:cd %:p:h<CR>
 nnoremap <Leader>sv	:source ~/.vimrc<CR>
 nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
-nnoremap <Leader>gw	:grep -R '<cword>' .<CR>
+nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
+
+" Abréviations
+" http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
+function! CmdCabbr(abbreviation, expansion)
+  execute 'cabbr ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() 
+              \ == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
+endfunction
+
+call CmdCabbr('diffs', 'vert diffsplit')
 
 
 " Config plugins
