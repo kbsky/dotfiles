@@ -39,6 +39,7 @@ filetype plugin indent on
 " Indentation
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set autoindent
 " Indentation C-style
 autocmd FileType c,cpp,java :set cindent |
@@ -47,6 +48,9 @@ autocmd FileType c,cpp,java :set cindent |
 
 " Options programmation
 autocmd FileType c,cpp,java,py,sh :set colorcolumn=80 number
+" Activation Doxygen pour les langages supportés
+let g:load_doxygen_syntax=1
+
 " Pas d'indentation private/protected/public:, namespace, type retour
 set cinoptions=g0,N0,t0
 
@@ -62,11 +66,9 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
-" help en vsplit
-augroup helpfiles
-  au!
-  au BufRead,BufEnter */doc/* wincmd L
-augroup END
+" Options mksession
+set sessionoptions=curdir,folds,help,resize,tabpages,winsize
+
 
 " Map divers
 nnoremap gb 		:bnext<CR>
@@ -92,6 +94,7 @@ nnoremap <Leader>sv	:source ~/.vimrc<CR>
 nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
 nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
+nnoremap <Leader>ms	:mksession! ~/.vim/session.vim<CR>
 
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
@@ -101,6 +104,7 @@ function! CmdCabbr(abbreviation, expansion)
 endfunction
 
 call CmdCabbr('diffs', 'vert diffsplit')
+call CmdCabbr('h', 'vert help')
 
 
 " Config plugins

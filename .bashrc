@@ -41,7 +41,7 @@ fi
 PS1="$GREEN[$BOLD$RED\u$RETURN$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RETURN$GREEN]$MK$RETURN "
 
 # Path
-if [ $(eval echo $PATH | grep "$(eval echo ~/bin)") ]; then
+if [ !$(eval echo $PATH | grep "$(eval echo ~/bin)") ]; then
 	export PATH=$PATH:~/bin
 fi
 
