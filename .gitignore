@@ -3,5 +3,6 @@
 !.vim
 /.vim/bundle/tag-highlight/
 /.vim/.netrwhist
+/.vim/session.vim
 
 /tmp/
