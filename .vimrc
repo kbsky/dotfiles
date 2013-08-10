@@ -71,6 +71,7 @@ set sessionoptions=curdir,folds,help,resize,tabpages,winsize
 
 
 " Map divers
+nnoremap Y			y$
 nnoremap gb 		:bnext<CR>
 nnoremap gB 		:bprevious<CR>
 
@@ -104,7 +105,7 @@ function! CmdCabbr(abbreviation, expansion)
 endfunction
 
 call CmdCabbr('diffs', 'vert diffsplit')
-call CmdCabbr('h', 'vert help')
+call CmdCabbr('h', 'vert rightb help')
 
 
 " Config plugins
@@ -162,3 +163,6 @@ let g:tex_flavor='latex'
 if filereadable($HOME . "/.vimrc_specific")
 	source $HOME/.vimrc_specific
 endif
+
+" To add
+set hlsearch

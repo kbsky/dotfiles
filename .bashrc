@@ -14,7 +14,7 @@ if [ `tput colors` -ge 256 ]; then
 	GREEN="\[\e[38;5;28m\]"
 	CYAN="\[\e[38;5;37m\]"
 	RED="\[\e[38;5;160m\]"
-	MAGENTA="\[\e[38;5;57m\]"
+	MAGENTA="\[\e[38;5;99m\]"
 	YELLOW="\[\e[38;5;214m\]"
 	WHITE="\[\e[38;5;255m\]"
 else
@@ -70,12 +70,16 @@ export EDITOR=vim
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
 
 
+# Functions
+
+mgrep()
+{
+	[[ $# -lt 2 ]] && { echo "Not enough arguments"; return; }
+	grep -Pzo ${@:1:$(($#-2))} "(?s)${@: -2: 1}" "${@: -1}"
+}
+
+
 # Source specific
 if [ -f $HOME/.bashrc_specific ]; then
 	. $HOME/.bashrc_specific
 fi
-
-
-# Waiting for resolution
-# Back to default language for man
-#alias man='LANG=C man'
