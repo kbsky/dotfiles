@@ -58,6 +58,7 @@ set cinoptions=g0,N0,t0
 set wildmode=longest,list,full
 
 " Options recherche
+set hlsearch
 set incsearch
 " -nH $* pour vim-latex
 set grepprg=grep\ --exclude=*.swp\ --exclude=tags\ --exclude=*.taghl\ -nH\ $*
@@ -95,6 +96,7 @@ nnoremap <Leader>sv	:source ~/.vimrc<CR>
 nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
 nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
+nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! ~/.vim/session.vim<CR>
 
 " Abréviations
@@ -106,6 +108,20 @@ endfunction
 
 call CmdCabbr('diffs', 'vert diffsplit')
 call CmdCabbr('h', 'vert rightb help')
+
+
+" Commandes
+" http://stackoverflow.com/a/10884567
+function! MoveFile(newspec)
+     let old = expand('%')
+     " could be improved:
+     if (old == a:newspec)
+         return 0
+     endif
+     exe 'sav' fnameescape(a:newspec)
+     call delete(old)
+endfunction
+command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
 
 
 " Config plugins
@@ -163,6 +179,3 @@ let g:tex_flavor='latex'
 if filereadable($HOME . "/.vimrc_specific")
 	source $HOME/.vimrc_specific
 endif
-
-" To add
-set hlsearch
