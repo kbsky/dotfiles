@@ -12,3 +12,5 @@
 	defaultToUpstream = true
 [core]
 	excludesfile = ~/.gitignore_global
+[alias]
+	br = branch --color

@@ -38,7 +38,7 @@ filetype plugin indent on
 
 " Indentation
 set tabstop=4
-set shiftwidth=4
+set shiftwidth=0 " Since 7.4, sw=0 sets sw to ts
 set softtabstop=4
 set autoindent
 " Indentation C-style

@@ -1,6 +1,8 @@
 #!/bin/sh
 # General
 cd
+echo "## Main config update"
+git pull
 echo "## General submodules update"
 git submodule update
 

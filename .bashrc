@@ -65,6 +65,7 @@ export SVN_EDITOR=vim
 export EDITOR=vim
 
 # Alias
+alias lsdir='ls --group-directories-first'
 
 # Alias adresses
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
