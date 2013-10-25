@@ -43,11 +43,12 @@ set softtabstop=4
 set autoindent
 " Indentation C-style
 autocmd FileType c,cpp,java :set cindent |
-	\ :inoremap {<CR> {<CR>}<Esc><Up>o
+	\ :inoremap {<CR> {<CR>}<Esc><Up>o <BS>
+"  <BS> permet de conserver l'indentation même après <Esc>
 " } (fix highlight)
 
 " Options programmation
-autocmd FileType c,cpp,java,py,sh :set colorcolumn=80 number
+autocmd FileType c,cpp,java,py,sh,perl,prolog :set colorcolumn=80 number
 " Activation Doxygen pour les langages supportés
 let g:load_doxygen_syntax=1
 
