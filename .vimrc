@@ -109,6 +109,7 @@ endfunction
 
 call CmdCabbr('diffs', 'vert diffsplit')
 call CmdCabbr('h', 'vert rightb help')
+call CmdCabbr('vsb', 'vert sbuffer')
 
 
 " Commandes
