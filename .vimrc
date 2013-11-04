@@ -47,7 +47,7 @@ autocmd FileType c,cpp,java :set cindent |
 " } (fix highlight)
 
 " Options programmation
-autocmd FileType c,cpp,java,py,sh :set colorcolumn=80 number
+autocmd FileType c,cpp,java,py,sh,prolog :set colorcolumn=80 number
 " Activation Doxygen pour les langages supportés
 let g:load_doxygen_syntax=1
 
@@ -98,6 +98,7 @@ nnoremap <Leader>n	:nohl<CR>
 nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
 nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! ~/.vim/session.vim<CR>
+nnoremap <Leader>dw	:w !diff % -<CR>
 
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
@@ -122,6 +123,10 @@ function! MoveFile(newspec)
      call delete(old)
 endfunction
 command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
+
+
+" Manual extension-filetype associations
+autocmd BufNew,BufNewFile,BufRead *.inc set filetype=asm
 
 
 " Config plugins
