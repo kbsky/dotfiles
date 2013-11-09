@@ -31,14 +31,14 @@ set guicursor+=a:blinkon0
 set mouse=a
 
 " Leader
-let mapleader = ","
+let mapleader=","
 
 " Chargement auto plugin/indent language-specific
 filetype plugin indent on
 
 " Indentation
 set tabstop=4
-set shiftwidth=0 " Since 7.4, sw=0 sets sw to ts
+set shiftwidth=4 " Since 7.4, sw=0 sets sw to ts, but older plugins are not aware of this
 set softtabstop=4
 set autoindent
 " Indentation C-style
@@ -52,8 +52,9 @@ autocmd FileType c,cpp,java,py,sh,perl,prolog :set colorcolumn=80 number
 " Activation Doxygen pour les langages supportés
 let g:load_doxygen_syntax=1
 
-" Pas d'indentation private/protected/public:, namespace, type retour
-set cinoptions=g0,N0,t0
+" Pas d'indentation private/protected/public:, namespace, type retour,
+" alignement parenthèses
+set cinoptions=g0,N-s,t0,(0
 
 " Complétion en mode Ex
 set wildmode=longest,list,full
@@ -128,6 +129,9 @@ command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
 
 " Config plugins
 
+" Netrw
+let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
+
 " TagHighlight
 map <Leader>tr :UpdateTypesFile<CR>
 if ! exists('g:TagHighlightSettings')
@@ -172,9 +176,11 @@ inoremap <A-a> <Plug>delimitMateS-Tab
 let delimitMate_expand_space=1
 
 " vim-latex
-filetype plugin on
-filetype indent on
 let g:tex_flavor='latex'
+
+" Fugitive
+nnoremap <Leader>gs :Gstatus <Bar> wincmd K<CR>
+nnoremap <Leader>gt :tabe % <Bar> Gstatus <Bar> wincmd K<CR>
 
 
 " Source specific
