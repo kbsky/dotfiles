@@ -1,5 +1,6 @@
-# Swap vim
+# Vim: swap & sessions
 *.swp
+session.vim
 # ctags
 tags
 # TagHighlight
