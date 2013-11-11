@@ -128,7 +128,8 @@ command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
 
 
 " Manual extension-filetype associations
-autocmd BufNew,BufNewFile,BufRead *.inc set filetype=asm
+autocmd BufNew,BufNewFile,BufRead *.inc,*.a30 set filetype=asm
+autocmd BufNew,BufNewFile,BufRead *.md set filetype=markdown
 
 
 " Config plugins
