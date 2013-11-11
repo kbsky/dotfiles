@@ -10,6 +10,7 @@
 	default = upstream
 [merge]
 	defaultToUpstream = true
+	tool = gvimdiff
 [core]
 	excludesfile = ~/.gitignore_global
 [alias]
