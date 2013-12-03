@@ -79,6 +79,16 @@ mgrep()
 	grep -Pzo ${@:1:$(($#-2))} "(?s)${@: -2: 1}" "${@: -1}"
 }
 
+silent_bg()
+{
+	if [[ $1 ]]; then
+		$1 2> /dev/null ${@:2} & 
+	else 
+		echo "No command given"
+		return 1
+	fi
+}
+
 
 # Source specific
 if [ -f $HOME/.bashrc_specific ]; then

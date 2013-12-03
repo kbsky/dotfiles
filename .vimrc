@@ -48,7 +48,7 @@ autocmd FileType c,cpp,java :set cindent |
 " } (fix highlight)
 
 " Options programmation
-autocmd FileType c,cpp,java,py,sh,perl,prolog :set colorcolumn=80 number
+autocmd FileType c,cpp,java,perl,prolog,py,sh,vim :set colorcolumn=80 number
 " Activation Doxygen pour les langages supportés
 let g:load_doxygen_syntax=1
 
@@ -68,6 +68,9 @@ set grepprg=grep\ --exclude=*.swp\ --exclude=tags\ --exclude=*.taghl\ -nH\ $*
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
+
+" Buffer options
+set switchbuf=usetab
 
 " Options mksession
 set sessionoptions=curdir,folds,help,resize,tabpages,winsize
@@ -112,6 +115,7 @@ endfunction
 call CmdCabbr('diffs', 'vert diffsplit')
 call CmdCabbr('h', 'vert rightb help')
 call CmdCabbr('vsb', 'vert sbuffer')
+call CmdCabbr('tsb', 'tab sbuffer')
 
 
 " Commandes
@@ -180,6 +184,9 @@ nnoremap <Leader>tt :TagbarToggle<CR>
 " delimitMate
 inoremap <A-a> <Plug>delimitMateS-Tab
 let delimitMate_expand_space=1
+
+" NERD commenter
+let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
 
 " vim-latex
 let g:tex_flavor='latex'
