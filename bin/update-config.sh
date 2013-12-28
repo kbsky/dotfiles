@@ -4,7 +4,7 @@ cd
 echo "## Main config update"
 git pull
 echo "## General submodules update"
-git submodule update
+git submodule update --recursive --merge
 
 # git-completion
 echo "## git-completion update"
