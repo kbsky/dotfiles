@@ -186,7 +186,8 @@ inoremap <A-a> <Plug>delimitMateS-Tab
 let delimitMate_expand_space=1
 
 " NERD commenter
-let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
+let g:NERDCustomDelimiters = { 'c': { 'left': '//', 
+									\ 'leftAlt': '/*', 'rightAlt': '*/' } }
 
 " vim-latex
 let g:tex_flavor='latex'
