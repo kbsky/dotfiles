@@ -169,9 +169,9 @@ nnoremap <Leader>as :call ClangGetSubclasses()<CR>
 
 " Syntastic
 " For setting project paths in vimrc_specific, to use with an autocmd
-function! AddSyntasticClangPath(project_path)
+function! AddSyntasticClangPath(language,project_path)
 	if stridx(expand('%:p'), a:project_path) == 0
-		let g:syntastic_c_config_file=a:project_path . '.clang_complete'
+		exe 'let g:syntastic_' . a:language . '_config_file="' . a:project_path . '.clang_complete""'
 	endif
 endfunction
 
