@@ -159,12 +159,22 @@ let g:clang_trailing_placeholder=1
 let g:clang_use_library=1
 let g:clang_complete_macros=1
 nnoremap <Leader>aq :call g:ClangUpdateQuickFix() <bar> cc <bar> clist<CR>
+" Suppression preview sur complétion (inutile avec clang_complete)
+set completeopt=menu,menuone,longest
+
 " clang_indexer
 nnoremap <Leader>ar :call ClangGetReferences()<CR>
 nnoremap <Leader>ad :call ClangGetDeclarations()<CR>
 nnoremap <Leader>as :call ClangGetSubclasses()<CR>
-" Suppression preview sur complétion (inutile avec clang_complete)
-set completeopt=menu,menuone,longest
+
+" Syntastic
+" For setting project paths in vimrc_specific, to use with an autocmd
+function! AddSyntasticClangPath(project_path)
+	if stridx(expand('%:p'), a:project_path) == 0
+		let g:syntastic_c_config_file=a:project_path . '.clang_complete'
+	endif
+endfunction
+
 
 " Supertab
 let g:SuperTabDefaultCompletionType='context'
