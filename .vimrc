@@ -147,7 +147,9 @@ map <Leader>tr :UpdateTypesFile<CR>
 if ! exists('g:TagHighlightSettings')
 	let g:TagHighlightSettings={}
 endif
-let g:TagHighlightSettings['IncludeLocals']=1
+let g:TagHighlightSettings['IncludeLocals']			= 1
+" Ctags isn't aware of override (C++11), ignore it
+let g:TagHighlightSettings['CtagsExtraArguments']	= ['-Ioverride']
 
 " clang_complete
 let g:clang_auto_select=1
