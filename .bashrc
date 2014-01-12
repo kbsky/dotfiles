@@ -75,7 +75,7 @@ export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
 
 mgrep()
 {
-	[[ $# -lt 2 ]] && { echo "Not enough arguments"; return; }
+	[[ $# -lt 2 ]] && { echo "Not enough arguments"; return 1; }
 	grep -Pzo ${@:1:$(($#-2))} "(?s)${@: -2: 1}" "${@: -1}"
 }
 
