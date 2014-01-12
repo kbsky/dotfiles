@@ -102,7 +102,7 @@ nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
 nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
 nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
-nnoremap <Leader>ms	:mksession! ~/.vim/session.vim<CR>
+nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
 
 " Abréviations
