@@ -102,7 +102,7 @@ nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
 nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
 nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
-nnoremap <Leader>ms	:mksession! ~/.vim/session.vim<CR>
+nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
 
 " Abréviations
@@ -147,7 +147,9 @@ map <Leader>tr :UpdateTypesFile<CR>
 if ! exists('g:TagHighlightSettings')
 	let g:TagHighlightSettings={}
 endif
-let g:TagHighlightSettings['IncludeLocals']=1
+let g:TagHighlightSettings['IncludeLocals']			= 1
+" Ctags isn't aware of override (C++11), ignore it
+let g:TagHighlightSettings['CtagsExtraArguments']	= ['-Ioverride']
 
 " clang_complete
 let g:clang_auto_select=1
