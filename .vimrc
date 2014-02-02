@@ -42,13 +42,13 @@ set shiftwidth=4 " Since 7.4, sw=0 sets sw to ts, but older plugins are not awar
 set softtabstop=4
 set autoindent
 " Indentation C-style
-autocmd FileType c,cpp,java :set cindent |
+autocmd FileType c,cpp,java,javascript :set cindent |
 	\ :inoremap {<CR> {<CR>}<Esc><Up>o <BS>
 "  <BS> permet de conserver l'indentation même après <Esc>
 " } (fix highlight)
 
 " Options programmation
-autocmd FileType c,cpp,java,perl,prolog,py,sh,vim :set colorcolumn=80 number
+autocmd FileType c,cpp,java,javascript,perl,prolog,py,sh,vim :set colorcolumn=80 number
 " Activation Doxygen pour les langages supportés
 let g:load_doxygen_syntax=1
 
@@ -104,7 +104,8 @@ nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
 nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
-
+nnoremap <Leader>sh	:vsp `=substitute(expand("%"), "\.h$", ".cpp", "")`<CR>
+	
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
 function! CmdCabbr(abbreviation, expansion)
