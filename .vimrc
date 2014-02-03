@@ -104,8 +104,12 @@ nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
 nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
-nnoremap <Leader>sh	:vsp `=substitute(expand("%"), "\.h$", ".cpp", "")`<CR>
-	
+nnoremap <Leader>sh	:if match(expand("%"), "\\v\\.h(pp)?$") != -1 <Bar>
+			\ vsp `=substitute(expand("%"), "\\v\\.h(pp)?$", ".cpp", "")` <Bar>
+			\ elseif match(expand("%"), "\.cpp$") != -1 <Bar>
+			\ vsp `=substitute(expand("%"), "\.cpp$", ".h", "")` <Bar>
+			\ endif<CR><CR>
+
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
 function! CmdCabbr(abbreviation, expansion)
