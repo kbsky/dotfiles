@@ -12,8 +12,9 @@ set encoding=utf8
 " Colorscheme & options générales d'affichage
 syntax on
 set background=dark
-colorscheme solarized 
 set cursorline
+set laststatus=2
+colorscheme solarized 
 " Options solarized
 let g:solarized_contrast="high"    "default value is normal
 " Touche changement arrière-plan
@@ -212,6 +213,14 @@ let g:tex_flavor='latex'
 " Fugitive
 nnoremap <Leader>gs :Gstatus <Bar> wincmd K<CR>
 nnoremap <Leader>gt :tabe % <Bar> Gstatus <Bar> wincmd K<CR>
+
+" airline
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 
 " Source specific

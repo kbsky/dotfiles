@@ -82,8 +82,8 @@ mgrep()
 silent_bg()
 {
 	if [[ $1 ]]; then
-		$1 2> /dev/null ${@:2} & 
-	else 
+		$1 2> /dev/null ${@:2} &
+	else
 		echo "No command given"
 		return 1
 	fi
