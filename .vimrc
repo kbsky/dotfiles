@@ -14,7 +14,7 @@ syntax on
 set background=dark
 set cursorline
 set laststatus=2
-colorscheme solarized 
+colorscheme solarized
 " Options solarized
 let g:solarized_contrast="high"    "default value is normal
 " Touche changement arrière-plan
@@ -44,12 +44,13 @@ set softtabstop=4
 set autoindent
 " Indentation C-style
 autocmd FileType c,cpp,java,javascript :set cindent |
-	\ :inoremap {<CR> {<CR>}<Esc><Up>o <BS>
+			\ :inoremap {<CR> {<CR>}<Esc><Up>o <BS>
 "  <BS> permet de conserver l'indentation même après <Esc>
 " } (fix highlight)
 
 " Options programmation
-autocmd FileType c,cpp,java,javascript,perl,prolog,py,sh,vim :set colorcolumn=80 number
+autocmd FileType c,cpp,java,javascript,perl,prolog,python,sh,vim 
+			\ :set colorcolumn=80 number
 " Activation Doxygen pour les langages supportés
 let g:load_doxygen_syntax=1
 
@@ -79,8 +80,8 @@ set sessionoptions=curdir,folds,help,resize,tabpages,winsize
 
 " Map divers
 nnoremap Y			y$
-nnoremap gb 		:bnext<CR>
-nnoremap gB 		:bprevious<CR>
+nnoremap gb			:bnext<CR>
+nnoremap gB			:bprevious<CR>
 
 " Search for selected text, forwards or backwards.
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
@@ -110,11 +111,12 @@ nnoremap <Leader>sh	:if match(expand("%"), "\\v\\.h(pp)?$") != -1 <Bar>
 			\ elseif match(expand("%"), "\.cpp$") != -1 <Bar>
 			\ vsp `=substitute(expand("%"), "\.cpp$", ".h", "")` <Bar>
 			\ endif<CR><CR>
+nnoremap <Leader>cf :%retab <Bar> %s/\s\+$//g<CR>
 
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
 function! CmdCabbr(abbreviation, expansion)
-  execute 'cabbr ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() 
+  execute 'cabbr ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype()
               \ == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
 endfunction
 
@@ -156,6 +158,7 @@ endif
 let g:TagHighlightSettings['IncludeLocals']			= 1
 " Ctags isn't aware of override (C++11), ignore it
 let g:TagHighlightSettings['CtagsExtraArguments']	= ['-Ioverride']
+let g:TagHighlightSettings['LanguageDetectionMethods'] = ['FileType']
 
 " clang_complete
 let g:clang_auto_select=1
@@ -187,7 +190,7 @@ endfunction
 " Supertab
 let g:SuperTabDefaultCompletionType='context'
 let g:SuperTabCompletionContexts=['s:ContextDiscover', 's:ContextText']
-let g:SuperTabContextDiscoverDiscovery= 
+let g:SuperTabContextDiscoverDiscovery=
 			\ ["&completefunc:<c-x><c-u>" ,"&omnifunc:<c-x><c-o>"]
 let g:SuperTabRetainCompletionDuration='completion'
 let g:SuperTabLongestEnhanced=1
@@ -204,7 +207,7 @@ inoremap <A-a> <Plug>delimitMateS-Tab
 let delimitMate_expand_space=1
 
 " NERD commenter
-let g:NERDCustomDelimiters = { 'c': { 'left': '//', 
+let g:NERDCustomDelimiters = { 'c': { 'left': '//',
 									\ 'leftAlt': '/*', 'rightAlt': '*/' } }
 
 " vim-latex
