@@ -107,9 +107,9 @@ nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
 nnoremap <Leader>sh	:if match(expand("%"), "\\v\\.h(pp)?$") != -1 <Bar>
-			\ vsp `=substitute(expand("%"), "\\v\\.h(pp)?$", ".cpp", "")` <Bar>
+			\ lefta vsp `=substitute(expand("%"), "\\v\\.h(pp)?$", ".cpp", "")` <Bar>
 			\ elseif match(expand("%"), "\.cpp$") != -1 <Bar>
-			\ vsp `=substitute(expand("%"), "\.cpp$", ".h", "")` <Bar>
+			\ rightb vsp `=substitute(expand("%"), "\.cpp$", ".h", "")` <Bar>
 			\ endif<CR><CR>
 nnoremap <Leader>cf :%retab <Bar> %s/\s\+$//g <Bar> nohl<CR>
 
@@ -208,7 +208,7 @@ let delimitMate_expand_space=1
 
 " NERD commenter
 let g:NERDCustomDelimiters = { 'c': { 'left': '//',
-									\ 'leftAlt': '/*', 'rightAlt': '*/' } }
+								\ 'leftAlt': '/*', 'rightAlt': '*/' } }
 
 " vim-latex
 let g:tex_flavor='latex'
