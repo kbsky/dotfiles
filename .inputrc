@@ -1,2 +1,5 @@
 Control-f: menu-complete
 Control-g: menu-complete-backward
+set editing-mode vi
+set colored-stats
+set show-mode-in-prompt

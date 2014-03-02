@@ -111,7 +111,7 @@ nnoremap <Leader>sh	:if match(expand("%"), "\\v\\.h(pp)?$") != -1 <Bar>
 			\ elseif match(expand("%"), "\.cpp$") != -1 <Bar>
 			\ vsp `=substitute(expand("%"), "\.cpp$", ".h", "")` <Bar>
 			\ endif<CR><CR>
-nnoremap <Leader>cf :%retab <Bar> %s/\s\+$//g<CR>
+nnoremap <Leader>cf :%retab <Bar> %s/\s\+$//g <Bar> nohl<CR>
 
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
