@@ -1,14 +1,14 @@
 # .bashrc
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
+if [[ -f /etc/bashrc ]]; then
 	. /etc/bashrc
 fi
 
 # User specific aliases and function
 
 # Colors for display
-if [ `tput colors` -ge 256 ]; then
+if [[ `tput colors` -ge 256 ]]; then
 	BLACK="\[\e[38;5;0m\]"
 	BLUE="\[\e[38;5;27m\]"
 	GREEN="\[\e[38;5;28m\]"
@@ -33,7 +33,7 @@ BOLD="\[$(tput bold)\]"
 REV="\[$(tput rev)\]"
 
 # Prompt
-if [ $UID -eq 0 ];
+if [[ $UID -eq 0 ]];
 	then MK="#"
 	else MK="$"
 fi
@@ -41,7 +41,7 @@ fi
 PS1="$GREEN[$BOLD$RED\u$RETURN$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RETURN$GREEN]$MK$RETURN "
 
 # Path
-if [ !$(eval echo $PATH | grep "$(eval echo ~/bin)") ]; then
+if [[ !$(eval echo $PATH | grep "$(eval echo ~/bin)") ]]; then
 	export PATH=$PATH:~/bin
 fi
 
@@ -91,6 +91,6 @@ silent_bg()
 
 
 # Source specific
-if [ -f $HOME/.bashrc_specific ]; then
+if [[ -f $HOME/.bashrc_specific ]]; then
 	. $HOME/.bashrc_specific
 fi
