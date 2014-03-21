@@ -49,6 +49,7 @@ autocmd FileType c,cpp,java,javascript :set cindent |
 " } (fix highlight)
 
 " Options programmation
+autocmd FileType tex :set number
 autocmd FileType c,cpp,java,javascript,perl,prolog,python,sh,vim 
 			\ :set colorcolumn=80 number
 " Activation Doxygen pour les langages supportés
@@ -143,6 +144,7 @@ command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
 " Manual extension-filetype associations
 autocmd BufNew,BufNewFile,BufRead *.inc,*.a30 set filetype=asm
 autocmd BufNew,BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNew,BufNewFile,BufRead *.ypp set filetype=yacc
 
 
 " Config plugins
