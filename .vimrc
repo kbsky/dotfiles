@@ -43,14 +43,14 @@ set shiftwidth=4 " Since 7.4, sw=0 sets sw to ts, but older plugins are not awar
 set softtabstop=4
 set autoindent
 " Indentation C-style
-autocmd FileType c,cpp,java,javascript :set cindent |
+autocmd FileType c,cpp,java,javascript,yacc :set cindent |
 			\ :inoremap {<CR> {<CR>}<Esc><Up>o <BS>
 "  <BS> permet de conserver l'indentation même après <Esc>
 " } (fix highlight)
 
 " Options programmation
 autocmd FileType tex :set number
-autocmd FileType c,cpp,java,javascript,perl,prolog,python,sh,vim 
+autocmd FileType c,cpp,java,javascript,perl,prolog,python,sh,vim,yacc
 			\ :set colorcolumn=80 number
 " Activation Doxygen pour les langages supportés
 let g:load_doxygen_syntax=1
