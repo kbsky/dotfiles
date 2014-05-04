@@ -45,8 +45,11 @@ if [[ !$(eval echo $PATH | grep "$(eval echo ~/bin)") ]]; then
 	export PATH=$PATH:~/bin
 fi
 
-# ls colors
+# Colors
+# ls
 eval `dircolors ~/.dir_colors`
+# gcc
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Use vi bindings in shell
 set -o vi
