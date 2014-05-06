@@ -7,6 +7,11 @@ fi
 
 # User specific aliases and function
 
+# Source specific before (e.g. env var)
+if [[ -f $HOME/.bashrc_specific_before ]]; then
+	. $HOME/.bashrc_specific_before
+fi
+
 # Colors for display
 if [[ `tput colors` -ge 256 ]]; then
 	BLACK="\[\e[38;5;0m\]"
