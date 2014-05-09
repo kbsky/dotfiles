@@ -9,6 +9,9 @@ runtime macros/matchit.vim
 " Encodage par défaut
 set encoding=utf8
 
+" Configuration backspace (par defaut vi-compatible = inutile)
+set backspace=2
+
 " Colorscheme & options générales d'affichage
 syntax on
 set background=dark
@@ -167,7 +170,6 @@ let g:clang_auto_select=1
 let g:clang_complete_auto=0
 let g:clang_complete_copen=0
 let g:clang_snippets=1
-let g:clang_conceal_snippets=1
 let g:clang_trailing_placeholder=1
 let g:clang_use_library=1
 let g:clang_complete_macros=1
