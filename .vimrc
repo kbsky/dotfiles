@@ -1,3 +1,6 @@
+" Make sure we're in nocp mode
+set nocompatible
+
 " Pathogen
 runtime bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -55,8 +58,13 @@ autocmd FileType c,cpp,java,javascript,yacc :set cindent |
 autocmd FileType tex :set number
 autocmd FileType c,cpp,java,javascript,perl,prolog,python,sh,vim,yacc
 			\ :set colorcolumn=80 number
+
+" Configure built-in syntax files
 " Activation Doxygen pour les langages supportés
 let g:load_doxygen_syntax=1
+" Highlight bash readline extensions
+let g:readline_has_bash=1
+
 
 " Pas d'indentation private/protected/public:, namespace, type retour,
 " alignement parenthèses
@@ -110,12 +118,18 @@ nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
 nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
+" Switch header/source
 nnoremap <Leader>sh	:if match(expand("%"), "\\v\\.h(pp)?$") != -1 <Bar>
 			\ lefta vsp `=substitute(expand("%"), "\\v\\.h(pp)?$", ".cpp", "")` <Bar>
 			\ elseif match(expand("%"), "\.cpp$") != -1 <Bar>
 			\ rightb vsp `=substitute(expand("%"), "\.cpp$", ".h", "")` <Bar>
 			\ endif<CR><CR>
+" Retab and remove trailing whitespaces
 nnoremap <Leader>cf :%retab <Bar> %s/\s\+$//g <Bar> nohl<CR>
+" Show highlight info for the item under the cursor
+nnoremap <Leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+            \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
@@ -126,6 +140,7 @@ endfunction
 
 call CmdCabbr('diffs', 'vert diffsplit')
 call CmdCabbr('h', 'vert rightb help')
+call CmdCabbr('ht', 'tab help')
 call CmdCabbr('vsb', 'vert sbuffer')
 call CmdCabbr('tsb', 'tab sbuffer')
 
