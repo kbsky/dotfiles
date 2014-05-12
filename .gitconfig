@@ -13,7 +13,7 @@
 	tool = gvimdiff
 [core]
 	excludesfile = ~/.gitignore_global
-[alias]
-	br = branch --color
 [i18n]
 	logOutputEncoding = UTF-8
+[color]
+	ui = auto
