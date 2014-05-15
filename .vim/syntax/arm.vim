@@ -859,7 +859,7 @@ syn keyword armasmDirective	ASSOC CODE COMDEF COMMON NOINIT READONLY
 syn keyword armasmDirective	READWRITE WEAK
 
 " Added: delimiters
-syn match armasmDelimiter	"[\][,<>]"
+syn match armasmDelimiter	"[\][{},<>]"
 
 
 " Define the default highlighting.
@@ -893,20 +893,12 @@ if version >= 508 || !exists("did_armasm_syntax_inits")
   HiLink armasmBase9		Number
   HiLink armasmFloat		Float
   HiLink armasmBoolean		Boolean
-  HiLink armasmBuiltIn		Constant
+  HiLink armasmBuiltIn		EnumerationValue
   HiLink armasmIdentifier	Identifier
 
-  "
-  " The following look better (for me, at least) with the alternate mappings,
-  " although the more "natural" way to highlight them is as follows:
-  "
   HiLink armasmLabel		PreProc
   HiLink armasmOpcode		Keyword
   HiLink armasmOperator		Operator
-
-  "HiLink armasmLabel		Identifier
-  "HiLink armasmOpcode		Normal
-  "HiLink armasmOperator		Special
   
   HiLink armasmDelimiter	Delimiter
 
