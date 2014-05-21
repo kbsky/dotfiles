@@ -409,6 +409,8 @@ syn keyword armasmOpcode	LDMLSFA LDMGEFA LDMLTFA LDMGTFA LDMLEFA LDMALFA
 syn keyword armasmOpcode	LDMEA LDMEQEA LDMNEEA LDMCSEA LDMHSEA LDMCCEA
 syn keyword armasmOpcode	LDMLOEA LDMMIEA LDMPLEA LDMVSEA LDMVCEA LDMHIEA
 syn keyword armasmOpcode	LDMLSEA LDMGEEA LDMLTEA LDMGTEA LDMLEEA LDMALEA
+" Added: LDM alone is valid too!
+syn keyword armasmOpcode	LDM
 
 syn keyword armasmOpcode	PLD
 
@@ -455,6 +457,8 @@ syn keyword armasmOpcode	STMLSFA STMGEFA STMLTFA STMGTFA STMLEFA STMALFA
 syn keyword armasmOpcode	STMEA STMEQEA STMNEEA STMCSEA STMHSEA STMCCEA
 syn keyword armasmOpcode	STMLOEA STMMIEA STMPLEA STMVSEA STMVCEA STMHIEA
 syn keyword armasmOpcode	STMLSEA STMGEEA STMLTEA STMGTEA STMLEEA STMALEA
+" Added: STM alone is valid too!
+syn keyword armasmOpcode	STM
 
 syn keyword armasmOpcode	SWP SWPEQ SWPNE SWPCS SWPHS SWPCC SWPLO
 syn keyword armasmOpcode	SWPMI SWPPL SWPVS SWPVC SWPHI SWPLS
