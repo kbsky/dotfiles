@@ -15,6 +15,9 @@ set encoding=utf8
 " Configuration backspace (par defaut vi-compatible = inutile)
 set backspace=2
 
+" More history (: commands and / patterns)
+set history=100
+
 " Colorscheme & options générales d'affichage
 syntax on
 set background=dark
