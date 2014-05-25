@@ -124,16 +124,16 @@ nnoremap <Leader>dw	:w !diff % -<CR>
 " Switch header/source
 function! SwitchHeader()
 	if match(expand("%"), "\\v\\.h(pp)?$") != -1
-		let l:src=substitute(glob(substitute(expand("%"), "\\v\\.h[^.]*$", ".c*", "")), 
-					\ "\n", "", "") 
+		let l:src=substitute(glob(substitute(expand("%"), "\\v\\.h[^.]*$", ".c*", "")),
+					\ "\n", "", "")
 		if !empty(l:src)
 			exe "lefta vsp " . l:src
 		else
 			echo "No source found"
 		endif
 	elseif match(expand("%"), "\\v\.c(pp|xx)?$") != -1
-		let l:header=substitute(glob(substitute(expand("%"), "\\v\\.c[^.]*$", ".h*", "")), 
-					\ "\n", "", "") 
+		let l:header=substitute(glob(substitute(expand("%"), "\\v\\.c[^.]*$", ".h*", "")),
+					\ "\n", "", "")
 		if !empty(l:header)
 			exe "lefta vsp " . l:header
 		else
@@ -207,6 +207,7 @@ let g:clang_snippets=1
 let g:clang_trailing_placeholder=1
 let g:clang_use_library=1
 let g:clang_complete_macros=1
+let g:clang_complete_patterns=1
 nnoremap <Leader>aq :call g:ClangUpdateQuickFix() <bar> cc <bar> clist<CR>
 " Suppression preview sur complétion (inutile avec clang_complete)
 set completeopt=menu,menuone,longest
