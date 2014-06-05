@@ -23,6 +23,7 @@ syntax on
 set background=dark
 set cursorline
 set laststatus=2
+set showcmd " Show size of visual selection
 colorscheme solarized
 " Options solarized
 let g:solarized_contrast="high"    "default value is normal
@@ -58,9 +59,9 @@ autocmd FileType c,cpp,java,javascript,yacc :set cindent |
 " } (fix highlight)
 
 " Options programmation
-autocmd FileType tex :set number
-autocmd FileType c,cpp,java,javascript,perl,prolog,python,sh,vim,yacc
-			\ :set colorcolumn=80 number
+autocmd FileType tex :setl number
+autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,vim,yacc
+			\ :setl colorcolumn=80 number
 
 " Configure built-in syntax files
 " Activation Doxygen pour les langages supportés
@@ -97,6 +98,11 @@ set sessionoptions=curdir,folds,help,resize,tabpages,winsize
 nnoremap Y			y$
 nnoremap gb			:bnext<CR>
 nnoremap gB			:bprevious<CR>
+
+" Special mappings to clear new lines (when comments are inserted)
+inoremap <S-CR>		<CR><C-u>
+nnoremap <Leader>o	o<C-U>
+nnoremap <Leader>O	O<C-U>
 
 " Search for selected text, forwards or backwards.
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
@@ -198,6 +204,8 @@ let g:TagHighlightSettings['IncludeLocals']			= 1
 " Ctags isn't aware of override (C++11), ignore it
 let g:TagHighlightSettings['CtagsExtraArguments']	= ['-Ioverride']
 let g:TagHighlightSettings['LanguageDetectionMethods'] = ['FileType']
+" taghl files use vim syntax
+autocmd BufNew,BufNewFile,BufRead *.taghl set filetype=vim
 
 " clang_complete
 let g:clang_auto_select=1
@@ -242,7 +250,8 @@ let g:tagbar_compact=1
 nnoremap <Leader>tt :TagbarToggle<CR>
 
 " delimitMate
-inoremap <A-a> <Plug>delimitMateS-Tab
+imap <C-f> <Plug>delimitMateS-Tab
+imap <C-b> <Plug>delimitMateJumpMany
 let delimitMate_expand_space=1
 
 " NERD commenter
