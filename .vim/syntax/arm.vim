@@ -47,6 +47,10 @@ syn match armasmFloat		"-\=[0-9]*\.[0-9]\+\([eE]-\=[0-9]\+\)\="
 syn match armasmBoolean		"{TRUE}"
 syn match armasmBoolean		"{FALSE}"
 
+" Defined after Decimal for precedence
+syn match armasmLocalLabel	"^\d\+"
+syn match armasmLocalLabelRef	"%\(F\|B\)\?\(A\|T\)\?\d\+\w*"
+
 syn match armasmBuiltIn		"{PC}"
 syn match armasmBuiltIn		"{VAR}"
 syn match armasmBuiltIn		"{TRUE}"
@@ -874,9 +878,7 @@ if version >= 508 || !exists("did_armasm_syntax_inits")
     let did_armasm_syntax_inits = 1
     command -nargs=+ HiLink hi link <args>
   else
-    "TEST, add def again
-    "command -nargs=+ HiLink hi def link <args>
-    command -nargs=+ HiLink hi link <args>
+    command -nargs=+ HiLink hi def link <args>
   endif
 
   HiLink armasmTodo		Todo
@@ -903,6 +905,9 @@ if version >= 508 || !exists("did_armasm_syntax_inits")
   HiLink armasmLabel		PreProc
   HiLink armasmOpcode		Keyword
   HiLink armasmOperator		Operator
+
+  HiLink armasmLocalLabel	Member
+  HiLink armasmLocalLabelRef	armasmLocalLabel
   
   HiLink armasmDelimiter	Delimiter
 
