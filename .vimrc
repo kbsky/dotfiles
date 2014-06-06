@@ -60,7 +60,7 @@ autocmd FileType c,cpp,java,javascript,yacc :set cindent |
 
 " Options programmation
 autocmd FileType tex :setl number
-autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,vim,yacc
+autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,verilog,vim,yacc
 			\ :setl colorcolumn=80 number
 
 " Configure built-in syntax files
@@ -127,6 +127,7 @@ nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
 nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
+nnoremap <Leader>do	:only <Bar> diffoff<CR>
 " Switch header/source
 function! SwitchHeader()
 	if match(expand("%"), "\\v\\.h(pp)?$") != -1
@@ -264,6 +265,7 @@ let g:tex_flavor='latex'
 " Fugitive
 nnoremap <Leader>gs :Gstatus <Bar> wincmd K<CR>
 nnoremap <Leader>gt :tabe % <Bar> Gstatus <Bar> wincmd K<CR>
+nnoremap <Leader>gd :Gdiff<CR>
 
 " airline
 let g:airline#extensions#tabline#enabled=1
