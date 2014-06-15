@@ -2,13 +2,43 @@
 
 # Script for using ViM as a PAGER.
 # Based on Bram's less.sh.
-# Version 1.8.2
+# Version 1.8.9
 # git://github.com/rkitover/vimpager.git
 
 # Just pass through if not on a tty
 if [ ! -t 1 ]; then
 	exec cat "${@}"
 fi
+
+# try to find a better shell, especially on Solaris
+
+PATH=$PATH:/usr/local/bin:/opt/csw/bin:/opt/local/bin:/usr/dt/bin:/usr/xpg4/bin:/usr/bin:/bin
+
+if [ -z "$IN_BASH" ] && command -v bash >/dev/null; then
+	IN_BASH=1
+	export IN_BASH
+	exec bash "$0" "$@"
+elif [ -z "$IN_BASH" ] && [ -z "$IN_KSH" ]; then
+	if command -v dtksh >/dev/null; then
+		IN_KSH=1
+		export IN_KSH
+		exec dtksh "$0" "$@"
+	elif [ -x /usr/xpg4/bin/sh ]; then
+		IN_KSH=1
+		export IN_KSH
+		exec /usr/xpg4/bin/sh "$0" "$@"
+	elif command -v ksh93 >/dev/null; then
+		IN_KSH=1
+		export IN_KSH
+		exec ksh93 "$0" "$@"
+	elif command -v ksh >/dev/null; then
+		IN_KSH=1
+		export IN_KSH
+		exec ksh "$0" "$@"
+	fi
+fi
+
+# hopefully we're now POSIX
 
 case $(uname -s) in
 	Linux) linux=1 ;;
@@ -33,15 +63,60 @@ grep_q() {
 	' "$@"
 }
 
+head_n() {
+	_lines=$1
+	shift
+
+	if [ -z "$_head_syntax" ]; then
+		_head1_test=`echo xx | head -n 1 2>/dev/null`
+		if [ "$_head1_test" = "xx" ]; then
+			_head_syntax=new
+		else
+			_head_syntax=old
+		fi
+	fi
+
+	if [ "$_head_syntax" = "new" ]; then
+		head -n $_lines "$@"
+	else
+		head -$_lines "$@"
+	fi
+}
+
+tail_n() {
+	_lines=$1
+	shift
+
+	if [ -z "$_tail_syntax" ]; then
+		_tail1_test=`echo xx | tail -n 1 2>/dev/null`
+		if [ "$_tail1_test" = "xx" ]; then
+			_tail_syntax=new
+		else
+			_tail_syntax=old
+		fi
+	fi
+
+	if [ "$_tail_syntax" = "new" ]; then
+		tail -n $_lines "$@"
+	else
+		tail -$_lines "$@"
+	fi
+}
+
 # Use the real TEMP directory on windows in case we are using a native vim/gvim
 tmp=/tmp
 [ -n "${msys}" -o -n "${cygwin}" ] && tmp=$(printf "%s\n" "${TEMP}" | tr '\\' /)
+# Create a safe directory in which we place all other tempfiles.
+tmp="${tmp}/vimpager_${$}"
+mkdir -m 700 "${tmp}" || {
+    echo Could not create temporary directory ${tmp} >&2
+    exit 1
+}
+trap "rm -rf ${tmp}" HUP INT QUIT ILL TRAP KILL BUS TERM
 
 # Detect terminal size
 if command -v tput >/dev/null; then
-	# this is the only way it works on Cygwin
-	trap "rm -f '${tmp}/vimpager_cols_${$}' '${tmp}/vimpager_lines_${$}'" HUP INT QUIT ILL TRAP KILL BUS TERM
-
+        # this is the only way it works on Cygwin
 	tput cols  > "${tmp}/vimpager_cols_${$}"
 	tput lines > "${tmp}/vimpager_lines_${$}"
 
@@ -66,10 +141,8 @@ if [ -z "${cols}" ]; then
 fi
 
 find_vim_dir() {
-	trap "rm -f '${tmp}/vimpager_vim_dir_${$}'" HUP INT QUIT ILL TRAP KILL BUS TERM
-
 	vim -E -c 'call writefile([ $VIM ], "'${tmp}'/vimpager_vim_dir_'${$}'") | q' </dev/null
-	vim_dir=$(head -1 "${tmp}/vimpager_vim_dir_${$}")
+	vim_dir=$(head_n 1 "${tmp}/vimpager_vim_dir_${$}")
 
 	rm -f "${tmp}/vimpager_vim_dir_${$}"
 }
@@ -80,6 +153,7 @@ find_rc() {
 	_rc_file=$2
 
 	[ -e "${HOME}/.${_rc_file}" ] && _rc="${HOME}/.${_rc_file}"
+	[ -z "${_rc}" ] && [ -e "${HOME}/_${_rc_file}" ] && _rc="${HOME}/_${_rc_file}"
 
 	if [ -n "${msys}" -o -n "${cygwin}" ]; then
 		if command -v ${_cmd} 2>/dev/null | grep_q '^\/(cygdrive\/)?[a-z]\/'; then
@@ -111,6 +185,8 @@ if [ -n "${VIMPAGER_RC}" ]; then
 	vimrc="${VIMPAGER_RC}"
 elif [ -f ~/.vimpagerrc ]; then
 	vimrc=~/.vimpagerrc
+elif [ -f ~/.vim/vimpagerrc ]; then
+	vimrc=~/.vim/vimpagerrc
 elif [ -f ~/_vimpagerrc ]; then
 	vimrc=~/_vimpagerrc
 fi
@@ -130,37 +206,35 @@ if [ -z "${vimrc}" ]; then
 fi
 
 # read settings
-trap "rm -f '${tmp}/vimpager_opts_${$}'" HUP INT QUIT ILL TRAP KILL BUS TERM
-
 vim -u "${vimrc}" -E --cmd 'set nocp' -c '
 	if !exists("vimpager_use_gvim")
 		let vimpager_use_gvim=0
 	endif
-	
+
 	if !exists("vimpager_disable_x11")
 		let vimpager_disable_x11=0
 	endif
-	
+
 	if !exists("vimpager_scrolloff")
 		let vimpager_scrolloff=5
 	endif
-	
+
 	if !exists("vimpager_passthrough")
 		let vimpager_passthrough=0
 	endif
 
 	call writefile([ vimpager_use_gvim, vimpager_disable_x11, vimpager_scrolloff, vimpager_passthrough ], "'${tmp}'/vimpager_opts_'${$}'")
-	
+
 	quit
 ' </dev/null
 
-[ "$(head -1 < "${tmp}/vimpager_opts_${$}")" = 1 ] && use_gvim=1
+[ "$(head_n 1 < "${tmp}/vimpager_opts_${$}")" = 1 ] && use_gvim=1
 
-[ "$(head -2 < "${tmp}/vimpager_opts_${$}" | tail -1)" = 1 ] && disable_x11=1
+[ "$(head_n 2 < "${tmp}/vimpager_opts_${$}" | tail_n 1)" = 1 ] && disable_x11=1
 
-scrolloff=$(head -3 < "${tmp}/vimpager_opts_${$}" | tail -1)
+scrolloff=$(head_n 3 < "${tmp}/vimpager_opts_${$}" | tail_n 1)
 
-[ "$(head -4 < "${tmp}/vimpager_opts_${$}" | tail -1)" = 0 ] && no_pass_thru=1
+[ "$(head_n 4 < "${tmp}/vimpager_opts_${$}" | tail_n 1)" = 0 ] && no_pass_thru=1
 
 if [ "${no_pass_thru}" = 0 ]; then
 	# check if arithmetic expansion works, passthrough mode relies on it
@@ -238,25 +312,28 @@ less_vim() {
 				vim_cmd="${vim_cmd} -X"
 			fi
 
+# 'unmap h' has to be the very last command in -c, to disable the less.vim help screen
 			#${vim_cmd} \
 				#-u "${vimrc}" \
 				#--cmd 'let vimpager=1 | runtime! macros/less.vim | set nocp' \
 				#-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu |
 					#nmap <ESC>u :nohlsearch<cr> | noremap q :<C-u>q<CR> | nnoremap <Down> 1<C-d> | nnoremap <Up> 1<C-u>" \
+				#-c "unmap h" \
 				#"${@:--}"
 			${vim_cmd} \
 				-u "${vimrc}" \
 				--cmd 'set nocp' \
 				-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu | set nomodifiable | noremap q :q!<CR>" \
+				-c 'noremap <nowait> d <C-d> | noremap u <C-u>' \
 				"${@:--}"
 			;;
 		*) # gvim or mvim GUI
-			[ -n "${gvimrc}" ] && colors=$(grep guifg ${gvimrc} 2>/dev/null | head -1)
+			[ -n "${gvimrc}" ] && colors=$(grep guifg ${gvimrc} 2>/dev/null | head_n 1)
 
 			# Check if the user maximized the window in ~/_gvimrc on Win32, if
 			# so restore on startup.
 			if [ -n "${gvimrc}" -a \( -n "${cygwin}" -o -n "${msys}" \) ]; then
-				simalt=$(grep simalt "${gvimrc}" 2>/dev/null | head -1)
+				simalt=$(grep simalt "${gvimrc}" 2>/dev/null | head_n 1)
 
 				if [ -n "${simalt}" ]; then
 					restore="simalt ~r"
@@ -266,9 +343,11 @@ less_vim() {
 			${vim_cmd} \
 				-u "${vimrc}" \
 				--cmd 'let vimpager=1 | runtime! macros/less.vim | set nocp' \
+				-c "nnoremap <Up> 1<C-u>" \
 				-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu |
-				    nmap <ESC>u :nohlsearch<cr> | noremap q :<C-u>q<CR> | nnoremap <Down> 1<C-d> | nnoremap <Up> 1<C-u> |
+				    nmap <ESC>u :nohlsearch<cr> | noremap q :<C-u>q<CR> | nnoremap <Down> 1<C-d> |
 				    ${colors:-echo} | ${restore:-echo} | set lines=${lines} | set columns=${cols}" \
+				-c "unmap h" \
 				"${@:--}" &
 			;;
 	esac
@@ -338,8 +417,6 @@ fi
 
 extra_cmd="let vimpager_ptree=[$(do_ptree | awk '{ print "\"" $2 "\"" }' | tr '\n' ',')] | call remove(vimpager_ptree, -1)"
 
-trap "rm -rf '${tmp}/vimpager_${$}'" HUP INT QUIT ILL TRAP KILL BUS TERM
-
 mkdir -m 0700 "${tmp}/vimpager_${$}"
 
 command -v perl > /dev/null && \
@@ -399,20 +476,13 @@ filter() {
 # Currently only checks for "+G" as in less which will start reading the file
 # at the end. Also supports just "+" as in vim.
 # Couldn't use getopt or getopts as neither supports options prepended with +
-checkAndProcessParameter() {
-    case "$1" in
-        "+G" | "+")
-               vim_cmd="${vim_cmd} +"
-               ;;
-        *)
-               return 1
-               ;;
-    esac
-    return 0
-}
-
-while checkAndProcessParameter $1; do
-    shift
+while [ $# -gt 0 ] ; do
+        case "$1" in
+                "+G"|"+") vim_cmd="${vim_cmd} +"; shift ;;
+                    "-c") shift; extra_c="$1"; shift ;;
+                      -*) echo "bad option '$1'" ; exit 1 ;;
+                       *) break ;;
+         esac
 done
 
 filename=${@:-stdin}
@@ -420,7 +490,7 @@ filename=$(echo "${filename}" | tr '/' '_')
 filename="${tmp}/vimpager_${$}/${filename}"
 
 case $(echo "${@}" | tr 'A-Z' 'a-z') in
-	*.gz) 
+	*.gz)
 		filename=$(echo ${filename} | sed -e 's/\.[Gg][Zz]$//')
 		gunzip -c "${@}" | filter 2> "${filename}"
 		;;
@@ -442,7 +512,7 @@ case $(echo "${@}" | tr 'A-Z' 'a-z') in
 esac
 
 # dumb man detection when the pstree heuristic fails
-if head -6 "${filename}" | grep_q '^NAME$'; then
+if head_n 12 "${filename}" | grep_q '^NAME$'; then
 	extra_c='set ft=man'
 fi
 
@@ -467,14 +537,14 @@ less_vim -c "${extra_c:-echo}" --cmd "${extra_cmd:-echo}" "${filename}" </dev/tt
 # On Win32 we must also wait for the process to exit before the file can
 # be deleted.
 (
-	while [ -d "${tmp}/vimpager_${$}" ]; do
-		sleep 10 
-		rm -rf "${tmp}/vimpager_${$}" 2>/dev/null
+	while [ -d "${tmp}" ]; do
+		sleep 10
+		rm -rf "${tmp}" 2>/dev/null
 		rm -f gvim.exe.stackdump 2>/dev/null
 	done
 ) &
 
-# Copyright (c) 2013, Rafael Kitover
+# Copyright (c) 2014, Rafael Kitover <rkitover@gmail.com>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -518,5 +588,11 @@ less_vim -c "${extra_c:-echo}" --cmd "${extra_cmd:-echo}" "${filename}" </dev/tt
 # vincer: vince rosso <vince@locationlabs.com>
 # justinkb: Paul Mulders <justinkb@gmail.com>
 # nonakap: NONAKA Kimihiro <nonakap@gmail.com>
+# dfechner: Dustin Fechner <fechnedu@gmail.com>
+# lucc: Lucas Hoffmann <l-m-h@web.de>
+# aroig: Abdo Roig-Maranges <abdo.roig@gmail.com>
+# mortonfox: Morton Fox <github@mortonfox.otherinbox.com>
+# mapeiqi88: <mapeiqi88@gmail.com>
+# snordhausen: Stefan Nordhausen <stefan.nordhausen@axiros.com>
 
 # vim:noet ts=8 sts=8 sw=8 tw=0:
