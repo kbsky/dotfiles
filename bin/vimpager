@@ -312,7 +312,7 @@ less_vim() {
 				vim_cmd="${vim_cmd} -X"
 			fi
 
-# 'unmap h' has to be the very last command in -c, to disable the less.vim help screen
+			# 'unmap h' has to be the very last command in -c, to disable the less.vim help screen
 			#${vim_cmd} \
 				#-u "${vimrc}" \
 				#--cmd 'let vimpager=1 | runtime! macros/less.vim | set nocp' \
@@ -320,11 +320,13 @@ less_vim() {
 					#nmap <ESC>u :nohlsearch<cr> | noremap q :<C-u>q<CR> | nnoremap <Down> 1<C-d> | nnoremap <Up> 1<C-u>" \
 				#-c "unmap h" \
 				#"${@:--}"
+
+			# Note: <nowait> is only available since 7.3.1264 (7.4 to make it simple)
 			${vim_cmd} \
 				-u "${vimrc}" \
 				--cmd 'set nocp' \
 				-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu | set nomodifiable | noremap q :q!<CR>" \
-				-c 'noremap <nowait> d <C-d> | noremap u <C-u>' \
+				-c 'if v:version >= 704 | noremap <nowait> d <C-d> | else | set timeoutlen=0 | noremap d <C-d> | endif | noremap u <C-u>' \
 				"${@:--}"
 			;;
 		*) # gvim or mvim GUI
