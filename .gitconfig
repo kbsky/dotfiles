@@ -17,3 +17,5 @@
 	logOutputEncoding = UTF-8
 [color]
 	ui = auto
+[pager]
+	grep = false
