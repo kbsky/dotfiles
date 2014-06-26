@@ -1,19 +1,22 @@
 # .bashrc
 
+## Source external scripts
+
 # Source global definitions
 if [[ -f /etc/bashrc ]]; then
 	. /etc/bashrc
 fi
-
-# User specific aliases and function
 
 # Source specific before (e.g. env var)
 if [[ -f $HOME/.bashrc_specific_before ]]; then
 	. $HOME/.bashrc_specific_before
 fi
 
+
+## Setup prompt
+
 # Colors for display
-if [[ `tput colors` -ge 256 ]]; then
+if [[ $(tput colors) -ge 256 ]]; then
 	BLACK="\[\e[38;5;0m\]"
 	BLUE="\[\e[38;5;27m\]"
 	GREEN="\[\e[38;5;28m\]"
@@ -33,26 +36,20 @@ else
 	WHITE="\[$(tput setf 7)\]"
 fi
 
-RETURN="\[$(tput sgr0)\]"
+RESET_COLOR="\[$(tput sgr0)\]"
 BOLD="\[$(tput bold)\]"
 REV="\[$(tput rev)\]"
 
 # Prompt
-if [[ $UID -eq 0 ]];
-	then MK="#"
-	else MK="$"
-fi
+[[ $UID -eq 0 ]] && MK="#" || MK="$"
+PS1="$GREEN[$BOLD$RED\u$RESET_COLOR$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RESET_COLOR$GREEN]$MK$RESET_COLOR "
 
-PS1="$GREEN[$BOLD$RED\u$RETURN$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RETURN$GREEN]$MK$RETURN "
 
-# Path
-if [[ !$(eval echo $PATH | grep "$(eval echo ~/bin)") ]]; then
-	export PATH=$PATH:~/bin
-fi
+## Various settings
 
 # Colors
 # ls
-eval `dircolors ~/.dir_colors`
+eval $(dircolors ~/.dir_colors)
 # gcc
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -60,13 +57,12 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 set -o vi
 
 # Use vimpager as pager and less
-export PAGER=~/bin/vimpager
+export PAGER="$HOME/bin/vimpager"
 alias less=$PAGER
 alias zless=$PAGER
 
 # Git autocompletion
-# &> to silence in case Git is not installed
-. ~/.git-completion.bash &> /dev/null
+command -v git > /dev/null && . ~/.git-completion.bash
 
 # Editor
 export SVN_EDITOR=vim
@@ -79,23 +75,82 @@ alias lsdir='ls --group-directories-first'
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
 
 
-# Functions
+## Functions
+
+# Internal function to check # of arguments of the calling function
+# $1 is caller's $#, $2 is the needed # of arguments
+_need_nb_args()
+{
+	[[ $1 -lt $2 ]] && 
+		{ echo "${FUNCNAME[1]}: not enough arguments ($2 needed)"; return 1; }
+	return 0
+}
+
+# PATH manipulation
+
+dir_in_path()
+{
+	[[ $1 && $PATH ==  ?(*:)$1?(:*) ]]
+}
+
+append_to_path()
+{
+	_need_nb_args $# 1 || return 1
+	dir_in_path "$1" || export PATH="$PATH:$1"
+}
+
+prepend_to_path()
+{
+	_need_nb_args $# 1 || return 1
+	dir_in_path "$1" || export PATH="$1:$PATH"
+}
+
+remove_from_path()
+{
+	_need_nb_args $# 1 || return 1
+
+	if dir_in_path "$1"; then
+		# If IFS is not set, we must not restore an empty value (here we restore
+		# the default value)
+		old_ifs="${IFS-$' \t\n'}"
+		unset IFS
+		# Read all paths and put them in an array
+		# IFS must only be set for read, otherwise it just doesn't work
+		IFS=: read -a p_array <<< $PATH
+
+		# For each path, if it matches $1, remove it from the array
+		for i in "${!p_array[@]}"; do
+			[[ ${p_array[i]} == $1 ]] && unset -v 'p_array[i]'
+		done
+
+		# Set PATH with the new value (IFS being set to :, array's elements will
+		# be concatenated using : )
+		IFS=: 
+		export PATH="${p_array[*]}"
+
+		IFS="$old_ifs"
+		return 0
+	fi
+	return 1
+}
 
 mgrep()
 {
-	[[ $# -lt 2 ]] && { echo "Not enough arguments"; return 1; }
+	_need_nb_args $# 2 || return 1
 	grep -Pzo ${@:1:$(($#-2))} "(?s)${@: -2: 1}" "${@: -1}"
 }
 
 silent_bg()
 {
-	if [[ $1 ]]; then
-		$1 2> /dev/null "${@:2}" &
-	else
-		echo "No command given"
-		return 1
-	fi
+	_need_nb_args $# 1 || return 1
+	$1 2> /dev/null "${@:2}" &
 }
+
+
+## Other environment settings
+
+# Add ~/bin to PATH (prepend to be able to shadow commands)
+prepend_to_path "$HOME/bin"
 
 
 # Source specific
