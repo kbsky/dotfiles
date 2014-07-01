@@ -45,6 +45,14 @@ REV="\[$(tput rev)\]"
 PS1="$GREEN[$BOLD$RED\u$RESET_COLOR$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RESET_COLOR$GREEN]$MK$RESET_COLOR "
 
 
+## Bash settings
+
+# Use vi bindings
+set -o vi
+
+# Enable extended glob (needed for dir_in_path)
+shopt -s extglob
+
 ## Various settings
 
 # Colors
@@ -52,9 +60,6 @@ PS1="$GREEN[$BOLD$RED\u$RESET_COLOR$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RESET_
 eval $(dircolors ~/.dir_colors)
 # gcc
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# Use vi bindings in shell
-set -o vi
 
 # Use vimpager as pager and less
 export PAGER="$HOME/bin/vimpager"
@@ -113,10 +118,10 @@ remove_from_path()
 		# If IFS is not set, we must not restore an empty value (here we restore
 		# the default value)
 		old_ifs="${IFS-$' \t\n'}"
-		unset IFS
+		IFS=: 
 		# Read all paths and put them in an array
 		# IFS must only be set for read, otherwise it just doesn't work
-		IFS=: read -a p_array <<< $PATH
+		read -a p_array <<< "$PATH"
 
 		# For each path, if it matches $1, remove it from the array
 		for i in "${!p_array[@]}"; do
@@ -125,7 +130,6 @@ remove_from_path()
 
 		# Set PATH with the new value (IFS being set to :, array's elements will
 		# be concatenated using : )
-		IFS=: 
 		export PATH="${p_array[*]}"
 
 		IFS="$old_ifs"
@@ -134,7 +138,7 @@ remove_from_path()
 	return 1
 }
 
-mgrep()
+multigrep()
 {
 	_need_nb_args $# 2 || return 1
 	grep -Pzo ${@:1:$(($#-2))} "(?s)${@: -2: 1}" "${@: -1}"
