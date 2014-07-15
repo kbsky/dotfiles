@@ -48,7 +48,7 @@ syn match armasmBoolean		"{TRUE}"
 syn match armasmBoolean		"{FALSE}"
 
 " Defined after Decimal for precedence
-syn match armasmLocalLabel	"^\d\+"
+syn match armasmLocalLabel	"^\d\{1,2\}\>"
 syn match armasmLocalLabelRef	"%\(F\|B\)\?\(A\|T\)\?\d\+\w*"
 
 syn match armasmBuiltIn		"{PC}"
