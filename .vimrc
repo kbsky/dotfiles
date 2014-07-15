@@ -142,7 +142,7 @@ function! SwitchHeader()
 		let l:header=substitute(glob(substitute(expand("%"), "\\v\\.c[^.]*$", ".h*", "")),
 					\ "\n", "", "")
 		if !empty(l:header)
-			exe "lefta vsp " . l:header
+			exe "rightb vsp " . l:header
 		else
 			echo "No header found"
 		endif
@@ -184,6 +184,15 @@ function! MoveFile(newspec)
 endfunction
 command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
 
+" http://stackoverflow.com/a/8459043 
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bdelete' buf
+    endfor
+endfunction
+command! -nargs=0 -bar DeleteHiddenBuffers call DeleteHiddenBuffers()
 
 " Manual extension-filetype associations
 autocmd BufNew,BufNewFile,BufRead *.inc,*.a30 set filetype=asm
