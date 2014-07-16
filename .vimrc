@@ -156,6 +156,7 @@ nnoremap <Leader>cf :%retab <Bar> %s/\s\+$//g <Bar> nohl<CR>
 nnoremap <Leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
             \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+nnoremap <Leader>;	@:
 
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
@@ -214,6 +215,8 @@ let g:TagHighlightSettings['IncludeLocals']			= 1
 " Ctags isn't aware of override (C++11), ignore it
 let g:TagHighlightSettings['CtagsExtraArguments']	= ['-Ioverride']
 let g:TagHighlightSettings['LanguageDetectionMethods'] = ['FileType']
+" Looks weird otherwise
+hi! link CTagsConstant EnumerationValue
 " taghl files use vim syntax
 autocmd BufNew,BufNewFile,BufRead *.taghl set filetype=vim
 
