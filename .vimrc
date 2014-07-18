@@ -127,7 +127,7 @@ nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
 nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
-nnoremap <Leader>do	:only <Bar> diffoff<CR>
+nnoremap <Leader>do	:only <Bar> diffoff!<CR>
 " Switch header/source
 function! SwitchHeader()
 	if match(expand("%"), "\\v\\.h(pp)?$") != -1
@@ -286,7 +286,7 @@ let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " Source specific
 if filereadable($HOME . "/.vimrc_specific")
