@@ -101,13 +101,15 @@ dir_in_path()
 append_to_path()
 {
 	_need_nb_args $# 1 || return 1
-	dir_in_path "$1" || export PATH="$PATH:$1"
+	remove_from_path "$1"
+	export PATH="$PATH:$1"
 }
 
 prepend_to_path()
 {
 	_need_nb_args $# 1 || return 1
-	dir_in_path "$1" || export PATH="$1:$PATH"
+	remove_from_path "$1"
+	export PATH="$1:$PATH"
 }
 
 remove_from_path()
