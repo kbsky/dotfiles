@@ -62,6 +62,8 @@ autocmd FileType c,cpp,java,javascript,perl,yacc :set cindent |
 autocmd FileType tex :setl number
 autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,verilog,vim,yacc
 			\ :setl colorcolumn=80 number
+" Don't search in included modules (too slow)
+autocmd FileType perl :setl complete-=i
 
 " Configure built-in syntax files
 " Activation Doxygen pour les langages supportés
