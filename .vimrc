@@ -247,7 +247,8 @@ function! AddSyntasticClangPath(language,project_path)
 		exe 'let g:syntastic_' . a:language . '_config_file="' . a:project_path . '.clang_complete""'
 	endif
 endfunction
-
+" Default is Todo, too close to Error
+hi! link SyntasticWarningSign Underlined
 
 " Supertab
 let g:SuperTabDefaultCompletionType='context'
