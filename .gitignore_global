@@ -1,5 +1,5 @@
 # Vim: swap & sessions
-*.swp
+*.sw?
 session.vim
 # ctags
 tags
