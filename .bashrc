@@ -152,6 +152,19 @@ silent_bg()
 	$1 2> /dev/null "${@:2}" &
 }
 
+# print_binary <number> [<width of blocks in bits> [<min number of blocks>]]
+print_binary()
+{
+	_need_nb_args $# 1 || return 1
+	perl -E '
+		my ($num, $width, $pad) = @ARGV; my @blocks;
+		do { unshift @blocks, $num & ((1 << $width) - 1) } while $num >>= $width;
+		printf "%0${width}b ", $_ for (0) x ($pad - @blocks), @blocks; say' \
+			$(($1)) ${2:-8} ${3:-0}
+	# Note: arithmetic evaluation of $1 automatically converts hex or octal
+	# to decimal, otherwise we'd need to tell Perl which base is used
+}
+
 
 ## Other environment settings
 
