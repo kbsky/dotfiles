@@ -43,6 +43,7 @@ set mouse=a
 
 " Leader
 let mapleader=","
+let maplocalleader=","
 
 " Chargement auto plugin/indent language-specific
 filetype plugin indent on
@@ -53,7 +54,7 @@ set shiftwidth=4 " Since 7.4, sw=0 sets sw to ts, but older plugins are not awar
 set softtabstop=4
 set autoindent
 " Indentation C-style
-autocmd FileType c,cpp,java,javascript,perl,yacc :set cindent |
+autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
 			\ :inoremap {<CR> {<CR>}<Esc><Up>o <BS>
 "  <BS> permet de conserver l'indentation même après <Esc>
 " } (fix highlight)
@@ -249,6 +250,8 @@ function! AddSyntasticClangPath(language,project_path)
 endfunction
 " Default is Todo, too close to Error
 hi! link SyntasticWarningSign Underlined
+" Default LaTeX checker is a pain in the ass, use chktex instead
+let syntastic_tex_checkers=['chktex']
 
 " Supertab
 let g:SuperTabDefaultCompletionType='context'
