@@ -37,3 +37,12 @@
 [submodule ".vim/bundle/vim-airline"]
 	path = .vim/bundle/vim-airline
 	url = https://github.com/bling/vim-airline.git
+[submodule ".vim/bundle/perlhelp-vim"]
+	path = .vim/bundle/perlhelp-vim
+	url = https://github.com/JessicaKMcIntosh/perlhelp-vim.git
+[submodule ".vim/bundle/latex-box"]
+	path = .vim/bundle/latex-box
+	url = git@github.com:LaTeX-Box-Team/LaTeX-Box.git
+[submodule ".vim/bundle/perlomni-vim"]
+	path = .vim/bundle/perlomni-vim
+	url = git@github.com:c9s/perlomni.vim.git
