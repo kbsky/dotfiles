@@ -90,6 +90,9 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
+" Always diff in vertical splits
+set diffopt+=vertical
+
 " Buffer options
 set switchbuf=usetab
 
