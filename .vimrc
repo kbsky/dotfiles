@@ -126,8 +126,8 @@ nnoremap <Leader>dg	:cd %:p:h<CR>
 nnoremap <Leader>sv	:source ~/.vimrc<CR>
 nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
+" gW used for git grep
 nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
-nnoremap <Leader>gW	:lgrep -Rw '<cword>' .<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
 nnoremap <Leader>do	:only <Bar> diffoff!<CR>
@@ -284,6 +284,8 @@ let g:tex_flavor='latex'
 nnoremap <Leader>gs :Gstatus <Bar> wincmd K<CR>
 nnoremap <Leader>gt :tabe % <Bar> Gstatus <Bar> wincmd K<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+" gw used for plain grep
+nnoremap <Leader>gW	:Ggrep -w '<cword>' .<CR>
 
 " airline
 let g:airline#extensions#tabline#enabled=1
