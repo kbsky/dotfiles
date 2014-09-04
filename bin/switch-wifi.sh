@@ -1,7 +1,7 @@
 #!/bin/sh
 
-if nmcli nm wifi | grep -q 'enabled'; then
-	nmcli nm wifi off
+if nmcli radio wifi | grep -q 'enabled'; then
+	nmcli radio wifi off
 else
-	nmcli nm wifi on
+	nmcli radio wifi on
 fi
