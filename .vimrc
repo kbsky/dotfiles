@@ -60,7 +60,7 @@ autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
 " } (fix highlight)
 
 " Options programmation
-autocmd FileType tex :setl number
+autocmd FileType php,tex :setl number
 autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,verilog,vim,yacc
 			\ :setl colorcolumn=80 number
 " Don't search in included modules (too slow)
@@ -71,6 +71,9 @@ autocmd FileType perl :setl complete-=i
 let g:load_doxygen_syntax=1
 " Highlight bash readline extensions
 let g:readline_has_bash=1
+" Use C++ syntax for lex and yacc files
+let g:lex_uses_cpp=1
+let g:yacc_uses_cpp=1
 
 
 " Pas d'indentation private/protected/public:, namespace, type retour,
@@ -97,13 +100,18 @@ set diffopt+=vertical
 set switchbuf=usetab
 
 " Options mksession
-set sessionoptions=curdir,folds,help,resize,tabpages,winsize
+set sessionoptions=curdir,folds,globals,help,options,localoptions,tabpages,winsize
 
 
 " Map divers
+" Without this, C-c in insert mode doesn't trigger InsertLeave (useful e.g.
+" in visual block insert)
+inoremap <C-C>		<Esc>
 nnoremap Y			y$
 nnoremap gb			:bnext<CR>
 nnoremap gB			:bprevious<CR>
+" Use range as the man section :)
+nnoremap K			:<C-u>exec "Man " . v:count . " <cword>"<CR>
 
 " Special mappings to clear new lines (when comments are inserted)
 inoremap <S-CR>		<CR><C-u>
@@ -204,7 +212,13 @@ command! -nargs=0 -bar DeleteHiddenBuffers call DeleteHiddenBuffers()
 " Manual extension-filetype associations
 autocmd BufNew,BufNewFile,BufRead *.inc,*.a30 set filetype=asm
 autocmd BufNew,BufNewFile,BufRead *.md set filetype=markdown
-autocmd BufNew,BufNewFile,BufRead *.ypp set filetype=yacc
+autocmd BufNew,BufNewFile,BufRead *.ypp,*.ycpp set filetype=yacc
+autocmd BufNew,BufNewFile,BufRead *.lcpp set filetype=lex
+autocmd BufNew,BufNewFile,BufRead *.ih set filetype=cpp
+
+
+" Additional highlighting links
+hi link markdownCode Underlined
 
 
 " Config plugins
@@ -255,6 +269,11 @@ endfunction
 hi! link SyntasticWarningSign Underlined
 " Default LaTeX checker is a pain in the ass, use chktex instead
 let syntastic_tex_checkers=['chktex']
+" Default C/C++ options
+let syntastic_c_check_header=1
+let syntastic_cpp_check_header=1
+let syntastic_c_compiler_options='-std=gnu99 -Wall -Wextra'
+let syntastic_cpp_compiler_options='-std=c++11 -Wall -Wextra'
 
 " Supertab
 let g:SuperTabDefaultCompletionType='context'
