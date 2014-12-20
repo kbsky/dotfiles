@@ -4,3 +4,4 @@ set editing-mode vi
 set completion-query-items 250
 set colored-stats
 set show-mode-in-prompt
+set skip-completed-text
