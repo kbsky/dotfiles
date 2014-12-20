@@ -78,6 +78,7 @@ alias lsdir='ls --group-directories-first'
 
 # Alias adresses
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
+export tw_cs="kxb414@tw.cs.bham.ac.uk"
 
 
 ## Functions
@@ -165,6 +166,11 @@ print_binary()
 	# to decimal, otherwise we'd need to tell Perl which base is used
 }
 
+dl_files_recursive()
+{
+	_need_nb_args $# 1 || return 1
+	wget -r --no-parent -nd --reject='*htm*' -e robots=off "$1"
+}
 
 ## Other environment settings
 
