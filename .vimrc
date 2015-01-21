@@ -220,6 +220,8 @@ autocmd BufNew,BufNewFile,BufRead *.ih set filetype=cpp
 " Additional highlighting links
 hi link markdownCode Underlined
 
+" Override adaSpecial highlighting (mainly highlights delimiters)
+"hi link adaSpecial Delimiter
 
 " Config plugins
 
@@ -278,8 +280,8 @@ let syntastic_cpp_compiler_options='-std=c++11 -Wall -Wextra'
 " Supertab
 let g:SuperTabDefaultCompletionType='context'
 let g:SuperTabCompletionContexts=['s:ContextDiscover', 's:ContextText']
-let g:SuperTabContextDiscoverDiscovery=
-			\ ["&completefunc:<c-x><c-u>" ,"&omnifunc:<c-x><c-o>"]
+let g:SuperTabContextDiscoverDiscovery =
+        \ ["&omnifunc:<c-x><c-o>", "&completefunc:<c-x><c-u>"]
 let g:SuperTabRetainCompletionDuration='completion'
 let g:SuperTabLongestEnhanced=1
 let g:SuperTabLongestHighlight=1
