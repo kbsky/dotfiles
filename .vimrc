@@ -221,7 +221,7 @@ autocmd BufNew,BufNewFile,BufRead *.ih set filetype=cpp
 hi link markdownCode Underlined
 
 " Override adaSpecial highlighting (mainly highlights delimiters)
-"hi link adaSpecial Delimiter
+hi link adaSpecial Delimiter
 
 " Config plugins
 
