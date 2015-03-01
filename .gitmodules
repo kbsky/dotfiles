@@ -46,3 +46,6 @@
 [submodule ".vim/bundle/perlomni-vim"]
 	path = .vim/bundle/perlomni-vim
 	url = git@github.com:c9s/perlomni.vim.git
+[submodule ".vim/bundle/jedi-vim"]
+	path = .vim/bundle/jedi-vim
+	url = git@github.com:davidhalter/jedi-vim.git

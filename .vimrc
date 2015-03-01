@@ -199,7 +199,7 @@ function! MoveFile(newspec)
 endfunction
 command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
 
-" http://stackoverflow.com/a/8459043 
+" http://stackoverflow.com/a/8459043
 function! DeleteHiddenBuffers()
     let tpbl=[]
     call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
@@ -319,6 +319,17 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+
+" Jedi
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#popup_on_dot = 0
+
+let g:jedi#completions_command = ''
+let g:jedi#goto_assignments_command = '<C-]>'
+let g:jedi#goto_definitions_command = '<Leader>jd'
+let g:jedi#rename_command = '<Leader>jr'
+let g:jedi#usages_command = '<Leader>ju'
+
 
 " Source specific
 if filereadable($HOME . "/.vimrc_specific")
