@@ -87,7 +87,7 @@ export tw_cs="kxb414@tw.cs.bham.ac.uk"
 # $1 is caller's $#, $2 is the needed # of arguments
 _need_nb_args()
 {
-	[[ $1 -lt $2 ]] && 
+	[[ $1 -lt $2 ]] &&
 		{ echo "${FUNCNAME[1]}: not enough arguments ($2 needed)"; return 1; }
 	return 0
 }
@@ -121,7 +121,7 @@ remove_from_path()
 		# If IFS is not set, we must not restore an empty value (here we restore
 		# the default value)
 		old_ifs="${IFS-$' \t\n'}"
-		IFS=: 
+		IFS=:
 		# Read all paths and put them in an array
 		# IFS must only be set for read, otherwise it just doesn't work
 		read -a p_array <<< "$PATH"
@@ -170,6 +170,13 @@ dl_files_recursive()
 {
 	_need_nb_args $# 1 || return 1
 	wget -r --no-parent -nd --reject='*htm*' -e robots=off "$1"
+}
+
+pacman_size()
+{
+	_need_nb_args $# 1 || return 1
+	pacman -Qql $(pacman -Qqs "$@") | grep -v '/$' | tr '\n' '\0' \
+		| du -hc --files0-from=- | tail -n 1
 }
 
 ## Other environment settings
