@@ -150,7 +150,7 @@ multigrep()
 silent_bg()
 {
 	_need_nb_args $# 1 || return 1
-	$1 2> /dev/null "${@:2}" &
+	$1 > /dev/null 2>&1 "${@:2}" &
 }
 
 # print_binary <number> [<width of blocks in bits> [<min number of blocks>]]
