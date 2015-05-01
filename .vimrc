@@ -209,16 +209,10 @@ function! DeleteHiddenBuffers()
 endfunction
 command! -nargs=0 -bar DeleteHiddenBuffers call DeleteHiddenBuffers()
 
-" Manual extension-filetype associations
-autocmd BufNew,BufNewFile,BufRead *.inc,*.a30 set filetype=asm
-autocmd BufNew,BufNewFile,BufRead *.md set filetype=markdown
-autocmd BufNew,BufNewFile,BufRead *.ypp,*.ycpp set filetype=yacc
-autocmd BufNew,BufNewFile,BufRead *.lcpp set filetype=lex
-autocmd BufNew,BufNewFile,BufRead *.ih set filetype=cpp
-
 
 " Additional highlighting links
 hi link markdownCode Underlined
+hi link doxygenVerbatimRegion Underlined
 
 " Override adaSpecial highlighting (mainly highlights delimiters)
 hi link adaSpecial Delimiter
