@@ -55,7 +55,7 @@ set softtabstop=4
 set autoindent
 " Indentation C-style
 autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
-			\ :inoremap {<CR> {<CR>}<Esc><Up>o <BS>
+			\ :inoremap <buffer> {<CR> {<CR>}<Esc><Up>o <BS>
 "  <BS> permet de conserver l'indentation même après <Esc>
 " } (fix highlight)
 
@@ -65,6 +65,9 @@ autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,verilog,vim
 			\ :setl colorcolumn=80 number
 " Don't search in included modules (too slow)
 autocmd FileType perl :setl complete-=i
+" Text files
+autocmd FileType tex,markdown
+			\ :setl linebreak showbreak=-->\  cpoptions+=n
 
 " Configure built-in syntax files
 " Activation Doxygen pour les langages supportés
@@ -323,6 +326,11 @@ let g:jedi#goto_assignments_command = '<C-]>'
 let g:jedi#goto_definitions_command = '<Leader>jd'
 let g:jedi#rename_command = '<Leader>jr'
 let g:jedi#usages_command = '<Leader>ju'
+
+" LaTeX Box
+let g:LatexBox_Folding = 1
+let g:LatexBox_fold_envs = 0
+let g:LatexBox_fold_automatic = 0
 
 
 " Source specific
