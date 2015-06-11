@@ -153,6 +153,15 @@ silent_bg()
 	$1 > /dev/null 2>&1 "${@:2}" &
 }
 
+wait_start()
+{
+	_need_nb_args $# 1 || return 1
+	while pgrep "$1" > /dev/null; do
+		sleep 1s
+	done
+	( silent_bg "$1" )
+}
+
 # print_binary <number> [<width of blocks in bits> [<min number of blocks>]]
 print_binary()
 {
