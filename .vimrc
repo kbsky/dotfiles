@@ -217,6 +217,7 @@ command! -nargs=0 -bar DeleteHiddenBuffers call DeleteHiddenBuffers()
 " Additional highlighting links
 hi link markdownCode Underlined
 hi link doxygenVerbatimRegion Underlined
+hi! link vimIsCommand Identifier
 
 " Override adaSpecial highlighting (mainly highlights delimiters)
 hi link adaSpecial Delimiter
