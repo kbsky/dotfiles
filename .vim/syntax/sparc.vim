@@ -53,9 +53,7 @@ syn keyword sparcMnemonicLogical  and andcc andn andcc or orcc orn orncc xnor xn
 
 syn keyword sparcMnemonicArithmetic add addcc addx addxcc mulscc sdiv sdivcc smul smulcc udiv udivcc umul umulcc taddcc tsubcc taddcctv tsubcctv sub subcc subx subxcc
 
-syn keyword sparcMnemonicBranch bn be bg ble bge bl bgu bleu bcc bcs bpos bneg bvc bvs ba call jmpl save restore rett jmp fbn fbu fbg fbug fbl fblg fbne fbe fbue fbge fbuge fble fbule fbo fba cbn cb3 cb2 cb23 cb1 cb13 cb12 cb123 cb0 cb03 cb02 cb023 cb01 cb013 cb012 cba
-
-syn match sparcMnemonicBranch /bne\(,a\)\?/
+syn keyword sparcMnemonicBranch bn bne be bg ble bge bl bgu bleu bcc bcs bpos bneg bvc bvs ba call jmpl save restore rett jmp fbn fbu fbg fbug fbl fblg fbne fbe fbue fbge fbuge fble fbule fbo fba cbn cb3 cb2 cb23 cb1 cb13 cb12 cb123 cb0 cb03 cb02 cb023 cb01 cb013 cb012 cba
 
 syn keyword sparcMnemonicFPI fitos fitod fitoq fstoi fdtoi fstod fstoq fdtos fdtoq fqtod fqtos fmovs fnegs fabss fsqrts fsqrtd fsqrtq fadds faddd faddq fsubs fsubd fsubq fmuls fmuld fmulq fsmulq fdivs fdivd fdivq fcmps fcmpd fcmpq fcmpes fcmped fcmpeq
 
@@ -63,13 +61,17 @@ syn keyword sparcMnemonicTrap tn tne te tg tle tge tl tgu tleu tlu tgeu tpos tne
 
 syn keyword sparcMnemonicCopro cpop1 cpop2
 
-syn keyword sparcAsmDirective alias align ascii asciz byte common double empty file global half ident local noalias nonvolatile nword optim popsection proc pushsection quad reserve section seg single size skip stabn stabs type uahalf uaword version volatile weak word xword xstabs
+"syn keyword sparcAsmDirective alias align ascii asciz byte common double empty file global half ident local noalias nonvolatile nword optim popsection proc pushsection quad reserve section seg single size skip stabn stabs type uahalf uaword version volatile weak word xword xstabs
+syn match sparcAsmDirective /\(^\s*\)\@<=\.\w\+/
 
 " Highlight preprocessor using C syntax
 syn include @c syntax/c.vim
 syn match sparcPreProc /^\s*#.*/ contains=@c
 
 syn match sparcDelimiter /[,;:]/
+
+" Hack to highlight the ,a modifier
+syn match sparcMnemonicBranch /\(^\s*\w\+\)\@<=,a/
 
 syn case match
 
