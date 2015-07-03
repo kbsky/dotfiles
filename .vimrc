@@ -62,7 +62,7 @@ autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
 
 " Options programmation
 autocmd FileType php,tex :setl number
-autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,verilog,vim,yacc
+autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,sparc,verilog,vim,yacc
 			\ :setl colorcolumn=80 number
 " Don't search in included modules (too slow)
 autocmd FileType perl :setl complete-=i
@@ -116,6 +116,11 @@ nnoremap gb			:bnext<CR>
 nnoremap gB			:bprevious<CR>
 " Use range as the man section :)
 nnoremap K			:<C-u>exec "Man " . v:count . " <cword>"<CR>
+" Similar to gv, but for the last pasted text
+nnoremap gp `[v`]
+" Disable annoying Page Down/Up mappings
+map <S-Down> <Nop>
+map <S-Up> <Nop>
 
 " Special mappings to clear new lines (when comments are inserted)
 inoremap <S-CR>		<CR><C-u>
@@ -175,6 +180,8 @@ nnoremap <Leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
             \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 nnoremap <Leader>;	@:
+" Call the last make command
+nnoremap <Leader>ml :make<Up><CR>
 
 " Abréviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
