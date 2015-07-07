@@ -94,37 +94,46 @@ _need_nb_args()
 
 # PATH manipulation
 
+# $1 in ${!2}? ($2 = PATH by default) 
+# (${!2} = the expansion of the variable named by $2)
 dir_in_path()
 {
-	[[ $1 && $PATH ==  ?(*:)$1?(:*) ]]
+    local var=${2:-PATH}
+	[[ $1 && ${!var} ==  ?(*:)$1?(:*) ]]
 }
 
+# Append $1 to ${!2}? ($2 = PATH by default)
 append_to_path()
 {
 	_need_nb_args $# 1 || return 1
-	remove_from_path "$1"
-	export PATH="$PATH:$1"
+    local var=${2:-PATH}
+	remove_from_path "$1" "$var"
+	export "$var"="${!var:+${!var}:}$1"
 }
 
+# Prepend $1 to ${!2}? ($2 = PATH by default)
 prepend_to_path()
 {
 	_need_nb_args $# 1 || return 1
-	remove_from_path "$1"
-	export PATH="$1:$PATH"
+    local var=${2:-PATH}
+	remove_from_path "$1" "$var"
+	export "$var"="$1${!var:+:${!var}}"
 }
 
+# Remove $1 from ${!2}? ($2 = PATH by default)
 remove_from_path()
 {
 	_need_nb_args $# 1 || return 1
+    local var=${2:-PATH}
 
-	if dir_in_path "$1"; then
+	if dir_in_path "$1" "$var"; then
 		# If IFS is not set, we must not restore an empty value (here we restore
 		# the default value)
-		old_ifs="${IFS-$' \t\n'}"
+		local old_ifs="${IFS-$' \t\n'}"
 		IFS=:
 		# Read all paths and put them in an array
 		# IFS must only be set for read, otherwise it just doesn't work
-		read -a p_array <<< "$PATH"
+		read -a p_array <<< "${!var}"
 
 		# For each path, if it matches $1, remove it from the array
 		for i in "${!p_array[@]}"; do
@@ -133,7 +142,7 @@ remove_from_path()
 
 		# Set PATH with the new value (IFS being set to :, array's elements will
 		# be concatenated using : )
-		export PATH="${p_array[*]}"
+		export "$var"="${p_array[*]}"
 
 		IFS="$old_ifs"
 		return 0
