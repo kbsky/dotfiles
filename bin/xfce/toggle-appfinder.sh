@@ -1,2 +1,8 @@
 #!/bin/sh
-pgrep xfce4-appfinder && xfce4-appfinder --quit || xfce4-appfinder
+window_id=$(xdotool search --name 'Application Finder')
+
+if [[ $window_id ]]; then
+	xdotool windowactivate $window_id key --delay 200 'alt+F4'
+else
+	xfce4-appfinder
+fi
