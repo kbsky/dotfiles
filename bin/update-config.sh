@@ -4,7 +4,6 @@ cd
 echo "## Main config update"
 git pull
 echo "## General submodules update"
-git submodule foreach git pull
 git submodule update --recursive --merge
 
 # git-completion
