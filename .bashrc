@@ -1,6 +1,6 @@
 # .bashrc
 
-## Source external scripts
+########################### Source external scripts ###########################
 
 # Source global definitions
 if [[ -f /etc/bashrc ]]; then
@@ -13,7 +13,7 @@ if [[ -f $HOME/.bashrc_specific_before ]]; then
 fi
 
 
-## Setup prompt
+################################# Setup prompt ################################
 
 # Colors for display
 if [[ $(tput colors) -ge 256 ]]; then
@@ -45,7 +45,7 @@ REV="\[$(tput rev)\]"
 PS1="$GREEN[$BOLD$RED\u$RESET_COLOR$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RESET_COLOR$GREEN]$MK$RESET_COLOR "
 
 
-## Bash settings
+################################ Bash settings ################################
 
 # Use vi bindings
 set -o vi
@@ -53,18 +53,25 @@ set -o vi
 # Enable extended glob (needed for dir_in_path)
 shopt -s extglob
 
-## Various settings
+
+##################### Various command settings and aliases #####################
 
 # Colors
 # ls
 eval $(dircolors ~/.dir_colors)
-# gcc
+# gcc (4.9+)
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# ip (iproute2 4.1+)
+if ip -c -V > /dev/null 2>&1; then
+    alias ip='ip -c'
+fi
 
 # Use vimpager as pager and less
-export PAGER="$HOME/bin/vimpager"
-alias less=$PAGER
-alias zless=$PAGER
+if [[ -x $HOME/bin/vimpager ]]; then
+    export PAGER=$HOME/bin/vimpager
+    alias less=$PAGER
+    alias zless=$PAGER
+fi
 
 # Git autocompletion
 command -v git > /dev/null && . ~/.git-completion.bash
@@ -81,7 +88,7 @@ export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
 export tw_cs="kxb414@tw.cs.bham.ac.uk"
 
 
-## Functions
+################################## Functions ##################################
 
 # Internal function to check # of arguments of the calling function
 # $1 is caller's $#, $2 is the needed # of arguments
@@ -92,7 +99,7 @@ _need_nb_args()
 	return 0
 }
 
-# PATH manipulation
+## PATH manipulation
 
 # $1 in ${!2}? ($2 = PATH by default) 
 # (${!2} = the expansion of the variable named by $2)
@@ -197,7 +204,7 @@ pacman_size()
 		| du -hc --files0-from=- | tail -n 1
 }
 
-## Other environment settings
+########################## Other environment settings #########################
 
 # Add ~/bin to PATH (prepend to be able to shadow commands)
 prepend_to_path "$HOME/bin"
