@@ -338,7 +338,7 @@ let g:jedi#usages_command = '<Leader>ju'
 
 " LaTeX Box
 let g:LatexBox_Folding = 1
-let g:LatexBox_fold_envs = 0
+let g:LatexBox_fold_envs = 1
 let g:LatexBox_fold_automatic = 0
 
 
