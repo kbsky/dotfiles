@@ -1,49 +1,44 @@
 " Make sure we're in nocp mode
 set nocompatible
 
-" Pathogen
+" Pathogen, load all bundles
 runtime bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
-" Plugins built-in
+" Built-in plugins
 runtime ftplugin/man.vim
 runtime macros/matchit.vim
 
-" Encodage par défaut
-set encoding=utf8
-
-" Configuration backspace (par defaut vi-compatible = inutile)
+set encoding=utf-8  " Interface encoding
 set backspace=2
+set history=100     " More history (: commands and / patterns)
 
-" More history (: commands and / patterns)
-set history=100
-
-" Colorscheme & options générales d'affichage
+" Display options
 syntax on
-set background=dark
 set cursorline
-set laststatus=2
-set showcmd " Show size of visual selection
+set laststatus=2    " Always show status line
+set showcmd         " Show size of visual selection
+set background=dark
 colorscheme solarized
-" Options solarized
-let g:solarized_contrast="high"    "default value is normal
-" Touche changement arrière-plan
+" Solarized options
+let g:solarized_contrast = "high" " Default value is normal
+" Toggle dark/light BG
 call togglebg#map("<F3>")
 
-" Options gvim
+" gvim options
 set guifont=Source\ Code\ Pro\ Medium\ 10
-" Pas de toolbar, heading texte (bug rafraîchissement avec heading graphiques)
+" No toolbar, text headings (refresh bug with graphical headings? TODO)
 set guioptions-=T
-set guioptions-=e
-" Désactivation clignotement curseur
+"set guioptions-=e
+" Disable blinking cursor
 set guicursor+=a:blinkon0
 
-" Souris
+" Mouse
 set mouse=a
 
 " Leader
-let mapleader=","
-let maplocalleader=","
+let mapleader = ","
+let maplocalleader = ","
 
 " Chargement auto plugin/indent language-specific
 filetype plugin indent on
@@ -54,46 +49,45 @@ set tabstop=4
 set shiftwidth=4 " Since 7.4, sw=0 sets sw to ts, but older plugins are not aware of this
 set softtabstop=4
 set autoindent
-" Indentation C-style
+" C-style indentation
 autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
 			\ :inoremap <buffer> {<CR> {<CR>}<Esc><Up>o <BS>
-"  <BS> permet de conserver l'indentation même après <Esc>
-" } (fix highlight)
+" " <BS>" is a hack to keep the indentation even when immediately followed by
+" <Esc>
+" No indentation for: private/protected/public:, namespace, return type
+" Align on opening parentheses
+set cinoptions=g0,N-s,t0,(0
 
-" Options programmation
-autocmd FileType php,tex :setl number
+" Language options
+autocmd FileType make,php,tex :setl number
 autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,sparc,verilog,vim,yacc
 			\ :setl colorcolumn=80 number
-" Don't search in included modules (too slow)
-autocmd FileType perl :setl complete-=i
+autocmd FileType perl :setl complete-=i " Don't search in included modules (too slow)
 " Text files
 autocmd FileType tex,markdown
 			\ :setl linebreak showbreak=-->\  cpoptions+=n
 
 " Configure built-in syntax files
-" Activation Doxygen pour les langages supportés
-let g:load_doxygen_syntax=1
+" Enable Doxygen in supported syntax files
+let g:load_doxygen_syntax = 1
 " Highlight bash readline extensions
-let g:readline_has_bash=1
+let g:readline_has_bash = 1
 " Use C++ syntax for lex and yacc files
-let g:lex_uses_cpp=1
-let g:yacc_uses_cpp=1
+let g:lex_uses_cpp = 1
+let g:yacc_uses_cpp = 1
 
-
-" Pas d'indentation private/protected/public:, namespace, type retour,
-" alignement parenthèses
-set cinoptions=g0,N-s,t0,(0
-
-" Complétion en mode Ex
+" Ex-mode completion
 set wildmode=longest,list,full
+" No preview on completion (useless with clang_complete)
+set completeopt=menu,menuone,longest
 
-" Options recherche
+" Search options
 set hlsearch
 set incsearch
-" -nH $* pour vim-latex
+" -nH $* for vim-latex
 set grepprg=grep\ --exclude=*.swp\ --exclude=tags\ --exclude=*.taghl\ -nH\ $*
-" Options pour le copier/coller
-nnoremap <F2> :set invpaste paste?<CR>
+
+" Copy/paste options
 set pastetoggle=<F2>
 set showmode
 
@@ -103,18 +97,18 @@ set diffopt+=vertical
 " Buffer options
 set switchbuf=usetab
 
-" Options mksession
+" mksession options
 set sessionoptions=curdir,folds,globals,help,options,localoptions,tabpages,winsize
 
 
-" Map divers
+" Mappings
 " Without this, C-c in insert mode doesn't trigger InsertLeave (useful e.g.
 " in visual block insert)
 inoremap <C-C>		<Esc>
 nnoremap Y			y$
 nnoremap gb			:bnext<CR>
 nnoremap gB			:bprevious<CR>
-" Use range as the man section :)
+" Use range as the man section
 nnoremap K			:<C-u>exec "Man " . v:count . " <cword>"<CR>
 " Similar to gv, but for the last pasted text
 nnoremap gp `[v`]
@@ -127,7 +121,7 @@ inoremap <S-CR>		<CR><C-u>
 nnoremap <Leader>o	o<C-U>
 nnoremap <Leader>O	O<C-U>
 
-" Search for selected text, forwards or backwards.
+" Search for selected text, forwards or backwards
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
@@ -154,7 +148,7 @@ nnoremap <Leader>do	:only <Bar> diffoff!<CR>
 " Switch header/source
 function! SwitchHeader()
 	if match(expand("%"), "\\v\\.h(pp)?$") != -1
-		let l:src=substitute(glob(substitute(expand("%"), "\\v\\.h[^.]*$", ".c*", "")),
+		let l:src = substitute(glob(substitute(expand("%"), "\\v\\.h[^.]*$", ".c*", "")),
 					\ "\n", "", "")
 		if !empty(l:src)
 			exe "lefta vsp " . l:src
@@ -162,7 +156,7 @@ function! SwitchHeader()
 			echo "No source found"
 		endif
 	elseif match(expand("%"), "\\v\.c(pp|xx)?$") != -1
-		let l:header=substitute(glob(substitute(expand("%"), "\\v\\.c[^.]*$", ".h*", "")),
+		let l:header = substitute(glob(substitute(expand("%"), "\\v\\.c[^.]*$", ".h*", "")),
 					\ "\n", "", "")
 		if !empty(l:header)
 			exe "rightb vsp " . l:header
@@ -183,7 +177,7 @@ nnoremap <Leader>;	@:
 " Call the last make command
 nnoremap <Leader>ml :make<Up><CR>
 
-" Abréviations
+" Abbreviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
 function! CmdCabbr(abbreviation, expansion)
   execute 'cabbr ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype()
@@ -197,7 +191,7 @@ call CmdCabbr('vsb', 'vert sbuffer')
 call CmdCabbr('tsb', 'tab sbuffer')
 
 
-" Commandes
+" Commands
 " http://stackoverflow.com/a/10884567
 function! MoveFile(newspec)
      let old = expand('%')
@@ -212,7 +206,7 @@ command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
 
 " http://stackoverflow.com/a/8459043
 function! DeleteHiddenBuffers()
-    let tpbl=[]
+    let tpbl = []
     call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
     for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
         silent execute 'bdelete' buf
@@ -225,23 +219,23 @@ command! -nargs=0 -bar DeleteHiddenBuffers call DeleteHiddenBuffers()
 hi link markdownCode Underlined
 hi link doxygenVerbatimRegion Underlined
 hi! link vimIsCommand Identifier
-
 " Override adaSpecial highlighting (mainly highlights delimiters)
 hi link adaSpecial Delimiter
+
 
 " Config plugins
 
 " Netrw
-let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " TagHighlight
 map <Leader>tr :UpdateTypesFile<CR>
 if ! exists('g:TagHighlightSettings')
-	let g:TagHighlightSettings={}
+	let g:TagHighlightSettings = {}
 endif
-let g:TagHighlightSettings['IncludeLocals']			= 1
+let g:TagHighlightSettings['IncludeLocals']	= 1
 " Ctags isn't aware of override (C++11), ignore it
-let g:TagHighlightSettings['CtagsExtraArguments']	= ['-Ioverride']
+let g:TagHighlightSettings['CtagsExtraArguments'] = ['-Ioverride']
 let g:TagHighlightSettings['LanguageDetectionMethods'] = ['FileType']
 " Looks weird otherwise
 hi! link CTagsConstant EnumerationValue
@@ -249,17 +243,15 @@ hi! link CTagsConstant EnumerationValue
 autocmd BufNew,BufNewFile,BufRead *.taghl set filetype=vim
 
 " clang_complete
-let g:clang_auto_select=1
-let g:clang_complete_auto=0
-let g:clang_complete_copen=0
-let g:clang_snippets=1
-let g:clang_trailing_placeholder=1
-let g:clang_use_library=1
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=1
+let g:clang_auto_select = 1
+let g:clang_complete_auto = 0
+let g:clang_complete_copen = 0
+let g:clang_snippets = 1
+let g:clang_trailing_placeholder = 1
+let g:clang_use_library = 1
+let g:clang_complete_macros = 1
+let g:clang_complete_patterns = 1
 nnoremap <Leader>aq :call g:ClangUpdateQuickFix() <bar> cc <bar> clist<CR>
-" Suppression preview sur complétion (inutile avec clang_complete)
-set completeopt=menu,menuone,longest
 
 " clang_indexer
 nnoremap <Leader>ar :call ClangGetReferences()<CR>
@@ -276,39 +268,39 @@ endfunction
 " Default is Todo, too close to Error
 hi! link SyntasticWarningSign Underlined
 " Default LaTeX checker is a pain in the ass, use chktex instead
-let syntastic_tex_checkers=['chktex']
+let syntastic_tex_checkers = ['chktex']
 " Default C/C++ options
-let syntastic_c_check_header=1
-let syntastic_cpp_check_header=1
-let syntastic_c_compiler_options='-std=gnu99 -Wall -Wextra'
-let syntastic_cpp_compiler_options='-std=c++11 -Wall -Wextra'
+let syntastic_c_check_header = 1
+let syntastic_cpp_check_header = 1
+let syntastic_c_compiler_options = '-std=gnu99 -Wall -Wextra'
+let syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
 
 " Supertab
-let g:SuperTabDefaultCompletionType='context'
-let g:SuperTabCompletionContexts=['s:ContextDiscover', 's:ContextText']
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabCompletionContexts = ['s:ContextDiscover', 's:ContextText']
 let g:SuperTabContextDiscoverDiscovery =
         \ ["&omnifunc:<c-x><c-o>", "&completefunc:<c-x><c-u>"]
-let g:SuperTabRetainCompletionDuration='completion'
-let g:SuperTabLongestEnhanced=1
-let g:SuperTabLongestHighlight=1
-let g:SuperTabCrMapping=0 " Problème de compatibilité avec delimitMate
+let g:SuperTabRetainCompletionDuration = 'completion'
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 1
+let g:SuperTabCrMapping = 0 " Compatbility issue with delimitMate
 
 " Tagbar
 "autocmd FileType * nested :call tagbar#autoopen(0)
-let g:tagbar_compact=1
+let g:tagbar_compact = 1
 nnoremap <Leader>tt :TagbarToggle<CR>
 
 " delimitMate
 imap <C-f> <Plug>delimitMateS-Tab
 imap <C-b> <Plug>delimitMateJumpMany
-let delimitMate_expand_space=1
+let delimitMate_expand_space = 1
 
 " NERD commenter
 let g:NERDCustomDelimiters = { 'c': { 'left': '//',
 								\ 'leftAlt': '/*', 'rightAlt': '*/' } }
 
 " vim-latex
-let g:tex_flavor='latex'
+let g:tex_flavor = 'latex'
 
 " Fugitive
 nnoremap <Leader>gs :Gstatus <Bar> wincmd K<CR>
@@ -318,7 +310,7 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gW	:Ggrep -w '<cword>' .<CR>
 
 " airline
-let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
