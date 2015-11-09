@@ -30,6 +30,7 @@ set guifont=Source\ Code\ Pro\ Medium\ 10
 " No toolbar, text headings (refresh bug with graphical headings? TODO)
 set guioptions-=T
 "set guioptions-=e
+set guioptions+=e
 " Disable blinking cursor
 set guicursor+=a:blinkon0
 
@@ -194,13 +195,15 @@ call CmdCabbr('tsb', 'tab sbuffer')
 " Commands
 " http://stackoverflow.com/a/10884567
 function! MoveFile(newspec)
-     let old = expand('%')
-     " could be improved:
-     if (old == a:newspec)
-         return 0
-     endif
-     exe 'sav' fnameescape(a:newspec)
-     call delete(old)
+    let old = expand('%')
+    " could be improved:
+    if (old == a:newspec)
+        return 0
+    endif
+    try
+        exe 'sav' fnameescape(a:newspec)
+        call delete(old)
+    endtry
 endfunction
 command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
 
