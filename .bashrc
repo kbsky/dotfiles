@@ -52,6 +52,10 @@ set -o vi
 
 # Enable extended glob (needed for dir_in_path)
 shopt -s extglob
+# Do not match . and .. with globs (e.g. .*)
+export GLOBIGNORE=.
+# Setting GLOBIGNORE also sets dotglob, disable it
+shopt -u dotglob
 
 
 ##################### Various command settings and aliases #####################
@@ -82,6 +86,7 @@ export EDITOR=vim
 
 # Alias
 alias lsdir='ls --group-directories-first'
+alias clip='xclip -sel clipboard'
 
 # Alias adresses
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
