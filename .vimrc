@@ -86,7 +86,7 @@ set completeopt=menu,menuone,longest
 set hlsearch
 set incsearch
 " -nH $* for vim-latex
-set grepprg=grep\ --exclude=*.swp\ --exclude=tags\ --exclude=*.taghl\ -nH\ $*
+set grepprg=grep\ --exclude=*.swp\ --exclude=tags\ --exclude=*.taghl\ --exclude-dir=doxygen\ -nH\ $*
 
 " Copy/paste options
 set pastetoggle=<F2>
