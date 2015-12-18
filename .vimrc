@@ -336,6 +336,16 @@ let g:LatexBox_Folding = 1
 let g:LatexBox_fold_envs = 1
 let g:LatexBox_fold_automatic = 0
 
+" javacomplete2
+" We need to be very explicit if the default SDK is not JDK8
+if (!empty($JAVA_HOME))
+  let g:java_classpath = $JAVA_HOME . "/lib"
+  let g:JavaComplete_JvmLauncher = $JAVA_HOME . "/bin/java"
+else
+  let g:java_classpath = "/usr/lib/jvm/java-8-openjdk/lib"
+  let g:JavaComplete_JvmLauncher = "/usr/lib/jvm/java-8-openjdk/bin/java"
+endif
+
 
 " Source specific
 if filereadable($HOME . "/.vimrc_specific")
