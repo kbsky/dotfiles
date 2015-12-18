@@ -183,6 +183,21 @@ wait_start()
 	( silent_bg "$1" )
 }
 
+cat_dir()
+{
+	_need_nb_args $# 1 || return 1
+	for d; do
+    d=${d%/}
+		echo -e "In $d/\n=========="
+		for f in "$d"/*; do
+			if [[ -f $f ]]; then
+				echo "$f"
+				cat "$f"
+			fi
+		done
+	done
+}
+
 # print_binary <number> [<width of blocks in bits> [<min number of blocks>]]
 print_binary()
 {
