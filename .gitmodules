@@ -55,3 +55,6 @@
 [submodule ".vim/bundle/vim-javacomplete2"]
 	path = .vim/bundle/vim-javacomplete2
 	url = git@github.com:artur-shaik/vim-javacomplete2.git
+[submodule ".vim/bundle/vim-logcat"]
+	path = .vim/bundle/vim-logcat
+	url = https://github.com/thinca/vim-logcat

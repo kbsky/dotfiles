@@ -143,6 +143,8 @@ nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
 " gW used for git grep
 nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
+nnoremap <Leader>0gw	:grep -Rw '<cword>' %:p:h<CR>
+nnoremap <Leader>1gw	:exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/..")<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
 nnoremap <Leader>do	:only <Bar> diffoff!<CR>
@@ -338,13 +340,13 @@ let g:LatexBox_fold_automatic = 0
 
 " javacomplete2
 " We need to be very explicit if the default SDK is not JDK8
-if (!empty($JAVA_HOME))
-  let g:java_classpath = $JAVA_HOME . "/lib"
-  let g:JavaComplete_JvmLauncher = $JAVA_HOME . "/bin/java"
-else
-  let g:java_classpath = "/usr/lib/jvm/java-8-openjdk/lib"
-  let g:JavaComplete_JvmLauncher = "/usr/lib/jvm/java-8-openjdk/bin/java"
-endif
+let s:java_home = empty($JAVA_HOME) ? "/usr/lib/jvm/java-8-openjdk" : $JAVA_HOME
+let g:java_classpath = s:java_home . "/lib"
+let g:JavaComplete_JvmLauncher = s:java_home . "/bin/java"
+let g:JavaComplete_JavaCompiler = s:java_home . "/bin/javac"
+
+" logcat
+hi! logcatLevelFatal guifg=Red gui=bold ctermfg=Red term=bold
 
 
 " Source specific
