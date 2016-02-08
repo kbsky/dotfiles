@@ -1,5 +1,6 @@
 Control-f: menu-complete
 Control-g: menu-complete-backward
+Control-e: forward-search-history
 set editing-mode vi
 set completion-query-items 250
 set colored-stats

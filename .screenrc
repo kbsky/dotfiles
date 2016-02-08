@@ -1,4 +1,8 @@
 term screen-256color
+defscrollback 100000
 defbce on
 vbell "off"
 caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %S"
+
+bind (    eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
+bind )    eval "exec sh -c 'xsel -bo >/tmp/screen-exchange'" readbuf
