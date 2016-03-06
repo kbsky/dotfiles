@@ -58,3 +58,6 @@
 [submodule ".vim/bundle/vim-logcat"]
 	path = .vim/bundle/vim-logcat
 	url = https://github.com/thinca/vim-logcat
+[submodule ".vim/bundle/neoman-vim"]
+	path = .vim/bundle/neoman-vim
+	url = git@github.com:nhooyr/neoman.vim.git
