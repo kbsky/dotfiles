@@ -326,7 +326,8 @@ less_vim() {
 				-u "${vimrc}" \
 				--cmd 'set nocp' \
 				-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu | set nomodifiable | noremap q :q!<CR>" \
-				-c 'autocmd FileType man :noremap <buffer> u <C-u> | if v:version >= 704 | noremap <nowait> <buffer> d <C-d> | else | set timeoutlen=0 | noremap <buffer> d <C-d> | endif' \
+				-c 'noremap <buffer> u <C-u> | if v:version >= 704 | noremap <nowait> <buffer> d <C-d> | else | set timeoutlen=0 | noremap <buffer> d <C-d> | endif' \
+				-c 'AnsiEsc' \
 				"${@:--}"
 			;;
 		*) # gvim or mvim GUI
@@ -465,11 +466,11 @@ filter() {
 	IFS="${OLDIFS}"
 	if [ "x${have_perl}" != "x" ]; then
 		( printf %s "${content}"; exec /bin/cat ) | \
-			sed -e 's/\[[^m]*m//g' "${@}" | \
+			#sed -e 's/\[[^m]*m//g' "${@}" | \
 			perl -CIOL -pe 'no warnings "utf8"; s/.\010//g' >&2
 	else
 		( printf %s "${content}"; exec /bin/cat ) | \
-			sed -e 's/\[[^m]*m//g' "${@}" | \
+			#sed -e 's/\[[^m]*m//g' "${@}" | \
 			sed -e 's/.//g' >&2
 	fi
 }
