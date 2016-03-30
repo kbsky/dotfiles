@@ -5,4 +5,6 @@ vbell "off"
 caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %S"
 
 bind (    eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
-bind )    eval "exec sh -c 'xsel -bo >/tmp/screen-exchange'" readbuf
+# http://superuser.com/a/868741
+# Note: passing -S is not necessary as screen -X reads $STY from the environment
+bind )    exec sh -c "xsel -bo >/tmp/screen-exchange && screen -X readbuf"
