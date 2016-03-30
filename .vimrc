@@ -195,15 +195,15 @@ call CmdCabbr('tsb', 'tab sbuffer')
 
 
 " Commands
-" http://stackoverflow.com/a/10884567
+" Original version: http://stackoverflow.com/a/10884567
 function! MoveFile(newspec)
     let old = expand('%')
-    " could be improved:
-    if (old == a:newspec)
-        return 0
+    let new = a:newspec
+    if isdirectory(a:newspec)
+        let new .= '/' . expand('%:t')
     endif
     try
-        exe 'sav' fnameescape(a:newspec)
+        exe 'sav' fnameescape(simplify(new))
         call delete(old)
     endtry
 endfunction
