@@ -282,12 +282,14 @@ let syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
 
 " Supertab
 let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabCompletionContexts = ['s:ContextDiscover', 's:ContextText']
 let g:SuperTabContextDiscoverDiscovery =
         \ ["&omnifunc:<c-x><c-o>", "&completefunc:<c-x><c-u>"]
 let g:SuperTabRetainCompletionDuration = 'completion'
 let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 1
+" TODO: should be 1, currently broken, ref https://github.com/ervandew/supertab/issues/158
+let g:SuperTabLongestHighlight = 0
 let g:SuperTabCrMapping = 0 " Compatbility issue with delimitMate
 
 " Tagbar
