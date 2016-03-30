@@ -23,7 +23,7 @@
 	st = status
 	stnu = status -uno
 	lg = !PAGER=less git log --decorate --graph
-	l = log -n 100
+	l = !GIT_DIR=$(git rev-parse --git-dir) git log -n 100
 	lp = log -p -n 10
 	a = add
 	br = branch
