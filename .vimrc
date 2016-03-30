@@ -305,6 +305,7 @@ let delimitMate_expand_space = 1
 " NERD commenter
 let g:NERDCustomDelimiters = { 'c': { 'left': '//',
 								\ 'leftAlt': '/*', 'rightAlt': '*/' } }
+let g:NERDSpaceDelims = 1
 
 " vim-latex
 let g:tex_flavor = 'latex'
