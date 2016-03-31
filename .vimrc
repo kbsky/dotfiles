@@ -109,6 +109,8 @@ inoremap <C-C>		<Esc>
 nnoremap Y			y$
 nnoremap gb			:bnext<CR>
 nnoremap gB			:bprevious<CR>
+" Make gt useful when given a count (and consistent with gT...)
+nnoremap <silent> gt	:<C-U>exe 'tabnext ' . (((tabpagenr() + v:count1 - 1) % tabpagenr('$')) + 1)<CR>
 " Use range as the man section
 nnoremap K			:<C-u>exec "Man " . v:count . " <cword>"<CR>
 " Similar to gv, but for the last pasted text
@@ -143,8 +145,10 @@ nnoremap <Leader>ws	:w !sudo tee %<CR>
 nnoremap <Leader>n	:nohl<CR>
 " gW used for git grep
 nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
-nnoremap <Leader>0gw	:grep -Rw '<cword>' %:p:h<CR>
-nnoremap <Leader>1gw	:exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/..")<CR>
+nnoremap <Leader>g0w	:grep -Rw '<cword>' %:p:h<CR>
+nnoremap <Leader>g1w	:exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/..")<CR>
+nnoremap <Leader>g2w	:exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/../..")<CR>
+nnoremap <Leader>g3w	:exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/../../..")<CR>
 nnoremap <Leader>ms	:mksession! session.vim<CR>
 nnoremap <Leader>dw	:w !diff % -<CR>
 nnoremap <Leader>do	:only <Bar> diffoff!<CR>
