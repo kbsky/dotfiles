@@ -52,7 +52,7 @@ set softtabstop=4
 set autoindent
 " C-style indentation
 autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
-			\ :inoremap <buffer> {<CR> {<CR>}<Esc><Up>o <BS>
+            \ :inoremap <buffer> {<CR> {<CR>}<Esc><Up>o <BS>
 " " <BS>" is a hack to keep the indentation even when immediately followed by
 " <Esc>
 " No indentation for: private/protected/public:, namespace, return type
@@ -62,11 +62,11 @@ set cinoptions=g0,N-s,t0,(0
 " Language options
 autocmd FileType make,php,tex :setl number
 autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,sparc,verilog,vim,yacc
-			\ :setl colorcolumn=80 number
+            \ :setl colorcolumn=80 number
 autocmd FileType perl :setl complete-=i " Don't search in included modules (too slow)
 " Text files
 autocmd FileType tex,markdown
-			\ :setl linebreak showbreak=-->\  cpoptions+=n
+            \ :setl linebreak showbreak=-->\  cpoptions+=n
 
 " Configure built-in syntax files
 " Enable Doxygen in supported syntax files
@@ -105,90 +105,90 @@ set sessionoptions=curdir,folds,globals,help,options,localoptions,tabpages,winsi
 " Mappings
 " Without this, C-c in insert mode doesn't trigger InsertLeave (useful e.g.
 " in visual block insert)
-inoremap <C-C>		<Esc>
-nnoremap Y			y$
-nnoremap gb			:bnext<CR>
-nnoremap gB			:bprevious<CR>
+inoremap <C-C>          <Esc>
+nnoremap Y              y$
+nnoremap gb             :bnext<CR>
+nnoremap gB             :bprevious<CR>
 " Make gt useful when given a count (and consistent with gT...)
-nnoremap <silent> gt	:<C-U>exe 'tabnext ' . (((tabpagenr() + v:count1 - 1) % tabpagenr('$')) + 1)<CR>
-" Use range as the man section
-nnoremap K			:<C-u>exec "Man " . v:count . " <cword>"<CR>
+nnoremap <silent> gt    :<C-U>exe 'tabnext ' . (((tabpagenr() + v:count1 - 1) % tabpagenr('$')) + 1)<CR>
 " Similar to gv, but for the last pasted text
-nnoremap gp `[v`]
+nnoremap gp             `[v`]
+" Use range as the man section
+nnoremap K              :<C-u>exe "Man " . v:count . " <cword>"<CR>
 " Disable annoying Page Down/Up mappings
-map <S-Down> <Nop>
-map <S-Up> <Nop>
+map <S-Down>            <Nop>
+map <S-Up>              <Nop>
 
 " Special mappings to clear new lines (when comments are inserted)
-inoremap <S-CR>		<CR><C-u>
-nnoremap <Leader>o	o<C-U>
-nnoremap <Leader>O	O<C-U>
+inoremap <S-CR>         <CR><C-u>
+nnoremap <Leader>o      o<C-U>
+nnoremap <Leader>O      O<C-U>
 
 " Search for selected text, forwards or backwards
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> *     :<C-U>
+            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+            \gvy/<C-R><C-R>=substitute(
+            \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+            \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> #     :<C-U>
+            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+            \gvy?<C-R><C-R>=substitute(
+            \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+            \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 " Maps leader
-nnoremap <Leader>dl	:lcd %:p:h<CR>
-nnoremap <Leader>dg	:cd %:p:h<CR>
-nnoremap <Leader>sv	:source ~/.vimrc<CR>
-nnoremap <Leader>ws	:w !sudo tee %<CR>
-nnoremap <Leader>n	:nohl<CR>
+nnoremap <Leader>dl     :lcd %:p:h<CR>
+nnoremap <Leader>dg     :cd %:p:h<CR>
+nnoremap <Leader>sv     :source ~/.vimrc<CR>
+nnoremap <Leader>ws     :w !sudo tee %<CR>
+nnoremap <Leader>n      :nohl<CR>
 " gW used for git grep
-nnoremap <Leader>gw	:grep -Rw '<cword>' .<CR>
-nnoremap <Leader>g0w	:grep -Rw '<cword>' %:p:h<CR>
-nnoremap <Leader>g1w	:exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/..")<CR>
-nnoremap <Leader>g2w	:exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/../..")<CR>
-nnoremap <Leader>g3w	:exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/../../..")<CR>
-nnoremap <Leader>ms	:mksession! session.vim<CR>
-nnoremap <Leader>dw	:w !diff % -<CR>
-nnoremap <Leader>do	:only <Bar> diffoff!<CR>
+nnoremap <Leader>gw     :grep -Rw '<cword>' .<CR>
+nnoremap <Leader>g0w    :grep -Rw '<cword>' %:p:h<CR>
+nnoremap <Leader>g1w    :exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/..")<CR>
+nnoremap <Leader>g2w    :exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/../..")<CR>
+nnoremap <Leader>g3w    :exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/../../..")<CR>
+nnoremap <Leader>ms     :mksession! session.vim<CR>
+nnoremap <Leader>dw     :w !diff % -<CR>
+nnoremap <Leader>do     :only <Bar> diffoff!<CR>
 " Switch header/source
 function! SwitchHeader()
-	if match(expand("%"), "\\v\\.h(pp)?$") != -1
-		let l:src = substitute(glob(substitute(expand("%"), "\\v\\.h[^.]*$", ".c*", "")),
-					\ "\n", "", "")
-		if !empty(l:src)
-			exe "lefta vsp " . l:src
-		else
-			echo "No source found"
-		endif
-	elseif match(expand("%"), "\\v\.c(pp|xx)?$") != -1
-		let l:header = substitute(glob(substitute(expand("%"), "\\v\\.c[^.]*$", ".h*", "")),
-					\ "\n", "", "")
-		if !empty(l:header)
-			exe "rightb vsp " . l:header
-		else
-			echo "No header found"
-		endif
-	endif
+    if match(expand("%"), "\\v\\.h(pp)?$") != -1
+        let src = substitute(glob(substitute(expand("%"), "\\v\\.h[^.]*$", ".c*", "")),
+                    \ "\n", "", "")
+        if !empty(src)
+            exe "lefta vsp " . src
+        else
+            echo "No source found"
+        endif
+    elseif match(expand("%"), "\\v\.c(pp|xx)?$") != -1
+        let header = substitute(glob(substitute(expand("%"), "\\v\\.c[^.]*$", ".h*", "")),
+                    \ "\n", "", "")
+        if !empty(header)
+            exe "rightb vsp " . header
+        else
+            echo "No header found"
+        endif
+    endif
 endfunction
 
-nnoremap <Leader>sh	:call SwitchHeader()<CR>
+nnoremap <Leader>sh     :call SwitchHeader()<CR>
 " Retab and remove trailing whitespaces
-nnoremap <Leader>cf :%retab <Bar> %s/\s\+$//g <Bar> nohl<CR>
+nnoremap <Leader>cf     :%retab <Bar> %s/\s\+$//g <Bar> nohl<CR>
 " Show highlight info for the item under the cursor
-nnoremap <Leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+nnoremap <Leader>hi     :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
             \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-nnoremap <Leader>;	@:
+nnoremap <Leader>;  @:
 " Call the last make command
-nnoremap <Leader>ml :make<Up><CR>
+nnoremap <Leader>ml     :make<Up><CR>
 
 " Abbreviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
 function! CmdCabbr(abbreviation, expansion)
-  execute 'cabbr ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype()
-              \ == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
+    execute 'cabbr ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype()
+            \ == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
 endfunction
 
 call CmdCabbr('diffs', 'vert diffsplit')
@@ -240,9 +240,9 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " TagHighlight
 map <Leader>tr :UpdateTypesFile<CR>
 if ! exists('g:TagHighlightSettings')
-	let g:TagHighlightSettings = {}
+    let g:TagHighlightSettings = {}
 endif
-let g:TagHighlightSettings['IncludeLocals']	= 1
+let g:TagHighlightSettings['IncludeLocals'] = 1
 " Ctags isn't aware of override (C++11), ignore it
 let g:TagHighlightSettings['CtagsExtraArguments'] = ['-Ioverride']
 let g:TagHighlightSettings['LanguageDetectionMethods'] = ['FileType']
@@ -270,9 +270,9 @@ nnoremap <Leader>as :call ClangGetSubclasses()<CR>
 " Syntastic
 " For setting project paths in vimrc_specific, to use with an autocmd
 function! AddSyntasticClangPath(language,project_path)
-	if stridx(expand('%:p'), a:project_path) == 0
-		exe 'let g:syntastic_' . a:language . '_config_file="' . a:project_path . '.clang_complete""'
-	endif
+    if stridx(expand('%:p'), a:project_path) == 0
+        exe 'let g:syntastic_' . a:language . '_config_file="' . a:project_path . '.clang_complete""'
+    endif
 endfunction
 " Default is Todo, too close to Error
 hi! link SyntasticWarningSign Underlined
@@ -289,7 +289,7 @@ let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabCompletionContexts = ['s:ContextDiscover', 's:ContextText']
 let g:SuperTabContextDiscoverDiscovery =
-        \ ["&omnifunc:<c-x><c-o>", "&completefunc:<c-x><c-u>"]
+            \ ["&omnifunc:<c-x><c-o>", "&completefunc:<c-x><c-u>"]
 let g:SuperTabRetainCompletionDuration = 'completion'
 let g:SuperTabLongestEnhanced = 1
 " TODO: should be 1, currently broken, ref https://github.com/ervandew/supertab/issues/158
@@ -308,7 +308,7 @@ let delimitMate_expand_space = 1
 
 " NERD commenter
 let g:NERDCustomDelimiters = { 'c': { 'left': '//',
-								\ 'leftAlt': '/*', 'rightAlt': '*/' } }
+                                \ 'leftAlt': '/*', 'rightAlt': '*/' } }
 let g:NERDSpaceDelims = 1
 
 " vim-latex
@@ -319,7 +319,7 @@ nnoremap <Leader>gs :Gstatus <Bar> wincmd K<CR>
 nnoremap <Leader>gt :tabe % <Bar> Gstatus <Bar> wincmd K<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 " gw used for plain grep
-nnoremap <Leader>gW	:Ggrep -w '<cword>' .<CR>
+nnoremap <Leader>gW :Ggrep -w '<cword>' .<CR>
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
@@ -358,5 +358,7 @@ hi! logcatLevelFatal guifg=Red gui=bold ctermfg=Red term=bold
 
 " Source specific
 if filereadable($HOME . "/.vimrc_specific")
-	source $HOME/.vimrc_specific
+    source $HOME/.vimrc_specific
 endif
+
+" vim: set ts=4 sw=4 sts=4 et:
