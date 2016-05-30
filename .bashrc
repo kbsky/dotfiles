@@ -87,6 +87,7 @@ export EDITOR=vim
 # Alias
 alias lsdir='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
+alias dd='dd bs=1M status=progress conv=fsync'
 
 # Alias adresses
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
@@ -240,6 +241,11 @@ pacman_size()
 pacman_ls()
 {
     pacman -Qql "$@" | grep -v '/$' | xargs ls -l --color
+}
+
+pacman_list()
+{
+    pacman --color always -Ql "$@" | grep -v '/usr/share/locale'
 }
 
 ########################## Other environment settings #########################
