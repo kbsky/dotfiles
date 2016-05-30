@@ -282,7 +282,7 @@ let syntastic_tex_checkers = ['chktex']
 let syntastic_c_check_header = 1
 let syntastic_cpp_check_header = 1
 let syntastic_c_compiler_options = '-std=gnu99 -Wall -Wextra'
-let syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
+let syntastic_cpp_compiler_options = '-std=c++1y -Wall -Wextra'
 
 " Supertab
 let g:SuperTabDefaultCompletionType = 'context'
