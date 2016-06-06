@@ -329,6 +329,7 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_solarized_normal_green = 1
 
 " Jedi
 let g:jedi#auto_vim_configuration = 0

@@ -61,3 +61,9 @@
 [submodule ".vim/bundle/neoman-vim"]
 	path = .vim/bundle/neoman-vim
 	url = git@github.com:nhooyr/neoman.vim.git
+[submodule ".themes/Xfce-dusk-MediterraneanDarkest"]
+	path = .themes/Xfce-dusk-MediterraneanDarkest
+	url = git@github.com:Corax26/Xfce-dusk-MediterraneanDarkest.git
+[submodule ".vim/bundle/vim-airline-themes"]
+	path = .vim/bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
