@@ -356,6 +356,9 @@ let g:JavaComplete_JavaCompiler = s:java_home . "/bin/javac"
 " logcat
 hi! logcatLevelFatal guifg=Red gui=bold ctermfg=Red term=bold
 
+" neoman
+let g:neoman_tab_after = 1
+
 
 " Source specific
 if filereadable($HOME . "/.vimrc_specific")
