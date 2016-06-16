@@ -2,7 +2,7 @@ term screen-256color
 defscrollback 100000
 defbce on
 vbell "off"
-caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %S"
+caption always "%{= gw}%?%PCOPY MODE %?%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %S"
 
 bind (    eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
 # http://superuser.com/a/868741
