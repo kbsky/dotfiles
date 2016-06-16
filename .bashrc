@@ -79,6 +79,10 @@ fi
 
 # Git autocompletion
 command -v git > /dev/null && . ~/.git-completion.bash
+# Completion for complex aliases that __git doesn't manage to recognise
+_git_l() { _git_log; }
+_git_lp() { _git_log; }
+_git_ls() { _git_log; }
 
 # Editor
 export SVN_EDITOR=vim
@@ -88,6 +92,11 @@ export EDITOR=vim
 alias lsdir='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
+
+# Make readelf always use the wide format, for all toolchains
+for readelf in $(find ${PATH//:/ } -name '*readelf' -printf '%f '); do
+    alias $readelf="$readelf -W"
+done
 
 # Alias adresses
 export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
@@ -252,6 +261,7 @@ pacman_list()
 
 # Add ~/bin to PATH (prepend to be able to shadow commands)
 prepend_to_path "$HOME/bin"
+export SYSTEMD_PAGER=
 
 
 # Source specific
