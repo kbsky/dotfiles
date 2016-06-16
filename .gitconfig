@@ -24,12 +24,20 @@
 	stnu = status -uno
 	lg = !PAGER=less git log --decorate --graph
 	l = !GIT_DIR=$(git rev-parse --git-dir) git log -n 100
-	lp = log -p -n 10
+	lp = !GIT_DIR=$(git rev-parse --git-dir) git log -p -n 10
+	ls = !GIT_DIR=$(git rev-parse --git-dir) git log --stat -n 100
 	a = add
 	br = branch
 	brf = branch -avv
 	d = diff
 	ds = diff --staged
+	s = show --stat --patch
 [log]
 	date = iso
 	decorate = short
+[sendemail]
+	confirm = always
+[format]
+	coverLetter = auto
+[pretty]
+	fixes = Fixes: %h (\"%s\")
