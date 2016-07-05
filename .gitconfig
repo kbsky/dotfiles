@@ -32,6 +32,7 @@
 	d = diff
 	ds = diff --staged
 	s = show --stat --patch
+	stl = !git --no-pager stash list --stat
 [log]
 	date = iso
 	decorate = short
@@ -41,3 +42,8 @@
 	coverLetter = auto
 [pretty]
 	fixes = Fixes: %h (\"%s\")
+[stash]
+	showPatch = true
+[include]
+	path = .gitconfig_specific
+
