@@ -18,6 +18,7 @@ syntax on
 set cursorline
 set laststatus=2    " Always show status line
 set showcmd         " Show size of visual selection
+set listchars=tab:>-,trail:@
 set background=dark
 colorscheme solarized
 " Solarized options
@@ -56,8 +57,8 @@ autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
 " " <BS>" is a hack to keep the indentation even when immediately followed by
 " <Esc>
 " No indentation for: private/protected/public:, namespace, return type
-" Align on opening parentheses
-set cinoptions=g0,N-s,t0,(0
+" Align on opening parentheses, align on case label (regardless of braces)
+set cinoptions=g0,N-s,t0,(0,l1
 
 " Language options
 autocmd FileType make,php,tex :setl number
@@ -69,8 +70,9 @@ autocmd FileType tex,markdown
             \ :setl linebreak showbreak=-->\  cpoptions+=n
 
 " Configure built-in syntax files
-" Enable Doxygen in supported syntax files
+" Enable Doxygen in supported syntax files (see doxygen.vim for the config options)
 let g:load_doxygen_syntax = 1
+let g:doxygen_javadoc_autobrief = 0
 " Highlight bash readline extensions
 let g:readline_has_bash = 1
 " Use C++ syntax for lex and yacc files
@@ -118,20 +120,22 @@ nnoremap K              :<C-u>exe "Man " . v:count . " <cword>"<CR>
 " Disable annoying Page Down/Up mappings
 map <S-Down>            <Nop>
 map <S-Up>              <Nop>
+" Search in the visual area in Visual mode
+xnoremap / /\%V\%V<Left><Left><Left>
 
 " Special mappings to clear new lines (when comments are inserted)
 inoremap <S-CR>         <CR><C-u>
 nnoremap <Leader>o      o<C-U>
 nnoremap <Leader>O      O<C-U>
 
-" Search for selected text, forwards or backwards
+" Search for selected text, forwards or backwards, in Visual mode.
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
-vnoremap <silent> *     :<C-U>
+xnoremap <silent> *     :<C-U>
             \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
             \gvy/<C-R><C-R>=substitute(
             \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> #     :<C-U>
+xnoremap <silent> #     :<C-U>
             \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
             \gvy?<C-R><C-R>=substitute(
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
@@ -143,12 +147,12 @@ nnoremap <Leader>dg     :cd %:p:h<CR>
 nnoremap <Leader>sv     :source ~/.vimrc<CR>
 nnoremap <Leader>ws     :w !sudo tee %<CR>
 nnoremap <Leader>n      :nohl<CR>
+nnoremap <Leader>gw     :grep! -Rw '<cword>' .<CR>
+nnoremap <Leader>g0w    :grep! -Rw '<cword>' %:p:h<CR>
+nnoremap <Leader>g1w    :exe "grep! -Rw '<cword>' " . simplify(expand("%:p:h") . "/..")<CR>
+nnoremap <Leader>g2w    :exe "grep! -Rw '<cword>' " . simplify(expand("%:p:h") . "/../..")<CR>
+nnoremap <Leader>g3w    :exe "grep! -Rw '<cword>' " . simplify(expand("%:p:h") . "/../../..")<CR>
 " gW used for git grep
-nnoremap <Leader>gw     :grep -Rw '<cword>' .<CR>
-nnoremap <Leader>g0w    :grep -Rw '<cword>' %:p:h<CR>
-nnoremap <Leader>g1w    :exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/..")<CR>
-nnoremap <Leader>g2w    :exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/../..")<CR>
-nnoremap <Leader>g3w    :exe "grep -Rw '<cword>' " . simplify(expand("%:p:h") . "/../../..")<CR>
 nnoremap <Leader>ms     :mksession! session.vim<CR>
 nnoremap <Leader>dw     :w !diff % -<CR>
 nnoremap <Leader>do     :only <Bar> diffoff!<CR>
@@ -176,13 +180,18 @@ endfunction
 nnoremap <Leader>sh     :call SwitchHeader()<CR>
 " Retab and remove trailing whitespaces
 nnoremap <Leader>cf     :%retab <Bar> %s/\s\+$//g <Bar> nohl<CR>
+nnoremap <Leader>ss     :s/\s\+/\r/g <Bar> nohl<CR>
+vnoremap <Leader>ss     :s/\s\+/\r/g <Bar> nohl<CR>
 " Show highlight info for the item under the cursor
 nnoremap <Leader>hi     :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
             \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-nnoremap <Leader>;  @:
+nnoremap <Leader>;      @:
 " Call the last make command
 nnoremap <Leader>ml     :make<Up><CR>
+nnoremap <Leader>ee     :copen<CR>
+nnoremap <Leader>eE     :cclose<CR>
+nnoremap <Leader>EE     :cclose<CR>
 
 " Abbreviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
@@ -255,6 +264,7 @@ autocmd BufNew,BufNewFile,BufRead *.taghl set filetype=vim
 let g:clang_auto_select = 1
 let g:clang_complete_auto = 0
 let g:clang_complete_copen = 0
+let g:clang_complete_hl_errors = 0
 let g:clang_snippets = 1
 let g:clang_trailing_placeholder = 1
 let g:clang_use_library = 1
@@ -268,16 +278,33 @@ nnoremap <Leader>ad :call ClangGetDeclarations()<CR>
 nnoremap <Leader>as :call ClangGetSubclasses()<CR>
 
 " Syntastic
-" For setting project paths in vimrc_specific, to use with an autocmd
-function! AddSyntasticClangPath(language,project_path)
+" For setting project paths in vimrc_specific, to use with an autocmd, like:
+" au Filetype cpp call AddSyntasticClangPath('cpp', '/path/', 1)
+" Pass 1 as the third argument to extract include paths from .clang_complete
+
+function! AddSyntasticClangPath(language, project_path, ...)
+    let override_path = a:0 >= 1 ? a:1 : 0
     if stridx(expand('%:p'), a:project_path) == 0
-        exe 'let g:syntastic_' . a:language . '_config_file="' . a:project_path . '.clang_complete""'
+        let config_path = a:project_path . '.clang_complete'
+        exe 'let g:syntastic_' . a:language . '_config_file="' . config_path . '"'
+        if override_path
+            setl path=.
+            for line in readfile(config_path)
+                if line =~ '^-I'
+                    let &l:path .= substitute(line, '^-I', ',', '')
+                endif
+            endfor
+            setl path+=,,
+        endif
     endif
 endfunction
+
 " Default is Todo, too close to Error
 hi! link SyntasticWarningSign Underlined
-" Default LaTeX checker is a pain in the ass, use chktex instead
+" Default LaTeX checker is a PITA, use chktex instead
 let syntastic_tex_checkers = ['chktex']
+" Don't use shellcheck even if available
+let syntastic_sh_checkers = ['sh']
 " Default C/C++ options
 let syntastic_c_check_header = 1
 let syntastic_cpp_check_header = 1
@@ -319,7 +346,7 @@ nnoremap <Leader>gs :Gstatus <Bar> wincmd K<CR>
 nnoremap <Leader>gt :tabe % <Bar> Gstatus <Bar> wincmd K<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 " gw used for plain grep
-nnoremap <Leader>gW :Ggrep -w '<cword>' .<CR>
+nnoremap <Leader>gW :Ggrep! -w '<cword>' .<CR>
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
@@ -345,6 +372,7 @@ let g:jedi#usages_command = '<Leader>ju'
 let g:LatexBox_Folding = 1
 let g:LatexBox_fold_envs = 1
 let g:LatexBox_fold_automatic = 0
+let g:LatexBox_quickfix = 4
 
 " javacomplete2
 " We need to be very explicit if the default SDK is not JDK8
