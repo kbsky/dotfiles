@@ -374,6 +374,8 @@ let g:LatexBox_Folding = 1
 let g:LatexBox_fold_envs = 1
 let g:LatexBox_fold_automatic = 0
 let g:LatexBox_quickfix = 4
+" Must be kept in sync with $out_dir in ~/.latexmkrc
+let g:LatexBox_build_dir = './out'
 
 " javacomplete2
 " We need to be very explicit if the default SDK is not JDK8
