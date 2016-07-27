@@ -17,4 +17,9 @@ set history expansion
 set history filename ~/.gdb_history
 set history save
 
-set disassemble-next-line on
+set disassemble-next-line auto
+set multiple-symbols ask
+
+alias -a di = disassemble
+alias -a set di = set disassemble-next-line
+alias -a show di = show disassemble-next-line
