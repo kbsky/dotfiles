@@ -20,19 +20,20 @@
 [pager]
 	grep = false
 [alias]
-	st = status
-	stnu = status -uno
-	lg = !PAGER=less git log --decorate --graph
-	l = !GIT_DIR=$(git rev-parse --git-dir) git log -n 100
-	lp = !GIT_DIR=$(git rev-parse --git-dir) git log -p -n 10
-	ls = !GIT_DIR=$(git rev-parse --git-dir) git log --stat -n 100
 	a = add
-	br = branch
+	br = branch -vv
 	brf = branch -avv
 	d = diff
+	dc = !git --no-pager diff --check
 	ds = diff --staged
+	l = !GIT_DIR=$(git rev-parse --git-dir) git log -n 100
+	lg = !PAGER=less git log --decorate --graph
+	lp = !GIT_DIR=$(git rev-parse --git-dir) git log -p -n 10
+	ls = !GIT_DIR=$(git rev-parse --git-dir) git log --stat -n 100
 	s = show --stat --patch
-	stl = !git --no-pager stash list --stat
+	sl = !git --no-pager stash list --stat
+	st = status
+	stnu = status -uno
 [log]
 	date = iso
 	decorate = short
