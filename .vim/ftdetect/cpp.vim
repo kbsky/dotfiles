@@ -1,1 +1,1 @@
-autocmd BufNew,BufNewFile,BufRead *.ih set filetype=cpp
+autocmd BufRead,BufNewFile *.ih set filetype=cpp

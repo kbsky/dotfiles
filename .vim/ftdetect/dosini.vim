@@ -1,2 +1,2 @@
 " Better than the conf syntax
-autocmd BufNew,BufNewFile,BufRead *.conf set filetype=dosini
+autocmd BufRead,BufNewFile *.conf set filetype=dosini

@@ -1,1 +1,1 @@
-autocmd BufNew,BufNewFile,BufRead *Doxyfile* set filetype=conf
+autocmd BufRead,BufNewFile *Doxyfile* set filetype=conf

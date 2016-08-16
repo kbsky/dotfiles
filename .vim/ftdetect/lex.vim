@@ -1,1 +1,1 @@
-autocmd BufNew,BufNewFile,BufRead *.lcpp set filetype=lex
+autocmd BufRead,BufNewFile *.lcpp set filetype=lex

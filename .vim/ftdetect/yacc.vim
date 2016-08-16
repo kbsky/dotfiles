@@ -1,1 +1,1 @@
-autocmd BufNew,BufNewFile,BufRead *.ypp,*.ycpp set filetype=yacc
+autocmd BufRead,BufNewFile *.ypp,*.ycpp set filetype=yacc
