@@ -300,7 +300,7 @@ if [ -n "${use_gvim}" ]; then
 		fi
 	fi
 else
-	vim_cmd='vim -R'
+	vim_cmd='vim'
 fi
 
 rm -f gvim.exe.stackdump # for cygwin gvim, which can be part of vim
@@ -326,7 +326,7 @@ less_vim() {
 			${vim_cmd} \
 				-u "${vimrc}" \
 				--cmd 'set nocp' \
-				-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu | set nomodifiable | noremap q :q!<CR>" \
+				-c "set scrolloff=${scrolloff:-5} | set foldlevel=999 | set nonu | silent! set nornu | setl readonly | setl nomodifiable | noremap q :q!<CR>" \
 				-c 'noremap <buffer> u <C-u> | if v:version >= 704 | noremap <nowait> <buffer> d <C-d> | else | set timeoutlen=0 | noremap <buffer> d <C-d> | endif' \
 				$ansi_esc \
 				"${@:--}"
