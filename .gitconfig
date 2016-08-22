@@ -13,6 +13,7 @@
 	tool = gvimdiff
 [core]
 	excludesfile = ~/.gitignore_global
+	abbrev = 12
 [i18n]
 	logOutputEncoding = UTF-8
 [color]
@@ -25,6 +26,7 @@
 	brf = branch -avv
 	d = diff
 	dc = !git --no-pager diff --check
+	dcs = !git --no-pager diff --check --staged
 	ds = diff --staged
 	l = !GIT_DIR=$(git rev-parse --git-dir) git log -n 100
 	lg = !PAGER=less git log --decorate --graph
@@ -45,6 +47,10 @@
 	fixes = Fixes: %h (\"%s\")
 [stash]
 	showPatch = true
+[notes]
+	displayRef = *
 [include]
 	path = .gitconfig_specific
 
+[remote "origin"]
+	fetch = +refs/notes/*:refs/notes/*
