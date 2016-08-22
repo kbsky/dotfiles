@@ -51,8 +51,8 @@ PS1="$GREEN[$BOLD$RED\u$RESET_COLOR$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RESET_
 # Use vi bindings
 set -o vi
 
-# Enable extended glob (needed for dir_in_path)
-shopt -s extglob
+# Enable extended glob (needed for dir_in_path) and directory glob (**)
+shopt -s extglob globstar
 # Do not match . and .. with globs (e.g. .*)
 export GLOBIGNORE=.
 # Setting GLOBIGNORE also sets dotglob, disable it
