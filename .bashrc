@@ -1,4 +1,5 @@
-# .bashrc
+# Only run if interactive
+[[ $- == *i* ]] || return
 
 ########################### Source external scripts ###########################
 
