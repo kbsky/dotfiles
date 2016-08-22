@@ -54,7 +54,7 @@ set autoindent
 " C-style indentation
 autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
             \ :inoremap <buffer> {<CR> {<CR>}<Esc><Up>o <BS>
-" " <BS>" is a hack to keep the indentation even when immediately followed by
+"} " <BS>" is a hack to keep the indentation even when immediately followed by
 " <Esc>
 " No indentation for: private/protected/public:, namespace, return type
 " Align on opening parentheses, align on case label (regardless of braces)
@@ -252,8 +252,8 @@ if ! exists('g:TagHighlightSettings')
     let g:TagHighlightSettings = {}
 endif
 let g:TagHighlightSettings['IncludeLocals'] = 1
-" Ctags isn't aware of override (C++11), ignore it
-let g:TagHighlightSettings['CtagsExtraArguments'] = ['-Ioverride']
+" Per-project exclude file
+let g:TagHighlightSettings['CtagsExtraArguments'] = ['--exclude=@.taghl_exclude']
 let g:TagHighlightSettings['LanguageDetectionMethods'] = ['FileType']
 " Looks weird otherwise
 hi! link CTagsConstant EnumerationValue
