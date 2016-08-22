@@ -78,13 +78,6 @@ if [[ -x $HOME/bin/vimpager ]]; then
     alias zless=$PAGER
 fi
 
-# Git autocompletion
-command -v git > /dev/null && . ~/.git-completion.bash
-# Completion for complex aliases that __git doesn't manage to recognise
-_git_l() { _git_log; }
-_git_lp() { _git_log; }
-_git_ls() { _git_log; }
-
 # Editor
 export SVN_EDITOR=vim
 export EDITOR=vim
@@ -93,6 +86,11 @@ export EDITOR=vim
 alias lsdir='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
+
+# Completion for complex aliases that __git doesn't manage to recognise
+_git_l() { _git_log; }
+_git_lp() { _git_log; }
+_git_ls() { _git_log; }
 
 # Make readelf always use the wide format, for all toolchains
 for readelf in $(find ${PATH//:/ } -name '*readelf' -printf '%f '); do
