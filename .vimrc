@@ -374,6 +374,7 @@ let g:LatexBox_Folding = 1
 let g:LatexBox_fold_envs = 1
 let g:LatexBox_fold_automatic = 0
 let g:LatexBox_quickfix = 4
+let g:LatexBox_latexmk_preview_continuously = 1
 " Must be kept in sync with $out_dir in ~/.latexmkrc
 let g:LatexBox_build_dir = './out'
 
