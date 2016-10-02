@@ -16,35 +16,40 @@ fi
 
 ################################# Setup prompt ################################
 
-# Colors for display
-if [[ $(tput colors) -ge 256 ]]; then
-    BLACK="\[\e[38;5;0m\]"
-    BLUE="\[\e[38;5;27m\]"
-    GREEN="\[\e[38;5;28m\]"
-    CYAN="\[\e[38;5;37m\]"
-    RED="\[\e[38;5;160m\]"
-    MAGENTA="\[\e[38;5;99m\]"
-    YELLOW="\[\e[38;5;214m\]"
-    WHITE="\[\e[38;5;255m\]"
-else
-    BLACK="\[$(tput setf 0)\]"
-    BLUE="\[$(tput setf 62)\]"
-    GREEN="\[$(tput setf 2)\]"
-    CYAN="\[$(tput setf 3)\]"
-    RED="\[$(tput setf 4)\]"
-    MAGENTA="\[$(tput setf 5)\]"
-    YELLOW="\[$(tput setf 6)\]"
-    WHITE="\[$(tput setf 7)\]"
-fi
+set_prompt()
+{
+    local black blue green cyan red magenta yellow white clr bold rev
+    if [[ $(tput colors) -ge 256 ]]; then
+        black="\[\e[38;5;0m\]"
+        blue="\[\e[38;5;27m\]"
+        green="\[\e[38;5;28m\]"
+        cyan="\[\e[38;5;37m\]"
+        red="\[\e[38;5;160m\]"
+        magenta="\[\e[38;5;99m\]"
+        yellow="\[\e[38;5;214m\]"
+        white="\[\e[38;5;255m\]"
+    else
+        black="\[$(tput setf 0)\]"
+        blue="\[$(tput setf 62)\]"
+        green="\[$(tput setf 2)\]"
+        cyan="\[$(tput setf 3)\]"
+        red="\[$(tput setf 4)\]"
+        magenta="\[$(tput setf 5)\]"
+        yellow="\[$(tput setf 6)\]"
+        white="\[$(tput setf 7)\]"
+    fi
 
-RESET_COLOR="\[$(tput sgr0)\]"
-BOLD="\[$(tput bold)\]"
-REV="\[$(tput rev)\]"
+    clr="\[$(tput sgr0)\]"
+    bold="\[$(tput bold)\]"
+    rev="\[$(tput rev)\]"
 
-# Prompt
-[[ $UID -eq 0 ]] && MK="#" || MK="$"
-PS1="$GREEN[$BOLD$RED\u$RESET_COLOR$YELLOW@$MAGENTA\h$YELLOW:$BOLD$CYAN\w$RESET_COLOR$GREEN]$MK$RESET_COLOR "
+    local mk status
+    [[ $UID -eq 0 ]] && mk="#" || mk="$"
+    status='$(e=$?; [[ $e -ne 0 ]] && echo "'"$yellow{$bold$red"'$e'"$clr$yellow}$clr"'")'
 
+    PS1="$status$green[$bold$red\u$clr$yellow@$magenta\h$yellow:$bold$cyan\w$clr$green]$mk$clr "
+}
+set_prompt
 
 ################################ Bash settings ################################
 
