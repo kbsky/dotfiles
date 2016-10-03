@@ -20,20 +20,23 @@
 [pager]
 	grep = false
 [alias]
-	a = add
-	br = branch -vv
-	brf = branch -avv
-	d = diff
-	dc = !git --no-pager diff --check
-	dcs = !git --no-pager diff --check --staged
-	ds = diff --staged
-	l = !GIT_DIR=$(git rev-parse --git-dir) git log -n 100
-	lg = !PAGER=less git log --decorate --graph
-	lp = !GIT_DIR=$(git rev-parse --git-dir) git log -p -n 10
-	ls = !GIT_DIR=$(git rev-parse --git-dir) git log --stat -n 100
-	s = show --stat --patch
-	sl = !git --no-pager stash list --stat
-	st = status
+	a    = add
+	br   = branch -vv
+	brf  = branch -avv
+	d    = !git-aw.sh diff
+	dc   = !git --no-pager diff --check
+	dcs  = !git --no-pager diff --check --staged
+	dsc  = !git --no-pager diff --check --staged
+	ds   = !git-aw.sh diff --staged
+	la   = !git-aw.sh log
+	l    = !git-aw.sh log -n 100
+	lg   = !PAGER=less git log --decorate --graph
+	lp   = !git-aw.sh log -p -n 100
+	ls   = !git-aw.sh log --stat -n 100
+	rl   = !git-aw.sh reflog
+	s    = show --stat --patch
+	sl   = !git --no-pager stash list --stat
+	st   = status
 	stnu = status -uno
 [log]
 	date = iso
@@ -50,6 +53,10 @@
 	displayRef = *
 [include]
 	path = .gitconfig_specific
-
 [remote "origin"]
 	fetch = +refs/notes/*:refs/notes/*
+[diff]
+	compactionHeuristic = true
+[rebase]
+	autoSquash = true
+# vim: set noet ts=8 sw=8:
