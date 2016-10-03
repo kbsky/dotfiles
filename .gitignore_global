@@ -4,6 +4,6 @@ session.vim
 # ctags
 tags
 # TagHighlight
-*.taghl
+*.taghl*
 # Precompiled Py
 *.pyc
