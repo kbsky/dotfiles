@@ -91,6 +91,7 @@ export EDITOR=vim
 alias lsdir='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
+alias journalctl='SYSTEMD_PAGER=less journalctl'
 
 # Completion for complex aliases that __git doesn't manage to recognise
 _git_l() { _git_log; }
