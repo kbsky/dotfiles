@@ -23,17 +23,16 @@
 	a    = add
 	br   = branch -vv
 	brf  = branch -avv
-	d    = !git-aw.sh diff
+	d    = diff
 	dc   = !git --no-pager diff --check
 	dcs  = !git --no-pager diff --check --staged
 	dsc  = !git --no-pager diff --check --staged
-	ds   = !git-aw.sh diff --staged
-	la   = !git-aw.sh log
-	l    = !git-aw.sh log -n 100
+	ds   = diff --staged
+	l    = log -n 100
 	lg   = !PAGER=less git log --decorate --graph
-	lp   = !git-aw.sh log -p -n 100
-	ls   = !git-aw.sh log --stat -n 100
-	rl   = !git-aw.sh reflog
+	lp   = log -p -n 100
+	ls   = log --stat -n 100
+	rl   = reflog
 	s    = show --stat --patch
 	sl   = !git --no-pager stash list --stat
 	st   = status

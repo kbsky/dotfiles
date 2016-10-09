@@ -83,6 +83,9 @@ if [[ -x $HOME/bin/vimpager ]]; then
     alias zless=$PAGER
 fi
 
+export SYSTEMD_PAGER=
+export GIT_PAGER='env GIT_DIR="$(git rev-parse --git-dir)" $PAGER'
+
 # Editor
 export SVN_EDITOR=vim
 export EDITOR=vim
@@ -94,9 +97,6 @@ alias dd='dd bs=1M status=progress conv=fsync'
 alias journalctl='SYSTEMD_PAGER=less journalctl'
 
 # Completion for complex aliases that __git doesn't manage to recognise
-_git_l() { _git_log; }
-_git_lp() { _git_log; }
-_git_ls() { _git_log; }
 
 # Make readelf always use the wide format, for all toolchains
 for readelf in $(find ${PATH//:/ } -name '*readelf' -printf '%f '); do
@@ -259,14 +259,13 @@ pacman_ls()
 
 pacman_list()
 {
-    pacman --color always -Ql "$@" | grep -v '/usr/share/locale'
+    pacman --color always -Ql "$@" | grep -v ' /usr/share/locale'
 }
 
 ########################## Other environment settings #########################
 
 # Add ~/bin to PATH (prepend to be able to shadow commands)
 prepend_to_path "$HOME/bin"
-export SYSTEMD_PAGER=
 
 
 # Source specific
