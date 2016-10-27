@@ -162,7 +162,7 @@ function! SwitchHeader()
         let src = substitute(glob(substitute(expand("%"), "\\v\\.h[^.]*$", ".c*", "")),
                     \ "\n", "", "")
         if !empty(src)
-            exe "lefta vsp " . src
+            exe "rightb vsp " . src
         else
             echo "No source found"
         endif
@@ -170,7 +170,7 @@ function! SwitchHeader()
         let header = substitute(glob(substitute(expand("%"), "\\v\\.c[^.]*$", ".h*", "")),
                     \ "\n", "", "")
         if !empty(header)
-            exe "rightb vsp " . header
+            exe "lefta vsp " . header
         else
             echo "No header found"
         endif
