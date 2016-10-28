@@ -67,3 +67,6 @@
 [submodule ".vim/bundle/vim-airline-themes"]
 	path = .vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule ".vim/bundle/arm-syntax-vim"]
+	path = .vim/bundle/arm-syntax-vim
+	url = git@github.com:ARM9/arm-syntax-vim.git
