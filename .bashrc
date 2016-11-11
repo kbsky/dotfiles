@@ -95,6 +95,7 @@ alias lsdir='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
 alias journalctl='SYSTEMD_PAGER=less journalctl'
+alias yaourt='GIT_PAGER= yaourt' # To prevent opening a pager for AUR diffs
 
 # Completion for complex aliases that __git doesn't manage to recognise
 
