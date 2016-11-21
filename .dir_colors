@@ -170,7 +170,9 @@ LINK 35
 
 # pipe, socket, block device, character device (blue bg)
 FIFO 07;34
-SOCK 07;35
+# readline 7.0 uses SOCK for displaying prefix matches, see C_PREFIX in color.h
+SOCK 37
+# SOCK 07;35
 DOOR 07;35 # Solaris 2.5 and later
 BLK  07;33
 CHR  07;32
