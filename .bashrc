@@ -63,6 +63,9 @@ export GLOBIGNORE=.
 # Setting GLOBIGNORE also sets dotglob, disable it
 shopt -u dotglob
 
+# Expand variables in directory names when performing completion
+shopt -s direxpand
+
 
 ##################### Various command settings and aliases #####################
 
