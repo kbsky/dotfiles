@@ -4,6 +4,10 @@ defbce on
 vbell "off"
 caption always "%{= gw}%?%PCOPY MODE %?%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %S"
 
+# Let the terminal scroll outside of screen (mouse/scrollbar)
+# http://unix.stackexchange.com/a/20374
+termcapinfo xterm* ti@:te@
+
 bind (    eval writebuf "exec sh -c 'xsel -bi </tmp/screen-exchange'"
 # http://superuser.com/a/868741
 # Note: passing -S is not necessary as screen -X reads $STY from the environment
