@@ -93,24 +93,88 @@ export GIT_PAGER='env GIT_DIR="$(git rev-parse --git-dir)" $PAGER'
 export SVN_EDITOR=vim
 export EDITOR=vim
 
-# Alias
-alias lsdir='ls --group-directories-first'
+# Aliases
+alias lsd='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
 alias journalctl='SYSTEMD_PAGER=less journalctl'
-alias yaourt='GIT_PAGER= yaourt' # To prevent opening a pager for AUR diffs
-
-# Completion for complex aliases that __git doesn't manage to recognise
-
 # Make readelf always use the wide format, for all toolchains
-for readelf in $(find ${PATH//:/ } -name '*readelf' -printf '%f '); do
+for readelf in $(find ${PATH//:/ } -maxdepth 1 -name '*readelf' -printf '%f '); do
     alias $readelf="$readelf -W"
 done
+unset readelf
 
-# Alias adresses
-export iftp="kbrodsky@iftpserv2.insa-lyon.fr"
-export tw_cs="kxb414@tw.cs.bham.ac.uk"
+# Arch stuff
+alias pqi='pacman -Qi'
+alias pql='pacman -Ql'
+alias pqs='pacman -Qs'
+alias pS='pacman -S'
+alias psi='pacman -Si'
+alias pss='pacman -Ss'
+alias pu='pacman -U'
+alias yaourt='GIT_PAGER= yaourt' # To prevent opening a pager for AUR diffs
 
+# Generic completion function that expands aliases
+# Based on https://github.com/cykerway/complete-alias
+_alias_complete()
+{
+    local -r alias_name="${COMP_WORDS[0]}"
+    local regex cmd_offset=0
+    if [[ -v BASH_ALIASES[$alias_name] ]]; then
+        local -r alias_expansion=${BASH_ALIASES[$alias_name]}
+        local -r alias_expansion_words=(${alias_expansion})
+
+        # Rewrite current completion context by expanding alias.
+        COMP_WORDS=("${alias_expansion_words[@]}" "${COMP_WORDS[@]:1}")
+        ((COMP_CWORD += ${#alias_expansion_words[@]} - 1))
+        COMP_LINE="${alias_expansion}${COMP_LINE:${#alias_name}}"
+        ((COMP_POINT += ${#alias_expansion} - ${#alias_name}))
+
+        # Rough support for leading variable assignments and redirections -
+        # assuming that the command name does not contain any of [<>=].
+        local i
+        for ((i = 0; i < ${#COMP_WORDS[@]}; ++i)); do
+            regex='^[^=<>]*$'
+            [[ ${COMP_WORDS[$i]} =~ $regex ]] && cmd_offset=$i && break
+        done
+
+        local -r cmd=${COMP_WORDS[$cmd_offset]}
+        # Note that just comparing $cmd with $alias_name is not enough, as $cmd
+        # may very well be another alias.
+        regex='\b_alias_complete\b'
+        if [[ $(complete -p $cmd 2>/dev/null) =~ $regex ]]; then
+            # We have to do something, otherwise _command_offset will call
+            # _alias_complete and we will end up in an infinite recursion.
+            # We temporarily unset the completion function and let
+            # bash-completion find an appropriate function.
+            complete -r $cmd
+            # Some commands don't have a completion file, make it work
+            # anyway...
+            local c
+            for c in diff grep ls; do
+                [[ $cmd == $c ]] && complete -F _longopt $cmd && break
+            done
+            # To avoid making bash-completion source the completion file again
+            # if it has already done so, we try to find to find an obvious
+            # candidate function and use it if it exists.
+            local comp_fn="_${cmd//-/_}"
+            for comp_fn in $comp_fn ${comp_fn}_module; do
+                type -t $comp_fn >/dev/null && complete -F $comp_fn $cmd && break
+            done
+        fi
+    fi
+    
+    # Let bash-completion reparse the completion line and invoke the right
+    # completion function
+    _command_offset $cmd_offset
+
+    # If we had to change the completion function, reset it now that the
+    # completion has been done.
+    [[ $comp_fn ]] && complete -F _alias_complete $cmd
+}
+
+# Complete all aliases
+complete -F _alias_complete "${!BASH_ALIASES[@]}"
 
 ################################## Functions ##################################
 
