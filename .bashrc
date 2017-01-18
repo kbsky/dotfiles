@@ -107,6 +107,7 @@ unset readelf
 # Arch stuff
 alias pqi='pacman -Qi'
 alias pql='pacman -Ql'
+alias pqo='pacman -Qo'
 alias pqs='pacman -Qs'
 alias pS='pacman -S'
 alias psi='pacman -Si'
