@@ -92,6 +92,7 @@ launch_silent_bg_wait()
     done
     launch_silent_bg "$@"
 }
+complete -F _command launch_silent_bg launch_detached launch_silent_bg_wait
 
 cat_dir()
 {
@@ -113,6 +114,7 @@ cat_dir()
         fi
     done
 }
+complete -o dirnames cat_dir
 
 # print_binary <number> [<width of blocks in bits> [<min number of blocks>]]
 print_binary()
@@ -136,7 +138,7 @@ dl_files_recursive()
 pacman_size()
 {
     _need_nb_args $# 1 || return 1
-    pacman -Qql $(pacman -Qqs "$@") | grep -v '/$' | tr '\n' '\0' \
+    pacman -Qql "$@" | grep -v '/$' | tr '\n' '\0' \
         | du -hc --files0-from=- | tail -n 1
 }
 
@@ -149,3 +151,6 @@ pacman_list()
 {
     pacman --color always -Ql "$@" | grep -v ' /usr/share/locale'
 }
+
+_pacman_pkg_only() { local cur; _get_comp_words_by_ref cur; _pacman_pkg Qq; }
+complete -F _pacman_pkg_only pacman_size pacman_ls pacman_list
