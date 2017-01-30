@@ -319,8 +319,7 @@ let g:SuperTabContextDiscoverDiscovery =
             \ ["&omnifunc:<c-x><c-o>", "&completefunc:<c-x><c-u>"]
 let g:SuperTabRetainCompletionDuration = 'completion'
 let g:SuperTabLongestEnhanced = 1
-" TODO: should be 1, currently broken, ref https://github.com/ervandew/supertab/issues/158
-let g:SuperTabLongestHighlight = 0
+let g:SuperTabLongestHighlight = 1
 let g:SuperTabCrMapping = 0 " Compatbility issue with delimitMate
 
 " Tagbar
@@ -358,6 +357,7 @@ let g:airline#extensions#tabline#right_alt_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_solarized_normal_green = 1
+let g:airline_solarized_dark_inactive_border = 1
 
 " Jedi
 let g:jedi#auto_vim_configuration = 0
