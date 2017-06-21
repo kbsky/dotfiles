@@ -65,6 +65,11 @@ remove_from_path()
     return 1
 }
 
+func_def()
+{
+    shopt -s extdebug && declare -F "$1" && shopt -u extdebug
+}
+
 multigrep()
 {
     _need_nb_args $# 2 || return 1
