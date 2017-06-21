@@ -17,6 +17,12 @@
 	logOutputEncoding = UTF-8
 [color]
 	ui = auto
+[color "grep"]
+	context = dim
+	filename = magenta
+	function = white
+	linenumber = green
+	separator = cyan
 [pager]
 	grep = false
 [alias]
