@@ -94,6 +94,7 @@ export SVN_EDITOR=vim
 export EDITOR=vim
 
 # Aliases
+alias v=vim
 alias lsd='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
