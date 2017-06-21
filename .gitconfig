@@ -30,15 +30,17 @@
 	br   = branch -vv
 	brf  = branch -avv
 	co   = checkout
-	d    = diff
+	d    = diff -p --stat
+	ds   = diff -p --stat --staged
 	dc   = !git --no-pager diff --check
 	dcs  = !git --no-pager diff --check --staged
 	dsc  = !git --no-pager diff --check --staged
-	ds   = diff --staged
+	dst  = !git --no-pager diff --stat
 	g    = grep
 	l    = log -n 100
 	lg   = !PAGER=less git log --decorate --graph
 	lp   = log -p -n 100
+	lo   = !git --no-pager log --oneline -n 20
 	ls   = log --stat -n 100
 	rl   = reflog
 	s    = show --stat --patch
