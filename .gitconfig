@@ -48,6 +48,8 @@
 [log]
 	date = iso
 	decorate = short
+[mailinfo]
+	scissors = true
 [sendemail]
 	confirm = always
 [format]
