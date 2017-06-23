@@ -115,6 +115,7 @@ set directory=~/.vimswp//
 " in visual block insert)
 inoremap <C-C>          <Esc>
 nnoremap Y              y$
+map      Q              gq
 nnoremap gb             :bnext<CR>
 nnoremap gB             :bprevious<CR>
 " Make gt useful when given a count (and consistent with gT...)
