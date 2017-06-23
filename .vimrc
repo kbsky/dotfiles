@@ -60,6 +60,9 @@ autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
 " Align on opening parentheses, align on case label (regardless of braces)
 set cinoptions=g0,N-s,t0,(0,l1
 
+" Formatting
+set formatoptions=croqnj
+
 " Language options
 autocmd FileType make,php,tex :setl number
 autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,sparc,verilog,vim,yacc
