@@ -106,6 +106,9 @@ set switchbuf=usetab
 " mksession options
 set sessionoptions=curdir,folds,globals,help,options,localoptions,tabpages,winsize
 
+" Swap directory
+set directory=~/.vimswp//
+
 
 " Mappings
 " Without this, C-c in insert mode doesn't trigger InsertLeave (useful e.g.
