@@ -244,7 +244,7 @@ hi! link vimIsCommand Identifier
 hi link adaSpecial Delimiter
 
 
-" Config plugins
+" Plugins
 
 " Netrw
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
@@ -302,6 +302,17 @@ function! AddSyntasticClangPath(language, project_path, ...)
     endif
 endfunction
 
+function! SyntasticToggleDebug()
+    if g:syntastic_debug == 0
+        let g:syntastic_debug = 1 + 2 + 32
+        let g:syntastic_debug_file = '/tmp/syntastic.log'
+    else
+        let g:syntastic_debug = 0
+        unlet! g:syntastic_debug_file
+    endif
+endfunction
+command! -bar SyntasticToggleDebug call SyntasticToggleDebug()
+
 " Default is Todo, too close to Error
 hi! link SyntasticWarningSign Underlined
 " Default LaTeX checker is a PITA, use chktex instead
@@ -313,6 +324,8 @@ let syntastic_c_check_header = 1
 let syntastic_cpp_check_header = 1
 let syntastic_c_compiler_options = '-std=gnu99 -Wall -Wextra'
 let syntastic_cpp_compiler_options = '-std=c++1y -Wall -Wextra'
+" Other checker options
+let syntastic_sh_sh_args='-O extglob'
 
 " Supertab
 let g:SuperTabDefaultCompletionType = 'context'
