@@ -67,15 +67,20 @@ shopt -u dotglob
 shopt -s direxpand
 
 
-##################### Various command settings and aliases #####################
+##################### Various command settings and aliases ####################
 
-# Colors
+# Colours
 # ls
 eval $(dircolors ~/.dir_colors)
 # gcc (4.9+)
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-# ip (iproute2 4.1+)
-if ip -c -V > /dev/null 2>&1; then
+# Coloured command aliases
+for cmd in ls grep egrep fgrep diff; do
+    alias $cmd="$cmd --color=auto"
+done
+unset cmd
+# ip (since iproute2 4.1)
+if ip -c -V >/dev/null 2>&1; then
     alias ip='ip -c'
 fi
 
@@ -99,8 +104,10 @@ alias lsd='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
 alias journalctl='SYSTEMD_PAGER=less journalctl'
+# Expand aliases when using sudo (useful for dd for instance)
+alias sudo='sudo '
 # Make readelf always use the wide format, for all toolchains
-for readelf in $(find ${PATH//:/ } -maxdepth 1 -name '*readelf' -printf '%f '); do
+for readelf in $(find ${PATH//:/ } -maxdepth 1 -name '*readelf' -printf '%f ' 2>/dev/null); do
     alias $readelf="$readelf -W"
 done
 unset readelf
