@@ -66,6 +66,10 @@ shopt -u dotglob
 # Expand variables in directory names when performing completion
 shopt -s direxpand
 
+# Edit the result of history substitution before executing it
+shopt -s histverify
+# Edit failed history substitution
+shopt -s histreedit
 
 ##################### Various command settings and aliases ####################
 
@@ -100,6 +104,7 @@ export EDITOR=vim
 
 # Aliases
 alias v=vim
+alias g=git
 alias lsd='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
