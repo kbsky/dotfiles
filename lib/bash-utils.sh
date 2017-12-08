@@ -121,6 +121,45 @@ cat_dir()
 }
 complete -o dirnames cat_dir
 
+swap()
+{
+    local tmp ret=1
+    while true; do
+        [[ -e $1 || -e $2 ]] || break
+        if ! [[ -e $1 && -e $2 ]]; then
+            local existing new
+            if [[ -e $1 ]]; then
+                existing=$1
+                new=$2
+            else
+                existing=$1
+                new=$2
+            fi
+
+            if [[ -d $existing ]]; then
+                mkdir "$new" || break
+            else
+                touch "$new" || break
+            fi
+        fi
+
+        tmp=$(mktemp -dp "$(dirname "$1")") || break
+
+        while true; do
+            mv "$1" "$tmp" || break
+            mv "$2" "$1" || break
+            mv "$tmp/$(basename "$1")" "$2" || break
+            ret=0
+            break
+        done
+
+        rmdir "$tmp"
+        break
+    done
+
+    return $ret
+}
+
 # print_binary <number> [<width of blocks in bits> [<min number of blocks>]]
 print_binary()
 {
@@ -159,3 +198,5 @@ pacman_list()
 
 _pacman_pkg_only() { local cur; _get_comp_words_by_ref cur; _pacman_pkg Qq; }
 complete -F _pacman_pkg_only pacman_size pacman_ls pacman_list
+
+# vim: set ts=4 sw=4 sts=4 et:
