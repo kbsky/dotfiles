@@ -42,7 +42,7 @@ set mouse=a
 let mapleader = ","
 let maplocalleader = ","
 
-" Chargement auto plugin/indent language-specific
+" Filetype plugin/indent autoloading
 filetype plugin indent on
 
 " Indentation
@@ -148,7 +148,7 @@ xnoremap <silent> #     :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-" Maps leader
+" Leader mappings
 nnoremap <Leader>dl     :lcd %:p:h<CR>
 nnoremap <Leader>dg     :cd %:p:h<CR>
 nnoremap <Leader>sv     :source ~/.vimrc<CR>
@@ -264,8 +264,6 @@ let g:TagHighlightSettings['CtagsExtraArguments'] = ['--exclude=@.taghl_exclude'
 let g:TagHighlightSettings['LanguageDetectionMethods'] = ['FileType']
 " Looks weird otherwise
 hi! link CTagsConstant EnumerationValue
-" taghl files use vim syntax
-autocmd BufNew,BufNewFile,BufRead *.taghl set filetype=vim
 
 " clang_complete
 let g:clang_auto_select = 1
