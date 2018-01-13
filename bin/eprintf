@@ -1,0 +1,26 @@
+#!/bin/bash
+# eprintf <standard printf arguments>
+# Works like printf, but allows printing strings containing terminal codes
+# (\e[...m) without breaking the width specifier.
+# Example with %b (escaping done by printf):
+# eprintf "%-*b$(tput sgr0): ...\n" '30*' "\e[31m$USER"
+# Example with %s (escaping done manually):
+# printf "%-*s$(tput sgr0): ...\n" '30*' $'\e[31m'"$USER"
+args=(${1+"$1"}); shift
+
+while [[ $# -gt 0 ]]; do
+    if [[ $1 =~ ^([0-9]+)\*$ && $# -gt 1 ]]; then
+        escape_len=$(perl -e '
+            my $res = 0;
+            $res += length for shift =~ /(?:\\\Ke|\e).*?m/g;
+            print $res
+        ' "$2")
+        args+=($((BASH_REMATCH[1] + escape_len)) "$2")
+        shift 2
+    else
+        args+=("$1")
+        shift
+    fi
+done
+
+printf "${args[@]}"
