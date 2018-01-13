@@ -1,36 +1,36 @@
 [submodule ".vim/bundle/pathogen"]
 	path = .vim/bundle/pathogen
-	url = git://github.com/tpope/vim-pathogen.git
+	url = https://github.com/tpope/vim-pathogen.git
 [submodule ".vim/bundle/solarized"]
 	path = .vim/bundle/solarized
 	url = git@github.com:Corax26/vim-colors-solarized.git
 [submodule ".vim/bundle/camelcasemotion"]
 	path = .vim/bundle/camelcasemotion
-	url = git://github.com/vim-scripts/camelcasemotion.git
+	url = https://github.com/vim-scripts/camelcasemotion.git
 [submodule ".vim/bundle/clang-complete"]
 	path = .vim/bundle/clang-complete
-	url = git://github.com/Rip-Rip/clang_complete.git
+	url = https://github.com/Rip-Rip/clang_complete.git
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
+	url = https://github.com/scrooloose/syntastic.git
 [submodule ".vim/bundle/nerdcommenter"]
 	path = .vim/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
+	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule ".vim/bundle/supertab"]
 	path = .vim/bundle/supertab
-	url = git://github.com/ervandew/supertab.git
+	url = https://github.com/ervandew/supertab.git
 [submodule ".vim/bundle/tagbar"]
 	path = .vim/bundle/tagbar
-	url = git://github.com/majutsushi/tagbar.git
+	url = https://github.com/majutsushi/tagbar.git
 [submodule ".vim/bundle/vim-fugitive"]
 	path = .vim/bundle/vim-fugitive
-	url = git://github.com/tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule ".vim/bundle/ansi-esc"]
 	path = .vim/bundle/ansi-esc
 	url = https://github.com/powerman/vim-plugin-AnsiEsc.git
 [submodule ".vim/bundle/delimit-mate"]
 	path = .vim/bundle/delimit-mate
-	url = git://github.com/Raimondi/delimitMate.git
+	url = https://github.com/Raimondi/delimitMate.git
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
@@ -42,25 +42,25 @@
 	url = https://github.com/JessicaKMcIntosh/perlhelp-vim.git
 [submodule ".vim/bundle/latex-box"]
 	path = .vim/bundle/latex-box
-	url = git@github.com:LaTeX-Box-Team/LaTeX-Box.git
+	url = https://github.com/LaTeX-Box-Team/LaTeX-Box.git
 [submodule ".vim/bundle/perlomni-vim"]
 	path = .vim/bundle/perlomni-vim
-	url = git@github.com:c9s/perlomni.vim.git
+	url = https://github.com/c9s/perlomni.vim.git
 [submodule ".vim/bundle/jedi-vim"]
 	path = .vim/bundle/jedi-vim
-	url = git@github.com:davidhalter/jedi-vim.git
+	url = https://github.com/davidhalter/jedi-vim.git
 [submodule ".vim/bundle/vim-abolish"]
 	path = .vim/bundle/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
 [submodule ".vim/bundle/vim-javacomplete2"]
 	path = .vim/bundle/vim-javacomplete2
-	url = git@github.com:artur-shaik/vim-javacomplete2.git
+	url = https://github.com/artur-shaik/vim-javacomplete2.git
 [submodule ".vim/bundle/vim-logcat"]
 	path = .vim/bundle/vim-logcat
 	url = https://github.com/thinca/vim-logcat
 [submodule ".vim/bundle/neoman-vim"]
 	path = .vim/bundle/neoman-vim
-	url = git@github.com:nhooyr/neoman.vim.git
+	url = https://github.com/nhooyr/neoman.vim.git
 [submodule ".themes/Xfce-dusk-MediterraneanDarkest"]
 	path = .themes/Xfce-dusk-MediterraneanDarkest
 	url = git@github.com:Corax26/Xfce-dusk-MediterraneanDarkest.git
@@ -69,7 +69,7 @@
 	url = https://github.com/vim-airline/vim-airline-themes.git
 [submodule ".vim/bundle/arm-syntax-vim"]
 	path = .vim/bundle/arm-syntax-vim
-	url = git@github.com:ARM9/arm-syntax-vim.git
+	url = https://github.com/ARM9/arm-syntax-vim.git
 [submodule ".vim/bundle/vim-gitgutter"]
 	path = .vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
