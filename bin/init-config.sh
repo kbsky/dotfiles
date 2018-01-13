@@ -6,4 +6,4 @@ git submodule update --init --recursive
 
 # Tag-Highlight
 echo "## Clone Tag-Highlight"
-git-hg clone https://bitbucket.org/abudden/taghighlight .vim/bundle/tag-highlight
+hg clone https://bitbucket.org/abudden/taghighlight .vim/bundle/tag-highlight
