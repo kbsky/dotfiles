@@ -44,7 +44,7 @@
 	ls   = log --stat -n 100
 	rl   = reflog
 	s    = show --stat --patch
-	sl   = !git --no-pager stash list --stat
+	sl   = stash list --stat
 	st   = status
 	stnu = status -uno
 [log]
@@ -68,6 +68,10 @@
 	compactionHeuristic = true
 [rebase]
 	autoSquash = true
+[pager]
+	branch = false
+	stash = false
+	tag = false
 #[remote "origin"]
 #	fetch = +refs/notes/*:refs/notes/*
 # vim: set noet ts=8 sw=8:
