@@ -181,11 +181,10 @@ CHR  07;32
 #############################################################################
 ### By file attributes
 
-# Orphaned symlinks (blinking white on red)
-# Blink may or may not work (works on iTerm dark or light, and Putty dark)
-ORPHAN  05;37;41
-# ... and the files that orphaned symlinks point to (blinking white on red)
-MISSING 05;31;40
+# Orphaned symlinks
+ORPHAN  37;41
+# ... and the files that orphaned symlinks point to
+MISSING 31;40
 
 # Files having another hardlink
 MULTIHARDLINK 04;35
