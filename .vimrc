@@ -15,6 +15,7 @@ set history=100     " More history (: commands and / patterns)
 
 " Display options
 syntax on
+set number
 set cursorline
 set laststatus=2    " Always show status line
 set showcmd         " Show size of visual selection
@@ -64,9 +65,8 @@ set cinoptions=g0,N-s,t0,(0,l1
 set formatoptions=croqnj
 
 " Language options
-autocmd FileType make,php,tex :setl number
 autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,sparc,verilog,vim,yacc
-            \ :setl colorcolumn=80 number
+            \ :setl colorcolumn=80
 autocmd FileType perl :setl complete-=i " Don't search in included modules (too slow)
 " Text files
 autocmd FileType tex,markdown
