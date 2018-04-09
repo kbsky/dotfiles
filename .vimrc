@@ -52,25 +52,12 @@ set tabstop=4
 set shiftwidth=4 " Since 7.4, sw=0 sets sw to ts, but older plugins are not aware of this
 set softtabstop=4
 set autoindent
-" C-style indentation
-autocmd FileType c,cpp,java,javascript,perl,yacc :setl cindent |
-            \ :inoremap <buffer> {<CR> {<CR>}<Esc><Up>o <BS>
-"} " <BS>" is a hack to keep the indentation even when immediately followed by
-" <Esc>
 " No indentation for: private/protected/public:, namespace, return type
 " Align on opening parentheses, align on case label (regardless of braces)
 set cinoptions=g0,N-s,t0,(0,l1
 
 " Formatting
 set formatoptions=croqnj
-
-" Language options
-autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,sh,sparc,verilog,vim,yacc
-            \ :setl colorcolumn=80
-autocmd FileType perl :setl complete-=i " Don't search in included modules (too slow)
-" Text files
-autocmd FileType tex,markdown
-            \ :setl linebreak showbreak=-->\  cpoptions+=n
 
 " Configure built-in syntax files
 " Enable Doxygen in supported syntax files (see doxygen.vim for the config options)
@@ -108,6 +95,32 @@ set sessionoptions=curdir,folds,globals,help,options,localoptions,tabpages,winsi
 
 " Swap directory
 set directory=~/.vimswp//
+
+
+" autocmd
+augroup vimrc
+    autocmd!
+    " C-style indentation
+    " " <BS>" is a hack to keep the indentation even when immediately
+    " followed by <Esc>
+    autocmd FileType c,cpp,java,javascript,perl,rust,yacc
+                \ setl cindent |
+                \ inoremap <buffer> {<CR> {<CR>}<Esc><Up>o <BS>
+
+    " colorcolumn is window-local, so we need to do a bit of magic to set it
+    " per language in all windows
+    autocmd FileType arm,asm,c,cpp,java,javascript,perl,prolog,python,rust,sh,sparc,verilog,vim,yacc
+                \ let b:showcolorcolumn = 1
+
+    autocmd BufWinEnter *
+                \ if exists("b:showcolorcolumn") |
+                \     if &tw != 0 | setl colorcolumn=+0 | else | setl colorcolumn=80 | endif |
+                \ endif
+
+    " Text files
+    autocmd FileType tex,markdown
+                \ setl linebreak showbreak=-->\  cpoptions+=n
+augroup END
 
 
 " Mappings
@@ -341,7 +354,6 @@ let g:SuperTabLongestHighlight = 1
 let g:SuperTabCrMapping = 0 " Compatbility issue with delimitMate
 
 " Tagbar
-"autocmd FileType * nested :call tagbar#autoopen(0)
 let g:tagbar_compact = 1
 nnoremap <Leader>tt :TagbarToggle<CR>
 
