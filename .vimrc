@@ -21,9 +21,13 @@ set laststatus=2    " Always show status line
 set showcmd         " Show size of visual selection
 set listchars=tab:>-,trail:@
 set background=dark
-colorscheme solarized
-" Solarized options
-let g:solarized_contrast = "high" " Default value is normal
+
+" colorscheme
+" Solarized8 works with true-color terminals, let's make use of that
+set termguicolors
+let g:solarized_extra_hi_groups = 1
+let g:solarized_term_italics = 1
+colorscheme solarized8_custom
 " Toggle dark/light BG
 call togglebg#map("<F3>")
 
