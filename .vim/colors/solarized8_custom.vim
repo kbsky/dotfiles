@@ -1,5 +1,7 @@
 runtime colors/solarized8.vim
 
+let g:colors_name = 'solarized8_custom'
+
 " Corax's add-on: Moar color "{{{
 " ---------------------------------------------------------------------
 
