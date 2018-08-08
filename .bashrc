@@ -103,9 +103,11 @@ export SVN_EDITOR=vim
 export EDITOR=vim
 
 # Aliases
+alias l=ls
+alias ll='ls -lh'
+alias lsd='ls --group-directories-first'
 alias v=vim
 alias g=git
-alias lsd='ls --group-directories-first'
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
 alias journalctl='SYSTEMD_PAGER=less journalctl'
@@ -118,14 +120,15 @@ done
 unset readelf
 
 # Arch stuff
+alias p='pacman'
 alias pqi='pacman -Qi'
 alias pql='pacman -Ql'
 alias pqo='pacman -Qo'
 alias pqs='pacman -Qs'
-alias pS='pacman -S'
 alias psi='pacman -Si'
 alias pss='pacman -Ss'
-alias pu='pacman -U'
+alias pS='sudo pacman -S'
+alias pU='sudo pacman -U'
 alias yaourt='GIT_PAGER= yaourt' # To prevent opening a pager for AUR diffs
 
 # Generic completion function that expands aliases
