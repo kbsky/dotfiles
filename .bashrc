@@ -105,6 +105,7 @@ export EDITOR=vim
 # Aliases
 alias l=ls
 alias ll='ls -lh'
+alias llt='ls -lht'
 alias lsd='ls --group-directories-first'
 alias v=vim
 alias g=git
