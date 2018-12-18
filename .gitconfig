@@ -25,22 +25,27 @@
 	separator = cyan
 [pager]
 	grep = false
+	reflog = false
 [alias]
 	a    = add
 	br   = branch -vv
 	brf  = branch -avv
 	co   = checkout
+	cp   = cherry-pick
 	d    = diff -p --stat
 	ds   = diff -p --stat --staged
 	dc   = !git --no-pager diff --check
 	dcs  = !git --no-pager diff --check --staged
 	dsc  = !git --no-pager diff --check --staged
 	dst  = !git --no-pager diff --stat
+	dsst = !git --no-pager diff --stat --staged
 	g    = grep
 	l    = log -n 100
 	lg   = !PAGER=less git log --decorate --graph
 	lp   = log -p -n 100
 	lo   = !git --no-pager log --oneline -n 20
+	# The trailing # is needed to ignore arguments, if any (they are passed to git in the middle of the line using "$@").
+	lon  = "!git lo --color \"$@\" | { nr=0; while read line; do printf \"%3d: $line\n\" $((nr++)); done; } #"
 	ls   = log --stat -n 100
 	rl   = reflog
 	s    = show --stat --patch
