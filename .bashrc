@@ -58,8 +58,8 @@ set -o vi
 
 # Enable extended glob (needed for dir_in_path) and directory glob (**)
 shopt -s extglob globstar
-# Do not match . and .. with globs (e.g. .*)
-export GLOBIGNORE=.
+# Do not match . and .. with globs, including inside paths (e.g. ~/.*/*)
+export GLOBIGNORE='*(*/).?(.)*(/*)'
 # Setting GLOBIGNORE also sets dotglob, disable it
 shopt -u dotglob
 
@@ -181,7 +181,7 @@ _alias_complete()
             done
         fi
     fi
-    
+
     # Let bash-completion reparse the completion line and invoke the right
     # completion function
     _command_offset $cmd_offset
