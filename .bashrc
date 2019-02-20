@@ -71,6 +71,12 @@ shopt -s histverify
 # Edit failed history substitution
 shopt -s histreedit
 
+############################### Terminal settings #############################
+
+# Disable both auto-sending of control flow characters, and the bindings
+# themselves (C-s and C-q)
+stty -ixon -ixoff
+
 ##################### Various command settings and aliases ####################
 
 # Colours
