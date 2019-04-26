@@ -32,20 +32,24 @@ endif
 if version < 600
   so <sfile>:p:h/c.vim
 else
-  runtime! syntax/c.vim
+  if exists("b:odmp_language")
+    exe "runtime! syntax/" . b:odmp_language . ".vim"
+  else
+    runtime! syntax/c.vim
+  endif
   unlet b:current_syntax
 endif
 
 " See s:FTasm in built-in filetype.vim
 if exists("b:asmsyntax")
-	" Use the buffer-specific ASM syntax
-	let s:asm_flavor = b:asmsyntax
+  " Use the buffer-specific ASM syntax
+  let s:asm_flavor = b:asmsyntax
 elseif exists("g:asmsyntax")
-	" Use the global ASM syntax
-	let s:asm_flavor = g:asmsyntax
+  " Use the global ASM syntax
+  let s:asm_flavor = g:asmsyntax
 else
-	" Use GNU assembler as fallback
-	let s:asm_flavor = "asm"
+  " Use GNU assembler as fallback
+  let s:asm_flavor = "asm"
 endif
 
 " Use determined ASM syntax
