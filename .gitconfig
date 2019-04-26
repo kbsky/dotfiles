@@ -77,6 +77,8 @@
 	branch = false
 	stash = false
 	tag = false
+[am]
+	threeWay = true
 #[remote "origin"]
 #	fetch = +refs/notes/*:refs/notes/*
 # vim: set noet ts=8 sw=8:
