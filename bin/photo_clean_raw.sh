@@ -2,13 +2,14 @@
 . ~/lib/bash-run-in-terminal.sh
 
 raws_to_delete=()
+pp3s_to_delete=()
 
 for img; do
     [[ $img == *.ORF ]] || continue
-    side_files=("${img%.ORF}".*)
-    if [[ ${#side_files[@]} -eq 1 ]]; then
+    if ! compgen -G "${img%.ORF}*.JPG" > /dev/null; then
         echo "  $img"
         raws_to_delete+=("$img")
+        [[ -f "${img}.pp3" ]] && pp3s_to_delete+=("${img}.pp3")
     fi
 done
 
@@ -17,6 +18,7 @@ if [[ ${#raws_to_delete[@]} -ne 0 ]]; then
     read -p "Delete ${#raws_to_delete[@]} files ($size) [y/N] > "
     if [[ ${REPLY,} == y ]]; then
         rm "${raws_to_delete[@]}"
+        [[ -v pp3s_to_delete ]] && rm "${pp3s_to_delete[@]}"
     fi
 else
     echo "Nothing to delete"
