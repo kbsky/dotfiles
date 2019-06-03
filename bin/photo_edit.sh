@@ -1,6 +1,5 @@
 #!/bin/bash
 . ~/lib/bash-run-in-terminal.sh
-wait=y
 
 for img; do
     wait=y
@@ -16,12 +15,12 @@ for img; do
         fi
         rawtherapee "$orf"
         if [[ -v orig_jpg ]]; then
-            xnviewmp "$orig_jpg" "$jpg" >/dev/null 2>&1
-            read -p "Keep original JPG? [Y/n] > "
-            if [[ ${REPLY,} != ?(y) ]]; then
+            if diff -q "$orig_jpg" "$jpg" >/dev/null; then
+                # Unchanged
                 rm "$orig_jpg"
+            else
+                xnviewmp "$orig_jpg" "$jpg" >/dev/null 2>&1
             fi
-            wait=
         fi
     else
         orig="${BASH_REMATCH[1]}_orig.JPG"
@@ -35,8 +34,8 @@ for img; do
             rm "${orig}.pp3"
             chmod +w "$img"
         fi
-        wait=
     fi
+    wait=
 done
 
 [[ -n $wait ]] && read_if_transient_term
