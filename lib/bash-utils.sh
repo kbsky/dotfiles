@@ -179,6 +179,60 @@ dl_files_recursive()
     wget -r --no-parent -nd --reject='*htm*' -e robots=off "$1"
 }
 
+exif_shift_time()
+{
+    local regex='(\+|-)([0-9]+)'
+    [[ $1 =~ $regex ]] || { echo "Wrong format"; return 1; }
+    local sign=${BASH_REMATCH[1]} value=${BASH_REMATCH[2]} i
+    local -a args
+    for attr in 'AllDates' 'ModifyDate' 'FileModifyDate'; do
+        args+=(-${attr}${sign}=${value})
+    done
+    shift
+    exiftool "${args[@]}" "$@"
+}
+
+ffmpeg_cut()
+{
+    [[ $# -ge 2 ]] || { echo "Usage: $FUNCNAME file [start]-[stop]..."; return 1; }
+
+    local -i i=0
+    local format='([0-9:]*)-([0-9:]*)'
+    local arg
+    local file=$1
+    local dir=$(dirname "$file")
+    local name=$(basename "$file")
+    local ext=${name##*.}
+    name=${name%.*}
+    shift
+
+    for arg; do
+        [[ $arg =~ $format ]] || { echo "Invalid format: $arg"; return 1; }
+    done
+
+    mkdir -p /tmp/conv
+
+    for arg; do
+        [[ $arg =~ $format ]]
+        local start=${BASH_REMATCH[1]} stop=${BASH_REMATCH[2]}
+        ffmpeg ${start:+-ss $start} ${stop:+-to $stop} \
+            -i "$file" -c copy -map_metadata 0 \
+            /tmp/conv/${basename}_$((i++)).$ext ||
+                return $?
+    done
+
+    mv "$file" "$dir/$name.orig.$ext"
+    ffmpeg -f concat -safe 0 \
+        -i <(printf "file %s\n" /tmp/conv/${basename}_*.$ext) -c copy -map_metadata 0 \
+        "$file" ||
+            return $?
+
+    # Restore the original modification date.
+    touch -r "$dir/$name.orig.$ext"  "$file"
+
+    rm /tmp/conv/${basename}_*.$ext
+}
+
 pacman_size()
 {
     _need_nb_args $# 1 || return 1
