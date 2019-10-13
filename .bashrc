@@ -139,14 +139,17 @@ alias pU='sudo pacman -U'
 alias yaourt='GIT_PAGER= yaourt' # To prevent opening a pager for AUR diffs
 
 # Generic completion function that expands aliases
-# Based on https://github.com/cykerway/complete-alias
+# Based on https://github.com/cykerway/complete-alias (but simplified a lot by
+# making use of _command_offset $offset)
 _alias_complete()
 {
-    local -r alias_name="${COMP_WORDS[0]}"
+    local alias_name="${COMP_WORDS[0]}"
     local regex cmd_offset=0
+    local comp_fn
+
     if [[ -v BASH_ALIASES[$alias_name] ]]; then
-        local -r alias_expansion=${BASH_ALIASES[$alias_name]}
-        local -r alias_expansion_words=(${alias_expansion})
+        local alias_expansion=${BASH_ALIASES[$alias_name]}
+        local alias_expansion_words=(${alias_expansion})
 
         # Rewrite current completion context by expanding alias.
         COMP_WORDS=("${alias_expansion_words[@]}" "${COMP_WORDS[@]:1}")
@@ -181,7 +184,7 @@ _alias_complete()
             # To avoid making bash-completion source the completion file again
             # if it has already done so, we try to find to find an obvious
             # candidate function and use it if it exists.
-            local comp_fn="_${cmd//-/_}"
+            comp_fn="_${cmd//-/_}"
             for comp_fn in $comp_fn ${comp_fn}_module; do
                 type -t $comp_fn >/dev/null && complete -F $comp_fn $cmd && break
             done
@@ -194,7 +197,7 @@ _alias_complete()
 
     # If we had to change the completion function, reset it now that the
     # completion has been done.
-    [[ $comp_fn ]] && complete -F _alias_complete $cmd
+    [[ -v comp_fn ]] && complete -F _alias_complete $cmd
 }
 
 # Complete all aliases
