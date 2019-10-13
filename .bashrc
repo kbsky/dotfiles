@@ -150,12 +150,22 @@ _alias_complete()
     if [[ -v BASH_ALIASES[$alias_name] ]]; then
         local alias_expansion=${BASH_ALIASES[$alias_name]}
         local alias_expansion_words=(${alias_expansion})
+        local alias_len=${#alias_name}
+
+        # COMP_LINE may have leading spaces (e.g. when the previous word was an
+        # alias with a trailing space), add them to the alias length to
+        # overwrite it properly.
+        local i=0
+        while [[ "${COMP_LINE:i:1}" == " " ]]; do
+            ((++alias_len))
+            ((++i))
+        done
 
         # Rewrite current completion context by expanding alias.
         COMP_WORDS=("${alias_expansion_words[@]}" "${COMP_WORDS[@]:1}")
         ((COMP_CWORD += ${#alias_expansion_words[@]} - 1))
-        COMP_LINE="${alias_expansion}${COMP_LINE:${#alias_name}}"
-        ((COMP_POINT += ${#alias_expansion} - ${#alias_name}))
+        COMP_LINE="${alias_expansion}${COMP_LINE:${alias_len}}"
+        ((COMP_POINT += ${#alias_expansion} - ${alias_len}))
 
         # Rough support for leading variable assignments and redirections -
         # assuming that the command name does not contain any of [<>=].
