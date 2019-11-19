@@ -33,10 +33,10 @@ call togglebg#map("<F3>")
 
 " gvim options
 set guifont=Source\ Code\ Pro\ Medium\ 10
-" No toolbar, text headings (refresh bug with graphical headings? TODO)
+" No toolbar
 set guioptions-=T
-"set guioptions-=e
-set guioptions+=e
+" Use GTK dark theme if available, graphical headings
+set guioptions+=de
 " Disable blinking cursor
 set guicursor+=a:blinkon0
 
