@@ -58,8 +58,8 @@ set -o vi
 
 # Enable extended glob (needed for dir_in_path) and directory glob (**)
 shopt -s extglob globstar
-# Do not match . and .. with globs, including inside paths (e.g. ~/.*/*)
-export GLOBIGNORE='*(*/).?(.)*(/*)'
+# Do not match . and .. with globs, even in subdirectories (e.g. ~/.*)
+export GLOBIGNORE='*(*/).?(.)'
 # Setting GLOBIGNORE also sets dotglob, disable it
 shopt -u dotglob
 
