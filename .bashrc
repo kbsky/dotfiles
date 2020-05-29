@@ -89,6 +89,8 @@ for cmd in ls grep egrep fgrep diff; do
     alias $cmd="$cmd --color=auto"
 done
 unset cmd
+# zgrep sometimes pipes its ouput to sed, so --color=auto is not always enough.
+alias zgrep='zgrep --color=yes'
 # ip (since iproute2 4.1)
 if ip -c -V >/dev/null 2>&1; then
     alias ip='ip -c'
@@ -111,6 +113,7 @@ export EDITOR=vim
 # Aliases
 alias l=ls
 alias ll='ls -lh'
+alias lla='ls -lha'
 alias llt='ls -lht'
 alias lsd='ls --group-directories-first'
 alias v=vim
