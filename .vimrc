@@ -216,6 +216,8 @@ nnoremap <Leader>ml     :make<Up><CR>
 nnoremap <Leader>ee     :copen<CR>
 nnoremap <Leader>eE     :cclose<CR>
 nnoremap <Leader>EE     :cclose<CR>
+" Recreate the temporary directory (useful when it gets deleted by the system)
+nnoremap <Leader>ft     :call mkdir(fnamemodify(tempname(),':h'),'',0700)<CR>
 
 " Abbreviations
 " http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
