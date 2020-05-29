@@ -92,7 +92,7 @@ set showmode
 set diffopt+=vertical
 
 " Buffer options
-set switchbuf=usetab
+set switchbuf=usetab,vsplit
 
 " mksession options
 set sessionoptions=curdir,folds,globals,help,options,localoptions,tabpages,winsize
