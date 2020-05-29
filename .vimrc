@@ -258,6 +258,11 @@ function! DeleteHiddenBuffers()
 endfunction
 command! -nargs=0 -bar DeleteHiddenBuffers call DeleteHiddenBuffers()
 
+function! DemangleAllCppSymbols()
+    %s/\<_Z\w\+/\=systemlist("c++filt " . submatch(0))[0]/g
+endfunction
+command! -nargs=0 -bar DemangleAllCppSymbols call DemangleAllCppSymbols()
+
 
 " Additional highlighting links
 hi link markdownCode Underlined
