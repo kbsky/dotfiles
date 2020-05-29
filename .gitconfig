@@ -49,7 +49,7 @@
 	ls   = log --stat -n 100
 	rl   = reflog
 	s    = show --stat --patch
-	sl   = stash list --stat
+	sl   = !git --no-pager stash list --stat
 	st   = status
 	stnu = status -uno
 [log]
@@ -75,7 +75,6 @@
 	autoSquash = true
 [pager]
 	branch = false
-	stash = false
 	tag = false
 [am]
 	threeWay = true
