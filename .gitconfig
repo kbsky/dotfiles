@@ -41,13 +41,19 @@
 	dsst = !git --no-pager diff --stat --staged
 	g    = grep
 	l    = log -n 100
-	lg   = !PAGER=less git log --decorate --graph
+	lm   = log --no-merges -n 100
 	lp   = log -p -n 100
+	lpm  = log --no-merges -p -n 100
 	lo   = !git --no-pager log --oneline -n 20
+	lom  = !git --no-pager log --no-merges --oneline -n 20
+	lg   = !PAGER=less git log --decorate --graph
 	# The trailing # is needed to ignore arguments, if any (they are passed to git in the middle of the line using "$@").
 	lon  = "!git lo --color \"$@\" | { nr=0; while read line; do printf \"%3d: $line\n\" $((nr++)); done; } #"
 	ls   = log --stat -n 100
+	lsm  = log --no-merges --stat -n 100
+	rd   = !PAGER=less git range-diff
 	rl   = reflog
+	rv   = remote -v
 	s    = show --stat --patch
 	sl   = !git --no-pager stash list --stat
 	st   = status
