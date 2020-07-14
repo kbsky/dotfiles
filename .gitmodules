@@ -76,3 +76,6 @@
 [submodule ".vim/bundle/vim-solarized8"]
 	path = .vim/bundle/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule ".vim/bundle/tag-highlight"]
+	path = .vim/bundle/tag-highlight
+	url = https://github.com/abudden/taghighlight-automirror.git
