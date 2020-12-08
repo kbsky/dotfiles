@@ -42,6 +42,7 @@
 	dst  = !git --no-pager diff --stat
 	dsst = !git --no-pager diff --stat --staged
 	g    = grep
+	h    = help
 	l    = log -n 100
 	lm   = log --no-merges -n 100
 	lp   = log -p -n 100
