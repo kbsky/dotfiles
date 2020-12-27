@@ -8,9 +8,8 @@ for img; do
     jpg="$base.JPG"
     orf="$base.ORF"
     if [[ -f $orf ]]; then
-        if [[ -f $jpg ]]; then
-            orig_jpg="${BASH_REMATCH[1]}_orig.JPG"
-            [[ -e $orig_jpg ]] && { echo "$orig_jpg already exists, skipping $img"; continue; }
+        if [[ -f $jpg && ! -f "${base}_orig.JPG" ]]; then
+            orig_jpg="${base}_orig.JPG"
             cp "$jpg" "$orig_jpg"
         fi
         rawtherapee "$orf"
@@ -23,7 +22,7 @@ for img; do
             fi
         fi
     else
-        orig="${BASH_REMATCH[1]}_orig.JPG"
+        orig="${base}_orig.JPG"
         [[ -e $orig ]] && { echo "$orig already exists, skipping $img"; continue; }
         cp "$img" "$orig"
         chmod -w "$orig"
