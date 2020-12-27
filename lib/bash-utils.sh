@@ -95,6 +95,7 @@ launch_silent_bg_wait()
     while pgrep "$1" > /dev/null; do
         sleep 1s
     done
+    shift
     launch_silent_bg "$@"
 }
 complete -F _command launch_silent_bg launch_detached launch_silent_bg_wait
@@ -242,7 +243,7 @@ pacman_size()
 
 pacman_ls()
 {
-    pacman -Qql "$@" | grep -v '/$' | xargs ls -l --color
+    pacman -Qql "$@" | grep -v '/$' | xargs ls -lh --color
 }
 
 pacman_list()
