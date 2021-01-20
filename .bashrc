@@ -121,6 +121,7 @@ alias g=git
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
 alias journalctl='SYSTEMD_PAGER=less journalctl'
+alias tar_xz="tar -I 'xz -T'$(nproc)"
 # Expand aliases when using sudo (useful for dd for instance)
 alias sudo='sudo '
 # Make readelf always use the wide format, for all toolchains
@@ -139,7 +140,6 @@ alias psi='pacman -Si'
 alias pss='pacman -Ss'
 alias pS='sudo pacman -S'
 alias pU='sudo pacman -U'
-alias yaourt='GIT_PAGER= yaourt' # To prevent opening a pager for AUR diffs
 
 # Generic completion function that expands aliases
 # Based on https://github.com/cykerway/complete-alias (but simplified a lot by
