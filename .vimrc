@@ -52,7 +52,6 @@ filetype plugin indent on
 
 " Indentation
 set expandtab
-set tabstop=4
 set shiftwidth=4 " Since 7.4, sw=0 sets sw to ts, but older plugins are not aware of this
 set softtabstop=4
 set autoindent
