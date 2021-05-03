@@ -342,6 +342,12 @@ command! -bar SyntasticToggleDebug call SyntasticToggleDebug()
 hi! link SyntasticWarningSign Underlined
 " Default LaTeX checker is a PITA, use chktex instead
 let syntastic_tex_checkers = ['chktex']
+" Silence:
+" - "Command terminated with space.", this is excessively noisy for
+"   commands followed by a newline
+" - "You should put a space in front of parenthesis.", problematic with
+"   function calls
+let syntastic_tex_chktex_args='-n 1 -n 36'
 " Don't use shellcheck even if available
 let syntastic_sh_checkers = ['sh']
 " Default C/C++ options
