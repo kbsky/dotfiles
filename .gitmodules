@@ -1,81 +1,78 @@
-[submodule ".vim/bundle/pathogen"]
-	path = .vim/bundle/pathogen
-	url = https://github.com/tpope/vim-pathogen.git
 [submodule ".vim/bundle/solarized"]
-	path = .vim/bundle/solarized
+	path = .vim/pack/main/start/solarized
 	url = git@github.com:Corax26/vim-colors-solarized.git
 [submodule ".vim/bundle/camelcasemotion"]
-	path = .vim/bundle/camelcasemotion
+	path = .vim/pack/main/start/camelcasemotion
 	url = https://github.com/vim-scripts/camelcasemotion.git
 [submodule ".vim/bundle/clang-complete"]
-	path = .vim/bundle/clang-complete
+	path = .vim/pack/main/opt/clang-complete
 	url = https://github.com/Rip-Rip/clang_complete.git
 [submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
+	path = .vim/pack/main/start/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule ".vim/bundle/nerdcommenter"]
-	path = .vim/bundle/nerdcommenter
+	path = .vim/pack/main/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule ".vim/bundle/supertab"]
-	path = .vim/bundle/supertab
+	path = .vim/pack/main/start/supertab
 	url = https://github.com/ervandew/supertab.git
 [submodule ".vim/bundle/tagbar"]
-	path = .vim/bundle/tagbar
+	path = .vim/pack/main/start/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 [submodule ".vim/bundle/vim-fugitive"]
-	path = .vim/bundle/vim-fugitive
+	path = .vim/pack/main/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule ".vim/bundle/ansi-esc"]
-	path = .vim/bundle/ansi-esc
+	path = .vim/pack/main/start/ansi-esc
 	url = https://github.com/powerman/vim-plugin-AnsiEsc.git
 [submodule ".vim/bundle/delimit-mate"]
-	path = .vim/bundle/delimit-mate
+	path = .vim/pack/main/start/delimit-mate
 	url = https://github.com/Raimondi/delimitMate.git
 [submodule ".vim/bundle/vim-surround"]
-	path = .vim/bundle/vim-surround
+	path = .vim/pack/main/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule ".vim/bundle/vim-airline"]
-	path = .vim/bundle/vim-airline
+	path = .vim/pack/main/start/vim-airline
 	url = https://github.com/bling/vim-airline.git
 [submodule ".vim/bundle/perlhelp-vim"]
-	path = .vim/bundle/perlhelp-vim
+	path = .vim/pack/main/start/perlhelp-vim
 	url = https://github.com/JessicaKMcIntosh/perlhelp-vim.git
 [submodule ".vim/bundle/latex-box"]
-	path = .vim/bundle/latex-box
+	path = .vim/pack/main/start/latex-box
 	url = https://github.com/LaTeX-Box-Team/LaTeX-Box.git
 [submodule ".vim/bundle/perlomni-vim"]
-	path = .vim/bundle/perlomni-vim
+	path = .vim/pack/main/start/perlomni-vim
 	url = https://github.com/c9s/perlomni.vim.git
 [submodule ".vim/bundle/jedi-vim"]
-	path = .vim/bundle/jedi-vim
+	path = .vim/pack/main/start/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 [submodule ".vim/bundle/vim-abolish"]
-	path = .vim/bundle/vim-abolish
+	path = .vim/pack/main/start/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
 [submodule ".vim/bundle/vim-javacomplete2"]
-	path = .vim/bundle/vim-javacomplete2
+	path = .vim/pack/main/opt/vim-javacomplete2
 	url = https://github.com/artur-shaik/vim-javacomplete2.git
 [submodule ".vim/bundle/vim-logcat"]
-	path = .vim/bundle/vim-logcat
+	path = .vim/pack/main/start/vim-logcat
 	url = https://github.com/thinca/vim-logcat
 [submodule ".vim/bundle/neoman-vim"]
-	path = .vim/bundle/neoman-vim
+	path = .vim/pack/main/start/neoman-vim
 	url = https://github.com/nhooyr/neoman.vim.git
 [submodule ".themes/Xfce-dusk-MediterraneanDarkest"]
 	path = .themes/Xfce-dusk-MediterraneanDarkest
 	url = git@github.com:Corax26/Xfce-dusk-MediterraneanDarkest.git
 [submodule ".vim/bundle/vim-airline-themes"]
-	path = .vim/bundle/vim-airline-themes
+	path = .vim/pack/main/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
 [submodule ".vim/bundle/arm-syntax-vim"]
-	path = .vim/bundle/arm-syntax-vim
+	path = .vim/pack/main/start/arm-syntax-vim
 	url = https://github.com/ARM9/arm-syntax-vim.git
 [submodule ".vim/bundle/vim-gitgutter"]
-	path = .vim/bundle/vim-gitgutter
+	path = .vim/pack/main/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
 [submodule ".vim/bundle/vim-solarized8"]
-	path = .vim/bundle/vim-solarized8
+	path = .vim/pack/main/start/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
 [submodule ".vim/bundle/tag-highlight"]
-	path = .vim/bundle/tag-highlight
+	path = .vim/pack/main/start/tag-highlight
 	url = https://github.com/abudden/taghighlight-automirror.git

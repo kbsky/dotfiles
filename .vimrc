@@ -1,10 +1,6 @@
 " Make sure we're in nocp mode
 set nocompatible
 
-" Pathogen, load all bundles
-runtime bundle/pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-
 " Built-in plugins
 runtime ftplugin/man.vim
 runtime macros/matchit.vim
@@ -21,15 +17,6 @@ set laststatus=2    " Always show status line
 set showcmd         " Show size of visual selection
 set listchars=tab:>-,trail:@
 set background=dark
-
-" colorscheme
-" Solarized8 works with true-color terminals, let's make use of that
-set termguicolors
-let g:solarized_extra_hi_groups = 1
-let g:solarized_term_italics = 1
-colorscheme solarized8_custom
-" Toggle dark/light BG
-call togglebg#map("<F3>")
 
 " gvim options
 set guifont=Source\ Code\ Pro\ Medium\ 10
@@ -442,5 +429,18 @@ let g:neoman_tab_after = 1
 if filereadable($HOME . "/.vimrc_specific")
     source $HOME/.vimrc_specific
 endif
+
+
+" We need plugins to be loaded for the commands below, do that now
+packloadall
+
+" colorscheme
+" Solarized8 works with true-color terminals, let's make use of that
+set termguicolors
+let g:solarized_extra_hi_groups = 1
+let g:solarized_term_italics = 1
+colorscheme solarized8_custom
+" Toggle dark/light BG
+call togglebg#map("<F3>")
 
 " vim: set ts=4 sw=4 sts=4 et:
