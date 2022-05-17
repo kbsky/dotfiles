@@ -108,9 +108,12 @@ cat_dir()
     local d f
     for d; do
         d=${d%/}
-        echo "> In $d/"
+        echo -e "\e[38;5;99m> In $d/$(tput sgr0)"
         for f in "$d"/*; do
-            [[ -f $f ]] && { echo ">> $(basename $f)"; cat "$f"; }
+            if [[ -f $f ]]; then
+                echo -e "\e[38;5;37m>> $(basename $f)$(tput sgr0)"
+                cat "$f"
+            fi
         done
 
         if [[ $recursive ]]; then
