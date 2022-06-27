@@ -117,6 +117,7 @@ alias lla='ls -lha'
 alias llt='ls -lht'
 alias lsd='ls --group-directories-first'
 alias v=vim
+alias vgst='vim -c "ped $(git rev-parse --git-dir)/index" -c "wincmd P" -c "exe \"normal G\\<C-p>\""'
 alias g=git
 alias clip='xclip -sel clipboard'
 alias dd='dd bs=1M status=progress conv=fsync'
