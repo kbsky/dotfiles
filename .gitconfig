@@ -56,7 +56,10 @@
 	lon  = "!git lo --color \"$@\" | { nr=0; while read line; do printf \"%3d: $line\n\" $((nr++)); done; } #"
 	ls   = log --stat -n 100
 	lsm  = log --no-merges --stat -n 100
-	rd   = !PAGER=less git range-diff
+	li   = "!vim -n -c 'set switchbuf= fdls=99' -c \"autocmd VimEnter * silent Glog $* -- | copen\" #"
+	rd   = !PAGER=less git range-diff --creation-factor=90
+	rbc  = rebase --continue
+	rbsc = rebase --show-current-patch
 	rl   = reflog
 	rv   = remote -v
 	s    = show --stat --patch
