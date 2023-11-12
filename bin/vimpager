@@ -322,7 +322,7 @@ less_vim() {
 				#"${@:--}"
 
 			local extra_args
-			[[ -v GIT_PREFIX ]] && extra_args=('-c' 'set ft=git') || extra_args=('-c' 'AnsiEsc')
+			[[ -v GIT_PREFIX ]] && extra_args=('-c' 'set ft=git' --cmd 'let b:git_dir=$GIT_DIR')
 			# Note: <nowait> is only available since 7.3.1264 (7.4 to make it simple)
 			${vim_cmd} \
 				-u "${vimrc}" \
@@ -416,7 +416,7 @@ do_ptree() {
 }
 
 # Check if called from man, perldoc or pydoc
-if do_ptree | grep_q '(^|\/)(man|perl(doc)?([0-9.]*)?|py(thon|doc|doc2))'; then
+if do_ptree | grep_q '(^| |\/)(man|perl(doc)?([0-9.]*)?|py(thon|doc|doc2))$'; then
 	extra_c='set ft=man'
 fi
 
@@ -468,11 +468,11 @@ filter() {
 	IFS="${OLDIFS}"
 	if [ "x${have_perl}" != "x" ]; then
 		( printf %s "${content}"; exec /bin/cat ) | \
-			{ [[ -v GIT_PREFIX ]] && sed -e 's/\[[^m]*m//g' "${@}" || cat; } | \
+			sed -e 's/\[[^m]*m//g' "${@}" | \
 			perl -CIOL -pe 'no warnings "utf8"; s/.\010//g' >&2
 	else
 		( printf %s "${content}"; exec /bin/cat ) | \
-			{ [[ -v GIT_PREFIX ]] && sed -e 's/\[[^m]*m//g' "${@}" || cat; } | \
+			sed -e 's/\[[^m]*m//g' "${@}" | \
 			sed -e 's/.//g' >&2
 	fi
 }
