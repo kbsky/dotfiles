@@ -94,6 +94,8 @@
 	tag = false
 [am]
 	threeWay = true
+[advice]
+	skippedCherryPicks = true
 #[remote "origin"]
 #	fetch = +refs/notes/*:refs/notes/*
 # vim: set noet ts=8 sw=8:
