@@ -30,6 +30,7 @@
 	reflog = false
 [alias]
 	a    = add
+        axc = "!xclip -sel clipboard -o | git am"
 	br   = branch -vv
 	brf  = branch -avv
 	co   = checkout
@@ -41,6 +42,7 @@
 	dsc  = !git --no-pager diff --check --staged
 	dst  = !git --no-pager diff --stat
 	dsst = !git --no-pager diff --stat --staged
+	fu   = "!u=${1/-\\//}; [[ $u =~ (https://.*)/(tree|commits)/(.*) ]] && git fetch ${BASH_REMATCH[1]} ${BASH_REMATCH[3]%/} #"
 	g    = grep
 	h    = help
 	l    = log -n 100
