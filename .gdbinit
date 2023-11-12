@@ -23,3 +23,9 @@ set multiple-symbols ask
 alias -a di = disassemble
 alias -a set di = set disassemble-next-line
 alias -a show di = show disassemble-next-line
+
+source /usr/share/gdb-dashboard/.gdbinit
+dashboard -style syntax_highlighting 'monokai'
+dashboard -layout stack source assembly registers threads history expressions memory
+dashboard stack -style compact True
+dashboard stack -style limit 4
