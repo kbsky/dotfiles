@@ -206,25 +206,20 @@ if [ -z "${vimrc}" ]; then
 fi
 
 # read settings
-vim -u "${vimrc}" -E --cmd 'set nocp' -c '
-	if !exists("vimpager_use_gvim")
+vim -u "${vimrc}" -E --cmd 'set nocp' -c \
+	'if !exists("vimpager_use_gvim")
 		let vimpager_use_gvim=0
 	endif
-
 	if !exists("vimpager_disable_x11")
 		let vimpager_disable_x11=0
 	endif
-
 	if !exists("vimpager_scrolloff")
 		let vimpager_scrolloff=5
 	endif
-
 	if !exists("vimpager_passthrough")
 		let vimpager_passthrough=0
 	endif
-
 	call writefile([ vimpager_use_gvim, vimpager_disable_x11, vimpager_scrolloff, vimpager_passthrough ], "'${tmp}'/vimpager_opts_'${$}'")
-
 	quit
 ' </dev/null
 
