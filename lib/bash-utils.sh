@@ -100,6 +100,14 @@ launch_silent_bg_wait()
 }
 complete -F _command launch_silent_bg launch_detached launch_silent_bg_wait
 
+cdd()
+{
+    _need_nb_args $# 1 || return 1
+
+    mkdir -p "$1" && cd "$1"
+}
+complete -o dirnames cdd
+
 cat_dir()
 {
     [[ ${1,,} == '-r' ]] && { local recursive=1; shift; }
