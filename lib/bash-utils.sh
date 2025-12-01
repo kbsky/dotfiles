@@ -204,6 +204,12 @@ exif_shift_time()
     exiftool "${args[@]}" "$@"
 }
 
+exif_set_pdf_title()
+{
+    # https://askubuntu.com/a/591299
+    exiftool '-PDF:Title<${filename;s/\..*?$//}' '-XMP-dc:Title<${filename;s/\..*?$//}' "$@"
+}
+
 ffmpeg_cut()
 {
     [[ $# -ge 2 ]] || { echo "Usage: $FUNCNAME file [start]-[stop]..."; return 1; }
