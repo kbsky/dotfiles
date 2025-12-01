@@ -271,4 +271,14 @@ pacman_list()
 _pacman_pkg_only() { local cur; _get_comp_words_by_ref cur; _pacman_pkg Qq; }
 complete -F _pacman_pkg_only pacman_size pacman_ls pacman_list
 
+ghostty_set_solarized_light()
+{
+    printf '\033]21;foreground=#657b83;background=#fdf6e3;cursor-color=#657b83;cursor-text=#eee8d5;selection-background=#eee8d5;selection-foreground=#586e75\a'
+}
+
+ghostty_set_solarized_dark()
+{
+    printf '\033]21;background=#002b36;foreground=#839496;cursor-color=#839496;cursor-text=#073642;selection-background=#073642;selection-foreground=#93a1a1\a'
+}
+
 # vim: set ts=4 sw=4 sts=4 et:
