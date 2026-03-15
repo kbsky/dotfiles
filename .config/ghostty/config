@@ -42,7 +42,7 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme = Builtin Solarized Dark
+theme = iTerm2 Solarized Dark
 font-family = Source Code Pro
 font-style = Medium
 font-size = 10
